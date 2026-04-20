@@ -1,16 +1,16 @@
 name: "my-website"
 output_dir: "docs"
 navbar:
-  title: "My Website"
+  title: "My Presentations"
   left:
     - text: "Home"
       href: index.html
-    - text: "About"
-      href: about.html
+#    - text: "About"
+#      href: about.html
     - text: "Proposal Presentation"
       href: proposalPresentation.html
   right:
     - icon: fa-file-pdf
       href: https://arxiv.org/abs/0000.00000
     - icon: fa-github
-      href: https://github.com/leninrafaelrierasegura/NAFDEMG
+      href: https://github.com/leninrafaelrierasegura/leninPresentations

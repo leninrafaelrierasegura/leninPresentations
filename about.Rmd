@@ -2,4 +2,4 @@
 title: "About This Website"
 ---
 
-More about this website.
+For the Proposal Presentation, press [Proposal Presentation](https://leninrafaelrierasegura.github.io/leninPresentations/proposalPresentation.html) or press the `Proposal Presentation` tab.

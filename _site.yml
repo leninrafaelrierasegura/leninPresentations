@@ -7,5 +7,10 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - text: "Presentation"
-      href: AMCS252ProjectPresentation.html
+    - text: "Proposal Presentation"
+      href: proposalPresentation.html
+  right:
+    - icon: fa-file-pdf
+      href: https://arxiv.org/abs/0000.00000
+    - icon: fa-github
+      href: https://github.com/leninrafaelrierasegura/NAFDEMG

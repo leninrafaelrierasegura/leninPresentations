@@ -22,7 +22,12 @@ output:
       - default
       - xaringan-themer.css
       - lenin.css
-mathjax: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+#      - myfont.css
+#mathjax: "https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_HTML"
+#mathjax: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+#mathjax: "https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_CHTML"
+mathjax: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" # original
+#before_body: mathjax-config.html
 ---
 
 ```{r, load_refs, include=FALSE, cache=FALSE}

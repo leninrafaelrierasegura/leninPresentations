@@ -1,0 +1,8 @@
+body {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+/* main text math container */
+.MathJax {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important;
+}

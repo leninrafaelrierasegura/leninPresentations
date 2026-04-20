@@ -1,7 +1,8 @@
 ---
-title: "Numerical analysis and optimal control of fractional diffusion equations on metric graphs"
-subtitle: ""
-author: "Lenin Rafael Riera Segura \n Joint work with David Bolin and Alexandre B. Simas"
+title: "Rational approximation for fractional diffusion and elliptic operators on metric graphs: scalable statistical modeling and optimal control"
+#title: "RATIONAL APPROXIMATION FOR FRACTIONAL DIFFUSION AND ELLIPTIC OPERATORS ON METRIC GRAPHS:"
+subtitle: "PhD proposal"
+author: "Lenin Rafael Riera Segura"# \n Joint work with David Bolin and Alexandre B. Simas"
 institute: "KAUST"
 date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
@@ -208,9 +209,9 @@ class: left, top
 *********
 
 
-```{r, echo=FALSE, fig.align='center', fig.cap=captioner("Illustration of the basis function system $\\{\\psi^i_h\\}_{i=1}^{N_h}$ on the hat-basis-functions graph (in black). Standard hat functions associated with internal edge nodes are shown in blue, while special vertex-centered functions are highlighted in red. The star-shaped structures around the vertices are shown in green."), out.width='90%'}
+```{r, echo=FALSE, fig.align='center', fig.cap=captioner("Illustration of the basis function system $\\{\\psi^i_h\\}_{i=1}^{N_h}$ on the hat-basis-functions graph (in black). Standard hat functions associated with internal edge nodes are shown in blue, while special vertex-centered functions are highlighted in red. The star-shaped structures around the vertices are shown in green."), out.width='60%'}
 # figures
-knitr::include_graphics("data_files/basis.png")
+knitr::include_graphics("data_files/fixedpointconvergence_combined2.png")
 ```
 
 

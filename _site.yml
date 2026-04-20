@@ -10,7 +10,5 @@ navbar:
     - text: "Proposal Presentation"
       href: proposalPresentation.html
   right:
-    - icon: fa-file-pdf
-      href: https://arxiv.org/abs/0000.00000
     - icon: fa-github
       href: https://github.com/leninrafaelrierasegura/leninPresentations

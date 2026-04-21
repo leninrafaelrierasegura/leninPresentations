@@ -84,9 +84,9 @@ class: center, middle
 <!-- </div> -->
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
 
@@ -101,9 +101,9 @@ class: center, middle
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
 ### Problem setting
@@ -136,9 +136,9 @@ Here $\Gamma = (\mathcal{V},\mathcal{E})$ is a compact metric graph, $\kappa>0$,
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
 ### Problem setting
@@ -162,12 +162,12 @@ T(t)\phi = \sum_{j\in\mathbb{N}}e^{-\lambda^{\alpha/2}_jt}\left(\phi, e_j\right)
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Existence and uniqueness
+### Existence and uniqueness
 *********
 
 We interpret $(1)$ as an abstract Cauchy problem in $L_2(\Gamma)$, given by
@@ -200,12 +200,12 @@ u(t) = T(t)u_0 + \int_0^t T(t-r)f(r)dr,\quad t\geq 0.\tag{5}
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Discretization | Space
+### Discretization | Space
 *********
 
 
@@ -227,12 +227,12 @@ p_bridge
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Discretization | Space
+### Discretization | Space
 *********
 
 
@@ -246,12 +246,12 @@ p_boundaryless
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Discretization | Time
+### Discretization | Time
 *********
 
 - Backward Euler scheme
@@ -275,12 +275,12 @@ $$
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Discrete Operator
+### Discrete Operator
 *********
 
 <div class="content-box-myblue">
@@ -307,12 +307,12 @@ $$
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Approximation | time-level
+### Approximation | time-level
 *********
 
 Let $\alpha>0$ and $U^\tau$ denote the sequence of approximations of the solution to problem $(7)$ at each time step. That is, $U^{\tau}\subset\dot{H}^{\alpha/2}(\Gamma)$ solves
@@ -338,12 +338,12 @@ $$\|u-\tilde{U}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim \tau \left(\|u_0\|_{\dot
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Approximation | space-level
+### Approximation | space-level
 *********
 
 
@@ -372,12 +372,12 @@ $$\|U^\tau-U_h^\tau\|_{\ell^2(L_2(\Gamma))}\lesssim h^{\alpha}\left(\|u_0\|_{\do
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Approximation | rational approx-level | 1
+### Approximation | rational approx-level | 1
 *********
 
 The corresponding strong form of $(9)$ is given by
@@ -395,12 +395,12 @@ $$r_m((L_h/\kappa^2)^{-1})= p_\ell(L_h/\kappa^2)^{-1}p_r(L_h/\kappa^2).\tag{12}$
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Approximation | rational approx-level | 2
+### Approximation | rational approx-level | 2
 *********
 
 Replacing the rational approximation of $(L_h/\kappa^2)^{-\beta}$ in $(11)$ yields 
@@ -423,12 +423,12 @@ where the hidden constant depends on $\|u_0\|_{L_2(\Gamma)} +\|f\|_{L_\infty(\Ga
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Matrix representation | 1
+### Matrix representation | 1
 *********
 
 
@@ -445,12 +445,12 @@ $$U_{h,m}^{k+1}= \left(\sum_{k=1}^{m+1}a_k(L_h/\kappa^2-p_kI_{V_h})^{-1} + rI_{V
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Matrix representation | 2
+### Matrix representation | 2
 *********
 
 
@@ -467,12 +467,12 @@ where it is evident that only sparse solves are required.
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Numerical experiments | 1
+### Numerical experiments | 1
 *********
 
 Using the spectral representation $(3)$ of the semigroup $T(t)$, the solution $(5)$ of problem $(4)$ can be expressed as
@@ -495,12 +495,12 @@ $$ u(s,t) = \sum_{j=1}^{\infty}(x_j+y_j G_j(t))\text{e}^{-\lambda^{\alpha/2}_jt}
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Numerical experiments | 2
+### Numerical experiments | 2
 *********
 
 ```{r, fig.height = 1.5, out.width = "100%", fig.cap = captioner("Comparison of the exact and approximate solution at selected time points.")}
@@ -514,12 +514,12 @@ exp1_com
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Convergence behavior | Calibration
+### Convergence behavior | Calibration
 *********
 
 From Theorem 4, recall that the total error satisfies
@@ -543,12 +543,12 @@ $$\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim C_h h^\alpha.$$
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Convergence behavior | Results
+### Convergence behavior | Results
 *********
 
 
@@ -563,9 +563,9 @@ knitr::include_graphics("data_files/p_all.png")
 class: center, middle
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
 
@@ -578,12 +578,12 @@ class: center, middle
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Problem setting
+### Problem setting
 *********
 
 Let $u_d$ be the desired state, $z$ denote the control variable, and  $\mu>0$ a regularization parameter. We are concerned with the following PDE-constrained optimization problem: Find
@@ -613,12 +613,12 @@ where $u$ satisfies the Kirchhoff vertex conditions \eqref{eq:Kcondfirstpart}, a
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Adjoint state
+### Adjoint state
 *********
 
 
@@ -642,12 +642,12 @@ is called the fractional adjoint state associated to $u = u(z)$
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Projection formula
+### Projection formula
 *********
 
 The optimal control variable $\bar{z}$ is related to the optimal adjoint state $\bar{p}$ via the projection formula `r Cite(myBib, "Troltzsch2025optimal")`.
@@ -673,12 +673,12 @@ A triple $(u, p, z)$ is optimal for $(20)$ - $(22)$ if and only if $u$ and $p$ s
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Error estimates
+### Error estimates
 *********
 
 <div class="content-box-myblue">
@@ -701,12 +701,12 @@ $$\|\bar{z}-\bar{Z}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim\tau+h^\alpha +
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Forward-backward sweep method
+### Forward-backward sweep method
 *********
 
 At a high level, FBSM follows these steps.
@@ -726,12 +726,12 @@ e. *Iteration:* Repeat steps b - d until convergence.
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Fully discrete FBSM
+### Fully discrete FBSM
 *********
 
 1 *Initialization:* Initialize $\mathbf{\bar{Z}}\in \mathbb{R}^{N_{h}\times (N+1)}$.
@@ -767,12 +767,12 @@ $$\mathbf{\bar{Z}} = \max\{\mathbf{A},\min\{\mathbf{B},-\mathbf{\bar{P}}/\mu\}\}
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Convergence analysis of the FBSM
+### Convergence analysis of the FBSM
 *********
 
 The unfolded iterations in $(25)$ and $(26)$ can equivalently be written in block-matrix form as
@@ -795,12 +795,12 @@ knitr::include_graphics("data_files/backwardsystem.png")
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Matrix vs Vector form
+### Matrix vs Vector form
 *********
 
 
@@ -846,12 +846,12 @@ where
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Fixed-point iteration | 1
+### Fixed-point iteration | 1
 *********
 
 **Vectorized formulation**
@@ -875,12 +875,12 @@ The corresponding iterative scheme then reads $\mathbf{\bar{Z}}^{(n+1)}  = \math
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Fixed-point iteration | 2
+### Fixed-point iteration | 2
 *********
  
 The quadrature-based norm, natural for the matrix formulation, and the weighted Euclidean norm, natural for the vectorized formulation, are equivalent up to the factor $\sqrt{\tau}$:
@@ -901,12 +901,12 @@ By the Banach fixed-point theorem, $(\mathbf{\bar{z}}^{(n)})_{n\in\mathbb{N}}$ c
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Idea of the proof 
+### Idea of the proof 
 *********
  
 Let $\mathbf{X}, \mathbf{Y}\in\mathbb{R}^{N_h\times(N+1)}$ and $\mathbf{x} =\text{vec}(\mathbf{X}),\mathbf{y} = \text{vec}(\mathbf{Y})\in \mathbb{R}^{(N+1)N_h}$ be their vectorized forms. Then
@@ -930,12 +930,12 @@ where $\gamma = (1/\mu)\|\boldsymbol{\mathfrak{L}}\|_{\mathbf{C}_{N+1}}$ and $\b
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Example
+### Example
 *********
 
 With $N=3$, matrix $\boldsymbol{\mathfrak{L}}$ has the form
@@ -955,12 +955,12 @@ $$\gamma = \dfrac{1}{\mu}\|\boldsymbol{\mathfrak{L}}\|_{\mathbf{C}_{N+1}} =  \df
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Contraction constant
+### Contraction constant
 *********
 
 
@@ -974,12 +974,12 @@ knitr::include_graphics("data_files/fixedpointconvergence_combined2.png")
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Convergence behavior | 1
+### Convergence behavior | 1
 *********
 
 
@@ -995,12 +995,12 @@ knitr::include_graphics("data_files/p_all_u.png")
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## Convergence behavior | 2
+### Convergence behavior | 2
 *********
 
 
@@ -1016,12 +1016,12 @@ knitr::include_graphics("data_files/p_all_z.png")
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## More information
+### More information
 *********
 
 ```{r, echo = FALSE, fig.align='center', out.width='25%', fig.cap = "Visit https://leninrafaelrierasegura.github.io/NAFDEMG/ for more information."}
@@ -1037,12 +1037,12 @@ plot(myqrcode)
 class: left, top
 
 <div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-## References
+### References
 *********
 
 ```{r refs, echo=FALSE, results="asis"}

@@ -106,7 +106,7 @@ class: left, top
   <img src="Kaust.png" height="70" style="margin-left:10px;">
 </div>
 
-## Problem setting
+### Problem setting
 *********
 
 We analyze and numerically approximate solutions to fractional diffusion equations on metric graphs of the form
@@ -141,7 +141,7 @@ class: left, top
   <img src="Kaust.png" height="70" style="margin-left:10px;">
 </div>
 
-## Problem setting
+### Problem setting
 *********
 
 - For $\kappa>0$, we define the operator $L:D(L) = D(\Delta_{\Gamma})\to L_2(\Gamma)$ as the shifted Kirchhoff-Laplacian $L =\kappa^2 -\Delta_{\Gamma}$, which is densely-defined in $L_2(\Gamma)$, selfadjoint, and positive definite with a compact inverse, ensuring a well-posed spectral decomposition `r Cite(myBib, "berkolaiko2013introduction", "bolin2024gaussian")`.
@@ -209,11 +209,37 @@ class: left, top
 *********
 
 
-```{r, echo=FALSE, fig.align='center', fig.cap=captioner("Illustration of the basis function system $\\{\\psi^i_h\\}_{i=1}^{N_h}$ on the hat-basis-functions graph (in black). Standard hat functions associated with internal edge nodes are shown in blue, while special vertex-centered functions are highlighted in red. The star-shaped structures around the vertices are shown in green."), out.width='60%'}
+```{r, eval = FALSE, echo=FALSE, fig.align='center', fig.cap=captioner("Illustration of the basis function system $\\{\\psi^i_h\\}_{i=1}^{N_h}$ on the hat-basis-functions graph (in black). Standard hat functions associated with internal edge nodes are shown in blue, while special vertex-centered functions are highlighted in red. The star-shaped structures around the vertices are shown in green."), out.width='60%'}
 # figures
 knitr::include_graphics("data_files/fixedpointconvergence_combined2.png")
 ```
 
+
+
+```{r, eval =TRUE, fig.height = 1.8, out.width = "100%", fig.cap = captioner("Animation.")}
+load(here::here("data_files/p_bridge.RData"))
+p_bridge
+```
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="70" style="margin-left:10px;">
+  <img src="statlogo.png" height="70" style="margin-left:10px;">
+  <img src="Kaust.png" height="70" style="margin-left:10px;">
+</div>
+
+## Discretization | Space
+*********
+
+
+```{r, eval =TRUE, fig.height = 1.8, out.width = "100%", fig.cap = captioner("Animation.")}
+load(here::here("data_files/p_boundaryless.RData"))
+p_boundaryless
+```
 
 ---
 

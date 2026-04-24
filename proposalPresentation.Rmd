@@ -1050,3 +1050,22 @@ PrintBibliography(myBib, .opts = list(bib.style = "alphabetic"))
 ```
 
 
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Thanks
+*********
+
+
+```{r, eval =TRUE, fig.height = 1.8, out.width = "100%", fig.cap = captioner("Thank you graph.")}
+load(here::here("data_files/thanksall3d.RData"))
+thanksall3d
+```
+

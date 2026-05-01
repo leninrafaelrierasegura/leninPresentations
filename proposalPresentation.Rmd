@@ -216,7 +216,7 @@ knitr::include_graphics("data_files/fixedpointconvergence_combined2.png")
 
 
 
-```{r, eval =TRUE, fig.height = 1.8, out.width = "100%", fig.cap = captioner("Animation.")}
+```{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Animation.")}
 load(here::here("data_files/p_bridge.RData"))
 p_bridge
 ```
@@ -236,7 +236,7 @@ class: left, top
 *********
 
 
-```{r, eval =TRUE, fig.height = 1.8, out.width = "100%", fig.cap = captioner("Animation.")}
+```{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Animation.")}
 load(here::here("data_files/p_boundaryless.RData"))
 p_boundaryless
 ```
@@ -504,9 +504,7 @@ class: left, top
 *********
 
 ```{r, fig.height = 1.5, out.width = "100%", fig.cap = captioner("Comparison of the exact and approximate solution at selected time points.")}
-library(plotly)
-load(file = "data_files/exp1_com.RData")
-exp1_com
+
 ```
 
 ---
@@ -1024,11 +1022,20 @@ class: left, top
 ### More information
 *********
 
-```{r, echo = FALSE, fig.align='center', out.width='25%', fig.cap = "Visit https://leninrafaelrierasegura.github.io/NAFDEMG/ for more information."}
+```{r, echo = FALSE, eval = FALSE}
 library(qrcode)
 # Generate QR code
-myqrcode <- qr_code("https://leninrafaelrierasegura.github.io/NAFDEMG/about.html") 
+myqrcode <- qr_code("https://leninrafaelrierasegura.github.io/PhD_thesis/index.html") 
+
+png(here::here("data_files/qrcode.png"), width = 800, height = 800)
 plot(myqrcode)
+dev.off()
+```
+
+
+```{r, echo = FALSE, eval = TRUE, fig.align='center', out.width='40%', fig.cap = captioner("Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information.")}
+# figures
+knitr::include_graphics(here::here("data_files/qrcode.png"))
 ```
 
 ---
@@ -1064,8 +1071,8 @@ class: left, top
 *********
 
 
-```{r, eval =TRUE, fig.height = 1.8, out.width = "100%", fig.cap = captioner("Thank you graph.")}
-load(here::here("data_files/thanksall3d.RData"))
-thanksall3d
+```{r, eval =TRUE, fig.height = 1.8, out.width = "50%", fig.cap = captioner("THANK-YOU-FOR-YOUR-ATTENTION graph.")}
+# figures
+knitr::include_graphics("data_files/thanksall3d.png")
 ```
 

@@ -267,10 +267,10 @@ class: left, top
 Key idea: To characterize a random field as the solution to a stochastic partial differential equation defined on the graph $\Gamma$ `r Cite(myBib, "Lindgren2011AnExplicit", "Bolin2024Gaussian")`.
 ]
 
-To fix ideas, let $L = \kappa^2 - \Delta_{\Gamma}$, let $\alpha > \sfrac{1}{2}$, and consider the SPDE
+To fix ideas, let $L = \kappa^2 - \Delta_{\Gamma}$, let $\alpha > 1/2$, and consider the SPDE
 \begin{align}
 \label{eq:spde_on_graphgamma}
-    L^{\sfrac{\alpha}{2}}(\tau u) = \mathcal{W}, \quad\text{on }\Gamma.
+    L^{\alpha/2}(\tau u) = \mathcal{W}, \quad\text{on }\Gamma.
 \end{align}
 
 We approximate $u$ by a finite element expansion $u_h(s) = \sum_{j=1}^{N_h} u_j \psi_j(s)$. For the special case $\tau = 1$ and $\alpha = 2$, this leads to the variational formulation
@@ -412,6 +412,44 @@ which are sparse whenever $\mathbf{E}$ is sparse. Define the stacked vector $\ma
 and the block-diagonal precision matrix $\mathbf{Q}=\operatorname{diag}\left(\mathbf{Q}_0,\mathbf{Q}_1, \ldots, \mathbf{Q}_{m}\right)$.
 Then we obtain $\mathbf{U} \sim \mathsf{N}\!\left(\mathbf{0},\, \mathbf{Q}^{-1}\right)$. As a consequence, *all conditional distributions and marginal likelihood computations can be carried out using sparse linear algebra operations*. Another advantage is that the dependence on $\alpha$ is made explicit through the construction of the components $\mathbf{Q}_i$. This makes it possible to treat $\alpha$ *as an estimable parameter*.
 
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Preliminaries | The Kirchhoff-Laplacian
+*********
+
+Let 
+\begin{equation*}
+\label{eq:kirchhoff_space}
+K(\Gamma) =   \Big\{ u \in \widetilde{H}^2(\Gamma)\cap C(\Gamma) \;\Big|\; \forall v \in \mathcal{V}: \; \textstyle \sum_{e\in\mathcal{E}_v}\partial_e u(v)=0 \Big\}.
+\end{equation*}
+
+- The Kirchhoff--Laplacian $\Delta_{\Gamma}: D(\Delta_{\Gamma}) = K(\Gamma)\subset L_2(\Gamma)\to L_2(\Gamma)$ is defined as $(\Delta_{\Gamma} f)|_e := f_e''$. For $\kappa>0$, define $L:D(L) = D(\Delta_{\Gamma})\to L_2(\Gamma)$ as the shifted Kirchhoff--Laplacian $L =\kappa^2 -\Delta_{\Gamma}$.
+
+- The fractional power $L^{\alpha/2} : D(L^{\alpha/2}) \longmapsto L_2(\Gamma)$ is given by
+\begin{equation}
+\label{lfractional}
+\textstyle
+\phi \longmapsto L^{\alpha/2}\phi = \sum_{j\in\mathbb{N}}\lambda_j^{\alpha/2}(\phi, e_j)_{L_2(\Gamma)}e_j
+\end{equation}
+and $-L^{\alpha/2}$ generates (see `r Cite(myBib, "Henry1981")`)
+\begin{equation}
+\label{Tsemigroup}
+\tag{3}
+\textstyle
+T(t)\phi = \sum_{j\in\mathbb{N}}\mathrm{e}^{-\lambda^{\alpha/2}_jt}\left(\phi, e_j\right)_{L_2(\Gamma)}e_j,
+\end{equation}
+where $D(L^{\alpha/2}) = \dot{H}^{\alpha}(\Gamma) = \{\phi\in L_2(\Gamma): \|\phi\|_{\dot{H}^{\alpha}}<\infty\}$.
+
 ---
 
 class: center, middle
@@ -423,10 +461,10 @@ class: center, middle
 </div>
 
 
-*********
 
 ## Project 1
 
+*********
 
 # A new class of non-stationary Gaussian fields with arbitrary smoothness on metric graphs
 
@@ -435,6 +473,47 @@ class: center, middle
 
 ---
 
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Problem setting
+*********
+
+Let $\alpha > 1/2$ and consider the SPDE
+\begin{align}
+\label{eq:spde_on_gamma_fem}
+\tag{4}
+    L^{\alpha/2} (\tau u) = \mathcal{W}, \quad \text{on } \Gamma,
+\end{align}
+where $L = \kappa^2 - \Delta_{\Gamma}$, $\kappa$ and $\tau$ are spatially varying functions, and  $u$ satisfies the Kirchhoff vertex conditions
+\begin{equation}
+\label{eq:kirchhoff_cond}
+\textstyle
+   \mathcal{K}(\Gamma) =  \Big\{f\in C(\Gamma)\cap \bigoplus_{e\in\mathcal{E}} C^{1,0}(e)\;\Big|\; \forall v\in \mathcal{V}:\; \sum_{e\in\mathcal{E}_v}\partial_e f(v)=0 \Big\}.
+\end{equation}
+
+
+The discrete counterpart of $(4)$ consists of finding $u_h \in V_h$ such that $L_h^{\alpha/2} (\tau u_h) = \mathcal{W}_h$.
+
+<div class="content-box-myblue">
+Proposition 1
+</div>
+
+.content-box-gray[
+Let $\alpha>1/2$. Under regularity conditions on $\kappa$ and $\tau$, we have that 
+\begin{equation}
+        \|\varrho^\alpha - \varrho^\alpha_h\|_{L_2(\Gamma\times\Gamma)}\leq Ch^{\min\{2\alpha-1/2,2\}},
+\end{equation}
+where $\varrho^\alpha$ and $\varrho^\alpha_h$ are kernels of $M_{\tau^{-1}}L^{-\alpha}M_{\tau^{-1}}$ and $M_{\tau^{-1}}L_h^{-\alpha}M_{\tau^{-1}}$, respectively,
+]
+
+---
+
 class: center, middle
 
 <div style="position:absolute; top:40px; right:55px;">
@@ -444,10 +523,10 @@ class: center, middle
 </div>
 
 
-*********
 
 ## Project 2
 
+*********
 
 # Numerical approximation of fractional diffusion equations on metric graphs
 
@@ -490,31 +569,6 @@ with $u(\cdot,t)$ satisfying the Kirchhoff vertex conditions
 
 Here $\Gamma = (\mathcal{V},\mathcal{E})$ is a compact metric graph, $\kappa>0$, $\alpha\in(0,2]$ determines the smoothness of $u(\cdot,t)$, $\Delta_{\Gamma}$ is the so-called Kirchhoff-Laplacian.
 
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Problem setting
-*********
-
-- For $\kappa>0$, we define the operator $L:D(L) = D(\Delta_{\Gamma})\to L_2(\Gamma)$ as the shifted Kirchhoff-Laplacian $L =\kappa^2 -\Delta_{\Gamma}$, which is densely-defined in $L_2(\Gamma)$, selfadjoint, and positive definite with a compact inverse, ensuring a well-posed spectral decomposition `r Cite(myBib, "Berkolaiko2013Introduction", "Bolin2024Gaussian")`.
-
-- The fractional operator $L^{\alpha/2} : D(L^{\alpha/2}) \longmapsto L_2(\Gamma)$ is defined via
-\begin{equation}
-\label{lfractional}
-\phi \longmapsto L^{\alpha/2}\phi = \sum_{j\in\mathbb{N}}\lambda_j^{\alpha/2}(\phi, e_j)_{L_2(\Gamma)}e_j
-\end{equation}
-and $-L^{\alpha/2}$ generates (see `r Cite(myBib, "Henry1981")`)
-\begin{equation}
-\label{Tsemigroup}
-T(t)\phi = \sum_{j\in\mathbb{N}}e^{-\lambda^{\alpha/2}_jt}\left(\phi, e_j\right)_{L_2(\Gamma)}e_j.\tag{3}
-\end{equation}
 
 ---
 
@@ -949,10 +1003,10 @@ class: center, middle
 </div>
 
 
-*********
 
 ## Project 3
 
+*********
 
 # Optimal control of fractional diffusion equations on metric graphs
 
@@ -1408,10 +1462,10 @@ class: center, middle
 </div>
 
 
-*********
 
 ## Project 4
 
+*********
 
 # An exponentially convergent Markov approximation of Gaussian Whittle-Matérn fields with arbitrary smoothness on metric graphs
 

@@ -29,6 +29,8 @@ output:
 #mathjax: "https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_CHTML"
 mathjax: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" # original
 #before_body: mathjax-config.html
+header-includes:
+  - \usepackage{xfrac}
 ---
 
 ```{r, load_refs, include=FALSE, cache=FALSE}
@@ -155,11 +157,146 @@ class: left, top
   <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-### Preliminaries | Metric graphs
+### Preliminaries | Metric graphs | Definition
 *********
 
-A metric graph $\Gamma$ is a combinatorial undirected graph $\Gamma = (\mathcal{V}, \mathcal{E})$ equipped with a metric $d(\cdot,\cdot)$, where $\mathcal{V} = \{v_i\}$ is a finite set of vertices and $\mathcal{E} = \{e_j\}$ is a set of undirected edges connecting pairs of vertices.
+.custom-box[
+A metric graph $\Gamma$ is a combinatorial undirected graph $\Gamma = (\mathcal{V}, \mathcal{E})$ equipped with a metric $d(\cdot,\cdot)$, where 
+- $\mathcal{V} = \{v\}$ denotes the vertex set with $\mathcal{V}\subset\mathbb{R}^n$ for some $n\in\mathbb{N}$, 
 
+- $\mathcal{E} = \{e\}$ denotes the edge set where each $e$ is induced by a rectifiable curve $\gamma_e:[0,\ell_e]\to\mathbb{R}^d$, parametrized by arc-length, satisfying $e = \gamma_e([0,\ell_e])$ and $\operatorname{length}(\gamma_e) = \ell_e$, and
+
+- $d(\cdot,\cdot)$ is the geodesic distance, defined as the length of the shortest path along the edges connecting two points.
+]
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Preliminaries | Metric graphs | Example 1 (2D)
+*********
+
+
+```
+{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Animation.")}
+load(here::here("data_files/p_from_graph_to_interval_transformation.RData"))
+p_from_graph_to_interval_transformation
+```
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Preliminaries | Metric graphs | Example 2 (3D)
+*********
+
+
+      
+```{r, echo = FALSE, fig.align='center', out.width='99%', fig.cap = captioner("A graph (the spaghetti graph) embedded in $\\mathbb{R}^3$ (left), its projection onto the plane (middle), and a zoomed-in view (right).")}
+knitr::include_graphics("data_files/p_spaguetti3d_map_with_square_p_to_show_geodesic_dist.png")
+```
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Preliminaries | Metric graphs | Example 3 (3D)
+*********
+
+
+      
+```{r, echo = FALSE, fig.align='center', out.width='80%', fig.cap = captioner("The $n$ - sphere fully connected graph (left) and its planar projection onto the plane (right).")}
+knitr::include_graphics("data_files/graph_on_sphere_sphere2dplot_with_mathpazo.png")
+```
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Preliminaries | Metric graphs | Functions
+*********
+
+A real-valued function $f$ on $\Gamma$ is specified by a collection of functions $\{f_e\}_{e\in\mathcal{E}}$. For example, consider the function $f = \{f_{e_1},f_{e_2}\}$ given by
+\begin{equation}
+\label{eq:funct_to_discuss_something}
+    \begin{cases}
+        f_{e_1}(s) = e^{t/4},& s = (e_1,t),\;t\in[0,\ell_{e_1}],\\
+        f_{e_2}(s) = \sin(3\pi t/\ell) + f_0 ,&  s = (e_2,t),\;t\in[0,\ell_{e_2}].
+    \end{cases}
+\end{equation}
+      
+```{r, echo = FALSE, fig.align='center', out.width='50%', fig.cap = captioner("Functions are first plotted on their corresponding intervals and then mapped back to the edges of the graph.")}
+knitr::include_graphics("data_files/p4tadpole_arclength.png")
+```
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Preliminaries | Metric graphs | Hat basis functions
+*********
+
+
+```{r, echo = FALSE, fig.align='center', out.width='60%', fig.cap = captioner("Finite element discretization of the tadpole graph, with the subdivision of each edge into regular segments and placement of nodes (left), and the corresponding system of basis functions $\\{\\varphi_j^e, \\phi_v\\}$.")}
+knitr::include_graphics("data_files/p2_p3.png")
+```
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Preliminaries | The SPDE approach
+*********
+
+.custom-box[
+Key idea: To characterize a random field as the solution to a stochastic partial differential equation defined on the graph $\Gamma$ `r Cite(myBib, "Lindgren2011AnExplicit", "Bolin2024Gaussian")`.
+]
+
+To fix ideas, let $\alpha > \sfrac{1}{2}$, and consider the SPDE
+\begin{align}
+\label{eq:spde_on_graphgamma}
+    (\kappa^2-\Delta_{\Gamma})^{\sfrac{\alpha}{2}}(\tau u) = \mathcal{W}, \quad\text{on }\Gamma.
+\end{align}
 
 ---
 
@@ -230,7 +367,7 @@ class: left, top
 ### Problem setting
 *********
 
-- For $\kappa>0$, we define the operator $L:D(L) = D(\Delta_{\Gamma})\to L_2(\Gamma)$ as the shifted Kirchhoff-Laplacian $L =\kappa^2 -\Delta_{\Gamma}$, which is densely-defined in $L_2(\Gamma)$, selfadjoint, and positive definite with a compact inverse, ensuring a well-posed spectral decomposition `r Cite(myBib, "berkolaiko2013introduction", "bolin2024gaussian")`.
+- For $\kappa>0$, we define the operator $L:D(L) = D(\Delta_{\Gamma})\to L_2(\Gamma)$ as the shifted Kirchhoff-Laplacian $L =\kappa^2 -\Delta_{\Gamma}$, which is densely-defined in $L_2(\Gamma)$, selfadjoint, and positive definite with a compact inverse, ensuring a well-posed spectral decomposition `r Cite(myBib, "Berkolaiko2013Introduction", "Bolin2024Gaussian")`.
 
 - The fractional operator $L^{\alpha/2} : D(L^{\alpha/2}) \longmapsto L_2(\Gamma)$ is defined via
 \begin{equation}
@@ -1180,7 +1317,7 @@ class: left, top
 *********
 
 
-```{r, eval =TRUE, fig.height = 1.8, out.width = "50%", fig.cap = captioner("THANK-YOU-FOR-YOUR-ATTENTION graph.")}
+```{r, eval =TRUE, fig.align='center', out.width = "45%", fig.cap = captioner("THANK-YOU-FOR-YOUR-ATTENTION graph.")}
 # figures
 knitr::include_graphics("data_files/thanksall3d.png")
 ```

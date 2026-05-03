@@ -121,11 +121,150 @@ class: left, top
   &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-### Preliminaries | Metric graphs
+### Preliminaries | Metric graphs | Definition
 *********
 
-A metric graph `\(\Gamma\)` is a combinatorial undirected graph `\(\Gamma = (\mathcal{V}, \mathcal{E})\)` equipped with a metric `\(d(\cdot,\cdot)\)`, where `\(\mathcal{V} = \{v_i\}\)` is a finite set of vertices and `\(\mathcal{E} = \{e_j\}\)` is a set of undirected edges connecting pairs of vertices.
+.custom-box[
+A metric graph `\(\Gamma\)` is a combinatorial undirected graph `\(\Gamma = (\mathcal{V}, \mathcal{E})\)` equipped with a metric `\(d(\cdot,\cdot)\)`, where 
+- `\(\mathcal{V} = \{v\}\)` denotes the vertex set with `\(\mathcal{V}\subset\mathbb{R}^n\)` for some `\(n\in\mathbb{N}\)`, 
 
+- `\(\mathcal{E} = \{e\}\)` denotes the edge set where each `\(e\)` is induced by a rectifiable curve `\(\gamma_e:[0,\ell_e]\to\mathbb{R}^d\)`, parametrized by arc-length, satisfying `\(e = \gamma_e([0,\ell_e])\)` and `\(\operatorname{length}(\gamma_e) = \ell_e\)`, and
+
+- `\(d(\cdot,\cdot)\)` is the geodesic distance, defined as the length of the shortest path along the edges connecting two points.
+]
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | Metric graphs | Example 1 (2D)
+*********
+
+
+```
+{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Animation.")}
+load(here::here("data_files/p_from_graph_to_interval_transformation.RData"))
+p_from_graph_to_interval_transformation
+```
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | Metric graphs | Example 2 (3D)
+*********
+
+
+      
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/p_spaguetti3d_map_with_square_p_to_show_geodesic_dist.png" alt="Figure 1: A graph (the spaghetti graph) embedded in `\(\mathbb{R}^3\)` (left), its projection onto the plane (middle), and a zoomed-in view (right)." width="99%" /&gt;
+&lt;p class="caption"&gt;Figure 1: A graph (the spaghetti graph) embedded in `\(\mathbb{R}^3\)` (left), its projection onto the plane (middle), and a zoomed-in view (right).&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | Metric graphs | Example 3 (3D)
+*********
+
+
+      
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/graph_on_sphere_sphere2dplot_with_mathpazo.png" alt="Figure 2: The `\(n\)` - sphere fully connected graph (left) and its planar projection onto the plane (right)." width="80%" /&gt;
+&lt;p class="caption"&gt;Figure 2: The `\(n\)` - sphere fully connected graph (left) and its planar projection onto the plane (right).&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | Metric graphs | Functions
+*********
+
+A real-valued function `\(f\)` on `\(\Gamma\)` is specified by a collection of functions `\(\{f_e\}_{e\in\mathcal{E}}\)`. For example, consider the function `\(f = \{f_{e_1},f_{e_2}\}\)` given by
+`\begin{equation}
+\label{eq:funct_to_discuss_something}
+    \begin{cases}
+        f_{e_1}(s) = e^{t/4},&amp; s = (e_1,t),\;t\in[0,\ell_{e_1}],\\
+        f_{e_2}(s) = \sin(3\pi t/\ell) + f_0 ,&amp;  s = (e_2,t),\;t\in[0,\ell_{e_2}].
+    \end{cases}
+\end{equation}`
+      
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/p4tadpole_arclength.png" alt="Figure 3: Functions are first plotted on their corresponding intervals and then mapped back to the edges of the graph." width="50%" /&gt;
+&lt;p class="caption"&gt;Figure 3: Functions are first plotted on their corresponding intervals and then mapped back to the edges of the graph.&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | Metric graphs | Hat basis functions
+*********
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/p2_p3.png" alt="Figure 4: Finite element discretization of the tadpole graph, with the subdivision of each edge into regular segments and placement of nodes (left), and the corresponding system of basis functions `\(\{\varphi_j^e, \phi_v\}\)`." width="60%" /&gt;
+&lt;p class="caption"&gt;Figure 4: Finite element discretization of the tadpole graph, with the subdivision of each edge into regular segments and placement of nodes (left), and the corresponding system of basis functions `\(\{\varphi_j^e, \phi_v\}\)`.&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | The SPDE approach
+*********
+
+.custom-box[
+Key idea: To characterize a random field as the solution to a stochastic partial differential equation defined on the graph `\(\Gamma\)` [LRL11; BSW24].
+]
+
+To fix ideas, let `\(\alpha &gt; \sfrac{1}{2}\)`, and consider the SPDE
+`\begin{align}
+\label{eq:spde_on_graphgamma}
+    (\kappa^2-\Delta_{\Gamma})^{\sfrac{\alpha}{2}}(\tau u) = \mathcal{W}, \quad\text{on }\Gamma.
+\end{align}`
 
 ---
 
@@ -622,8 +761,8 @@ class: left, top
 
       
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/p_all.png" alt="Figure 2: Comparison between theoretical and observed convergence behavior for the error `\(\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="90%" /&gt;
-&lt;p class="caption"&gt;Figure 2: Comparison between theoretical and observed convergence behavior for the error `\(\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
+&lt;img src="data_files/p_all.png" alt="Figure 6: Comparison between theoretical and observed convergence behavior for the error `\(\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="90%" /&gt;
+&lt;p class="caption"&gt;Figure 6: Comparison between theoretical and observed convergence behavior for the error `\(\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
 &lt;/div&gt;
 
 
@@ -1025,8 +1164,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/fixedpointconvergence_combined2.png" alt="Figure 3: Comparison between the contraction constant and its upper bound." width="70%" /&gt;
-&lt;p class="caption"&gt;Figure 3: Comparison between the contraction constant and its upper bound.&lt;/p&gt;
+&lt;img src="data_files/fixedpointconvergence_combined2.png" alt="Figure 7: Comparison between the contraction constant and its upper bound." width="70%" /&gt;
+&lt;p class="caption"&gt;Figure 7: Comparison between the contraction constant and its upper bound.&lt;/p&gt;
 &lt;/div&gt;
 
 ---
@@ -1045,8 +1184,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/p_all_u.png" alt="Figure 4: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{u}-\bar{U}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="75%" /&gt;
-&lt;p class="caption"&gt;Figure 4: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{u}-\bar{U}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
+&lt;img src="data_files/p_all_u.png" alt="Figure 8: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{u}-\bar{U}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="75%" /&gt;
+&lt;p class="caption"&gt;Figure 8: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{u}-\bar{U}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
 &lt;/div&gt;
 
 
@@ -1065,8 +1204,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/p_all_z.png" alt="Figure 5: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{z}- \bar{\mathcal{Z}}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="75%" /&gt;
-&lt;p class="caption"&gt;Figure 5: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{z}- \bar{\mathcal{Z}}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
+&lt;img src="data_files/p_all_z.png" alt="Figure 9: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{z}- \bar{\mathcal{Z}}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="75%" /&gt;
+&lt;p class="caption"&gt;Figure 9: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{z}- \bar{\mathcal{Z}}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
 &lt;/div&gt;
 
 ---
@@ -1088,8 +1227,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/qrcode.png" alt="Figure 6: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information." width="40%" /&gt;
-&lt;p class="caption"&gt;Figure 6: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information.&lt;/p&gt;
+&lt;img src="data_files/qrcode.png" alt="Figure 10: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information." width="40%" /&gt;
+&lt;p class="caption"&gt;Figure 10: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information.&lt;/p&gt;
 &lt;/div&gt;
 
 ---
@@ -1107,26 +1246,31 @@ class: left, top
 *********
 
 [BK13] G. Berkolaiko and P. Kuchment. _Introduction to quantum graphs_.
-Vol. 186. Mathematical Surveys and Monographs. American Mathematical
-Society, Providence, RI, 2013, p. xiv+270. ISBN: 978-0-8218-9211-4.
-DOI: [10.1090/surv/186](https://doi.org/10.1090%2Fsurv%2F186).
+Vol. 186. Mathematical Surveys and Monographs.
+&lt;https://doi.org/10.1090/surv/186&gt;. American Mathematical Society,
+Providence, RI, 2013, p. xiv+270.
 
 [BSW24] D. Bolin, A. B. Simas, and J. Wallin. "Gaussian Whittle-Matérn
-fields on metric graphs". In: _Bernoulli_ 30.2 (2024), pp. 1611-1639.
-ISSN: 1350-7265,1573-9759. DOI:
-[10.3150/23-bej1647](https://doi.org/10.3150%2F23-bej1647).
+fields on metric graphs". In: _Bernoulli_ 30.2 (2024).
+&lt;https://doi.org/10.3150/23-bej1647&gt;, pp. 1611-1639.
 
 [Hen81] D. Henry. "Preliminaries". In: _Geometric Theory of Semilinear
 Parabolic Equations_. Berlin, Heidelberg: Springer Berlin Heidelberg,
 1981, pp. 3-40. ISBN: 978-3-540-38528-8. DOI:
 [10.1007/BFb0089649](https://doi.org/10.1007%2FBFb0089649).
 
+[LRL11] F. Lindgren, H. Rue, and J. Lindström. "An explicit link
+between Gaussian fields and Gaussian Markov random fields: the
+stochastic partial differential equation approach". In: _J. R. Stat.
+Soc. Ser. B Stat. Methodol._ 73.4 (2011).
+&lt;https://doi.org/10.1111/j.1467-9868.2011.00777.x&gt;, pp. 423-498.
+
 [Trö10] F. Tröltzsch. _Optimal control of partial differential
 equations_. Vol. 112. Graduate Studies in Mathematics. Theory, methods
 and applications, Translated from the 2005 German original by Jürgen
-Sprekels. American Mathematical Society, Providence, RI, 2010, p.
-xvi+399. ISBN: 978-0-8218-4904-0. DOI:
-[10.1090/gsm/112](https://doi.org/10.1090%2Fgsm%2F112).
+Sprekels, &lt;https://doi.org/10.1090/gsm/112&gt;. American Mathematical
+Society, Providence, RI, 2010, p. xvi+399. ISBN: 978-0-8218-4904-0.
+DOI: [10.1090/gsm/112](https://doi.org/10.1090%2Fgsm%2F112).
 
 
 ---
@@ -1144,8 +1288,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/thanksall3d.png" alt="Figure 7: THANK-YOU-FOR-YOUR-ATTENTION graph." width="50%" /&gt;
-&lt;p class="caption"&gt;Figure 7: THANK-YOU-FOR-YOUR-ATTENTION graph.&lt;/p&gt;
+&lt;img src="data_files/thanksall3d.png" alt="Figure 11: THANK-YOU-FOR-YOUR-ATTENTION graph." width="45%" /&gt;
+&lt;p class="caption"&gt;Figure 11: THANK-YOU-FOR-YOUR-ATTENTION graph.&lt;/p&gt;
 &lt;/div&gt;
 
     </textarea>

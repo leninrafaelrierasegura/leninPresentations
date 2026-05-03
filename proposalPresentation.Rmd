@@ -77,7 +77,7 @@ captioner <- function(caption) {
 ```
 
 
-class: center, middle
+class: left, top
 
 <!-- <div style="position:absolute; top:40px; right:55px;"> -->
 <!--   <img src="kaustlogo.svg" width="120"> -->
@@ -90,11 +90,96 @@ class: center, middle
 </div>
 
 
+### Outline
+*********
 
-# Part I
+### - Preliminaries 
+### - Project 1
+### - Project 2
+### - Project 3
+### - Project 4
+
+<!-- THIS IS THE START OF THE TEMPLATE -->
+<!-- ######################################## -->
+<!-- ######################################## -->
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Title template
+*********
+
+# level 1
+## level 2
+### level 3
+#### level 4
+
+<!-- ######################################## -->
+<!-- ######################################## -->
+<!-- THIS IS THE END OF THE TEMPLATE -->
+
+---
+
+class: center, middle
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
 
 
-#### Numerical Analysis
+*********
+
+## Preliminaries
+
+
+# On metric graps, the SPDE approach, and the rational approximation
+
+*********
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Preliminaries | Metric graphs
+*********
+
+A metric graph $\Gamma$ is a combinatorial undirected graph $\Gamma = (\mathcal{V}, \mathcal{E})$ equipped with a metric $d(\cdot,\cdot)$, where $\mathcal{V} = \{v_i\}$ is a finite set of vertices and $\mathcal{E} = \{e_j\}$ is a set of undirected edges connecting pairs of vertices.
+
+
+---
+
+class: center, middle
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+
+*********
+
+## Project 1
+
+
+# A new class of non-stationary Gaussian fields with arbitrary smoothness on metric graphs
+
+*********
 
 ---
 
@@ -108,6 +193,7 @@ class: left, top
 
 ### Problem setting
 *********
+
 
 We analyze and numerically approximate solutions to fractional diffusion equations on metric graphs of the form
 
@@ -242,6 +328,27 @@ class: left, top
 load(here::here("data_files/p_boundaryless.RData"))
 p_boundaryless
 ```
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Discretization | Space
+*********
+
+
+```
+{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Animation.")}
+load(here::here("data_files/p_from_graph_to_interval_transformation.RData"))
+p_from_graph_to_interval_transformation
+```
+
 
 ---
 

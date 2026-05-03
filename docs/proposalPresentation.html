@@ -32,7 +32,7 @@ class: center, middle, inverse, title-slide
 ### KAUST
 ]
 .date[
-### 02-05-2026
+### 03-05-2026
 ]
 
 ---
@@ -43,7 +43,7 @@ class: center, middle, inverse, title-slide
 
 
 
-class: center, middle
+class: left, top
 
 &lt;!-- &lt;div style="position:absolute; top:40px; right:55px;"&gt; --&gt;
 &lt;!--   &lt;img src="kaustlogo.svg" width="120"&gt; --&gt;
@@ -56,11 +56,96 @@ class: center, middle
 &lt;/div&gt;
 
 
+### Outline
+*********
 
-# Part I
+### - Preliminaries 
+### - Project 1
+### - Project 2
+### - Project 3
+### - Project 4
+
+&lt;!-- THIS IS THE START OF THE TEMPLATE --&gt;
+&lt;!-- ######################################## --&gt;
+&lt;!-- ######################################## --&gt;
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Title template
+*********
+
+# level 1
+## level 2
+### level 3
+#### level 4
+
+&lt;!-- ######################################## --&gt;
+&lt;!-- ######################################## --&gt;
+&lt;!-- THIS IS THE END OF THE TEMPLATE --&gt;
+
+---
+
+class: center, middle
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
 
 
-#### Numerical Analysis
+*********
+
+## Preliminaries
+
+
+# On metric graps, the SPDE approach, and the rational approximation
+
+*********
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | Metric graphs
+*********
+
+A metric graph `\(\Gamma\)` is a combinatorial undirected graph `\(\Gamma = (\mathcal{V}, \mathcal{E})\)` equipped with a metric `\(d(\cdot,\cdot)\)`, where `\(\mathcal{V} = \{v_i\}\)` is a finite set of vertices and `\(\mathcal{E} = \{e_j\}\)` is a set of undirected edges connecting pairs of vertices.
+
+
+---
+
+class: center, middle
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+
+*********
+
+## Project 1
+
+
+# A new class of non-stationary Gaussian fields with arbitrary smoothness on metric graphs
+
+*********
 
 ---
 
@@ -74,6 +159,7 @@ class: left, top
 
 ### Problem setting
 *********
+
 
 We analyze and numerically approximate solutions to fractional diffusion equations on metric graphs of the form
 
@@ -205,6 +291,27 @@ class: left, top
 load(here::here("data_files/p_boundaryless.RData"))
 p_boundaryless
 ```
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Discretization | Space
+*********
+
+
+```
+{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Animation.")}
+load(here::here("data_files/p_from_graph_to_interval_transformation.RData"))
+p_from_graph_to_interval_transformation
+```
+
 
 ---
 

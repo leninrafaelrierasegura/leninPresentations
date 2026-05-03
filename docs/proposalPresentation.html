@@ -65,31 +65,6 @@ class: left, top
 ### - Project 3
 ### - Project 4
 
-&lt;!-- THIS IS THE START OF THE TEMPLATE --&gt;
-&lt;!-- ######################################## --&gt;
-&lt;!-- ######################################## --&gt;
----
-
-class: left, top
-
-&lt;div style="position:absolute; top:40px; right:55px;"&gt;
-  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
-  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
-  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
-&lt;/div&gt;
-
-### Title template
-*********
-
-# level 1
-## level 2
-### level 3
-#### level 4
-
-&lt;!-- ######################################## --&gt;
-&lt;!-- ######################################## --&gt;
-&lt;!-- THIS IS THE END OF THE TEMPLATE --&gt;
-
 ---
 
 class: center, middle
@@ -143,7 +118,7 @@ class: left, top
   &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-### Preliminaries | Metric graphs | Example 1 (2D)
+### Preliminaries | Metric graphs | Example 1/3 (2D)
 *********
 
 
@@ -163,7 +138,7 @@ class: left, top
   &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-### Preliminaries | Metric graphs | Example 2 (3D)
+### Preliminaries | Metric graphs | Example 2/3 (3D)
 *********
 
 
@@ -184,14 +159,14 @@ class: left, top
   &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-### Preliminaries | Metric graphs | Example 3 (3D)
+### Preliminaries | Metric graphs | Example 3/3 (3D)
 *********
 
 
       
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/graph_on_sphere_sphere2dplot_with_mathpazo.png" alt="Figure 2: The `\(n\)` - sphere fully connected graph (left) and its planar projection onto the plane (right)." width="80%" /&gt;
-&lt;p class="caption"&gt;Figure 2: The `\(n\)` - sphere fully connected graph (left) and its planar projection onto the plane (right).&lt;/p&gt;
+&lt;img src="data_files/graph_on_sphere_sphere2dplot_with_mathpazo.png" alt="Figure 2: The n - sphere fully connected graph (left) and its planar projection onto the plane (right)." width="80%" /&gt;
+&lt;p class="caption"&gt;Figure 2: The n - sphere fully connected graph (left) and its planar projection onto the plane (right).&lt;/p&gt;
 &lt;/div&gt;
 
 
@@ -260,11 +235,152 @@ class: left, top
 Key idea: To characterize a random field as the solution to a stochastic partial differential equation defined on the graph `\(\Gamma\)` [LRL11; BSW24].
 ]
 
-To fix ideas, let `\(\alpha &gt; \sfrac{1}{2}\)`, and consider the SPDE
+To fix ideas, let `\(L = \kappa^2 - \Delta_{\Gamma}\)`, let `\(\alpha &gt; \sfrac{1}{2}\)`, and consider the SPDE
 `\begin{align}
 \label{eq:spde_on_graphgamma}
-    (\kappa^2-\Delta_{\Gamma})^{\sfrac{\alpha}{2}}(\tau u) = \mathcal{W}, \quad\text{on }\Gamma.
+    L^{\sfrac{\alpha}{2}}(\tau u) = \mathcal{W}, \quad\text{on }\Gamma.
 \end{align}`
+
+We approximate `\(u\)` by a finite element expansion `\(u_h(s) = \sum_{j=1}^{N_h} u_j \psi_j(s)\)`. For the special case `\(\tau = 1\)` and `\(\alpha = 2\)`, this leads to the variational formulation
+`\begin{align}
+\mathfrak{h}(u_h,\psi_i) = \mathcal{W}_h(\psi_i), \qquad i = 1,\dots,N_h,
+\end{align}`
+which yields a linear system that, in matrix form, reads
+`\begin{align*}
+(\mathbf{G} + \mathbf{C}^\kappa)\mathbf{u} = \mathbf{W}.
+\end{align*}`
+It follows that `\(\mathbf{u}\sim N(\mathbf{0}, \mathbf{Q}_2^{-1})\)`, where `\(\mathbf{Q}_2=\mathbf{L}^\top\mathbf{C}^{-1}\mathbf{L}\)` with `\(\mathbf{L}= \mathbf{G}+\mathbf{C}^\kappa\)`.
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | Sparsity pattern of FEM matrices
+*********
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/sparsematrixplots_tadpole_justC_with_mathpazo_sparsematrixplots_sphere_dense_justC_with_mathpazo.png" alt="Figure 5: Sparse pattern of the mass matrix `\(\mathbf{C}\)` for the tadpole graph (left), and for the n - sphere graph (right). Nonzero entries are depicted as black pixels." width="70%" /&gt;
+&lt;p class="caption"&gt;Figure 5: Sparse pattern of the mass matrix `\(\mathbf{C}\)` for the tadpole graph (left), and for the n - sphere graph (right). Nonzero entries are depicted as black pixels.&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | The rational approximation | 1 line summary
+*********
+
+.custom-box[
+Let `\(\alpha&gt;0\)` and `\(\delta \in (0,1)\)`. In essence, the rational approximation consists in representing `\(x^{-\alpha}\)` as
+`\begin{align}
+\label{eq:partial_frac_approx_der}
+\tag{1}
+   x^{-\alpha} = x^{-\lfloor\alpha\rfloor}x^{-\{\alpha\}}\approx x^{-\lfloor\alpha\rfloor}\dfrac{p_m(x)}{q_m(x)} = x^{-\lfloor\alpha\rfloor}k+x^{-\lfloor\alpha\rfloor}\sum_{i=1}^mr_i(x-p_i)^{-1},\quad x\in[1,1/\delta],\quad x^{-1}\in[\delta,1],\quad
+\end{align}`
+where `\(k,r_i&gt;0\)` and `\(p_i&lt;0\)` for `\(i=1,\dots,m\)`.
+]
+
+From [Sta03], we obtain the exponential convergence estimate
+`\begin{align}
+    \label{eq:rational_error_with_one_over_delta}
+    \sup_{x\in[1,1/\delta]}\left|x^{-\alpha} - r_m(x^{-1})\right| &amp;\leq C \mathrm{e}^{-2\pi\sqrt{\{\alpha\}m}},
+\end{align}`
+where `\(C\)` is a constant independent of `\(m\)` and `\(r_m(x^{-1}) = x^{-\lfloor\alpha\rfloor}k+x^{-\lfloor\alpha\rfloor}\sum_{i=1}^mr_i(x-p_i)^{-1}\)`.
+
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | The rational approximation | Convergence
+*********
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/conv_rate_ratapprox_with_mathpazo.png" alt="Figure 6: Comparison between the theoretical and observed convergence rates for the `\(L_{\infty}([1, 1/\delta_m])\)`-error of the rational approximation." width="90%" /&gt;
+&lt;p class="caption"&gt;Figure 6: Comparison between the theoretical and observed convergence rates for the `\(L_{\infty}([1, 1/\delta_m])\)`-error of the rational approximation.&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | The rational approximation | In action 1/2
+*********
+
+Let `\(\alpha\in(0,1)\)` and suppose `\(\widetilde{\mathbf{E}}\)` is a (SPD) matrix  with eigenvalues `\(\{\lambda_i\}_{i=1}^n\)` so that `\(\sigma(\widetilde{\mathbf{E}})\subset[\lambda_{\text{min}}, \lambda_{\text{max}}]\)`. Define `\(\mathbf{E} = \widetilde{\mathbf{E}}\lambda^{-1}_{\min}\)`. Since `\(\sigma(\mathbf{E})\subset[1, \lambda_{\max}\lambda^{-1}_{\min}]\)`, we may evaluate `\((1)\)` at `\(\mathbf{E}\)`, obtaining
+`\begin{align}
+\tag{2}
+   \mathbf{E}^{-\{\alpha\}}\approx  k\mathbf{I}+\sum_{i=1}^mr_i(\mathbf{E}-p_i\mathbf{I})^{-1},\quad \sigma(\mathbf{E})\subset[1, \lambda_{\max}\lambda^{-1}_{\min}].
+\end{align}`
+
+**Scenario 1** Let `\(\mathbf{b}\in\mathbb{R}^n\)` be given and `\(\mathbf{E}\)` be a sparse matrix. Instead of computing the eigendecomposition `\(\mathbf{E}^{-\{\alpha\}}\mathbf{b} = \mathbf{U}\boldsymbol{\Lambda}^{-\{\alpha\}}\mathbf{U}^\top \mathbf{b}\)` which in general has cost `\(\mathcal{O}(n^3)\)`, we approximate the action of `\(\mathbf{E}^{-\{\alpha\}}\)` on `\(\mathbf{b}\)` by
+`\begin{align*}
+    \mathbf{E}^{-\{\alpha\}}\mathbf{b}
+    \approx
+    k\mathbf{b} + \sum_{i=1}^m r_i (\mathbf{E} - p_i \mathbf{I})^{-1}\mathbf{b}.
+\end{align*}`
+at a computational cost of  `\(\mathcal{O}(m\cdot\mathcal{C}_{\text{solve}}(\mathbf{E}))\)`.
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Preliminaries | The rational approximation | In action 2/2
+*********
+
+Let `\(\alpha\in(0,1)\)` and suppose `\(\widetilde{\mathbf{E}}\)` is a (SPD) matrix  with eigenvalues `\(\{\lambda_i\}_{i=1}^n\)` so that `\(\sigma(\widetilde{\mathbf{E}})\subset[\lambda_{\text{min}}, \lambda_{\text{max}}]\)`. Define `\(\mathbf{E} = \widetilde{\mathbf{E}}\lambda^{-1}_{\min}\)`. Since `\(\sigma(\mathbf{E})\subset[1, \lambda_{\max}\lambda^{-1}_{\min}]\)`, we may evaluate `\((1)\)` at `\(\mathbf{E}\)`, obtaining
+`\begin{align}
+\tag{2}
+   \mathbf{E}^{-\{\alpha\}}\approx  k\mathbf{I}+\sum_{i=1}^mr_i(\mathbf{E}-p_i\mathbf{I})^{-1},\quad \sigma(\mathbf{E})\subset[1, \lambda_{\max}\lambda^{-1}_{\min}].
+\end{align}`
+
+**Scenario 2** Let `\(\mathbf{E}\)` be a sparse matrix and `\(\mathbf{u} \sim \mathsf{N}(\mathbf{0},\, \mathbf{E}^{-\{\alpha\}})\)`.
+Using `\((2)\)`, we may represent `\(\mathbf{u}\)` as `\(\mathbf{u} = \mathbf{u}_0 + \sum_{i=1}^m \mathbf{u}_i\)`, where `\(\mathbf{u}_i\)` are mutually independent and satisfy `\(\mathbf{u}_i \sim \mathsf{N}(\mathbf{0},\, \mathbf{Q}_i^{-1})\)`. The corresponding precision matrices are
+`\begin{align*}
+    \mathbf{Q}_i = 
+    \begin{cases}
+    k^{-1}\mathbf{I}&amp;\text{ if } i = 0,\\
+        r_i^{-1}(\mathbf{E}-p_i\mathbf{I})&amp;\text{ if } i= 1,\dots,m,
+    \end{cases}
+\end{align*}`
+which are sparse whenever `\(\mathbf{E}\)` is sparse. Define the stacked vector `\(\mathbf{U} = [\mathbf{u}_0^\top, \mathbf{u}_1^\top\dots,\mathbf{u}_{m}^\top]^\top\)`
+and the block-diagonal precision matrix `\(\mathbf{Q}=\operatorname{diag}\left(\mathbf{Q}_0,\mathbf{Q}_1, \ldots, \mathbf{Q}_{m}\right)\)`.
+Then we obtain `\(\mathbf{U} \sim \mathsf{N}\!\left(\mathbf{0},\, \mathbf{Q}^{-1}\right)\)`. As a consequence, *all conditional distributions and marginal likelihood computations can be carried out using sparse linear algebra operations*. Another advantage is that the dependence on `\(\alpha\)` is made explicit through the construction of the components `\(\mathbf{Q}_i\)`. This makes it possible to treat `\(\alpha\)` *as an estimable parameter*.
 
 ---
 
@@ -285,6 +401,28 @@ class: center, middle
 # A new class of non-stationary Gaussian fields with arbitrary smoothness on metric graphs
 
 *********
+
+
+---
+
+class: center, middle
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+
+*********
+
+## Project 2
+
+
+# Numerical approximation of fractional diffusion equations on metric graphs
+
+*********
+
 
 ---
 
@@ -761,8 +899,8 @@ class: left, top
 
       
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/p_all.png" alt="Figure 6: Comparison between theoretical and observed convergence behavior for the error `\(\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="90%" /&gt;
-&lt;p class="caption"&gt;Figure 6: Comparison between theoretical and observed convergence behavior for the error `\(\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
+&lt;img src="data_files/p_all.png" alt="Figure 8: Comparison between theoretical and observed convergence behavior for the error `\(\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="90%" /&gt;
+&lt;p class="caption"&gt;Figure 8: Comparison between theoretical and observed convergence behavior for the error `\(\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
 &lt;/div&gt;
 
 
@@ -777,9 +915,15 @@ class: center, middle
 &lt;/div&gt;
 
 
-# Part II
+*********
 
-#### Optimal Control
+## Project 3
+
+
+# Optimal control of fractional diffusion equations on metric graphs
+
+*********
+
 
 ---
 
@@ -1164,8 +1308,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/fixedpointconvergence_combined2.png" alt="Figure 7: Comparison between the contraction constant and its upper bound." width="70%" /&gt;
-&lt;p class="caption"&gt;Figure 7: Comparison between the contraction constant and its upper bound.&lt;/p&gt;
+&lt;img src="data_files/fixedpointconvergence_combined2.png" alt="Figure 9: Comparison between the contraction constant and its upper bound." width="70%" /&gt;
+&lt;p class="caption"&gt;Figure 9: Comparison between the contraction constant and its upper bound.&lt;/p&gt;
 &lt;/div&gt;
 
 ---
@@ -1184,8 +1328,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/p_all_u.png" alt="Figure 8: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{u}-\bar{U}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="75%" /&gt;
-&lt;p class="caption"&gt;Figure 8: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{u}-\bar{U}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
+&lt;img src="data_files/p_all_u.png" alt="Figure 10: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{u}-\bar{U}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="75%" /&gt;
+&lt;p class="caption"&gt;Figure 10: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{u}-\bar{U}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
 &lt;/div&gt;
 
 
@@ -1204,13 +1348,34 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/p_all_z.png" alt="Figure 9: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{z}- \bar{\mathcal{Z}}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="75%" /&gt;
-&lt;p class="caption"&gt;Figure 9: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{z}- \bar{\mathcal{Z}}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
+&lt;img src="data_files/p_all_z.png" alt="Figure 11: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{z}- \bar{\mathcal{Z}}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`." width="75%" /&gt;
+&lt;p class="caption"&gt;Figure 11: Comparison between theoretical and observed convergence behavior for the error `\(\|\bar{z}- \bar{\mathcal{Z}}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\)`.&lt;/p&gt;
 &lt;/div&gt;
+
+
 
 ---
 
+class: center, middle
 
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+
+*********
+
+## Project 4
+
+
+# An exponentially convergent Markov approximation of Gaussian Whittle-Matérn fields with arbitrary smoothness on metric graphs
+
+*********
+
+
+---
 
 class: left, top
 
@@ -1227,8 +1392,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/qrcode.png" alt="Figure 10: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information." width="40%" /&gt;
-&lt;p class="caption"&gt;Figure 10: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information.&lt;/p&gt;
+&lt;img src="data_files/qrcode.png" alt="Figure 12: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information." width="40%" /&gt;
+&lt;p class="caption"&gt;Figure 12: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information.&lt;/p&gt;
 &lt;/div&gt;
 
 ---
@@ -1255,9 +1420,9 @@ fields on metric graphs". In: _Bernoulli_ 30.2 (2024).
 &lt;https://doi.org/10.3150/23-bej1647&gt;, pp. 1611-1639.
 
 [Hen81] D. Henry. "Preliminaries". In: _Geometric Theory of Semilinear
-Parabolic Equations_. Berlin, Heidelberg: Springer Berlin Heidelberg,
-1981, pp. 3-40. ISBN: 978-3-540-38528-8. DOI:
-[10.1007/BFb0089649](https://doi.org/10.1007%2FBFb0089649).
+Parabolic Equations_. &lt;https://doi.org/10.1007/BFb0089649&gt;. Berlin,
+Heidelberg: Springer Berlin Heidelberg, 1981, pp. 3-40. ISBN:
+978-3-540-38528-8.
 
 [LRL11] F. Lindgren, H. Rue, and J. Lindström. "An explicit link
 between Gaussian fields and Gaussian Markov random fields: the
@@ -1265,12 +1430,15 @@ stochastic partial differential equation approach". In: _J. R. Stat.
 Soc. Ser. B Stat. Methodol._ 73.4 (2011).
 &lt;https://doi.org/10.1111/j.1467-9868.2011.00777.x&gt;, pp. 423-498.
 
+[Sta03] H. R. Stahl. "Best uniform rational approximation of `\(x^\alpha\)`
+on `\([0,1]\)`". In: _Acta Math._ 190.2 (2003).
+&lt;https://doi.org/10.1007/BF02392691&gt;, pp. 241-306.
+
 [Trö10] F. Tröltzsch. _Optimal control of partial differential
 equations_. Vol. 112. Graduate Studies in Mathematics. Theory, methods
 and applications, Translated from the 2005 German original by Jürgen
 Sprekels, &lt;https://doi.org/10.1090/gsm/112&gt;. American Mathematical
 Society, Providence, RI, 2010, p. xvi+399. ISBN: 978-0-8218-4904-0.
-DOI: [10.1090/gsm/112](https://doi.org/10.1090%2Fgsm%2F112).
 
 
 ---
@@ -1288,8 +1456,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/thanksall3d.png" alt="Figure 11: THANK-YOU-FOR-YOUR-ATTENTION graph." width="45%" /&gt;
-&lt;p class="caption"&gt;Figure 11: THANK-YOU-FOR-YOUR-ATTENTION graph.&lt;/p&gt;
+&lt;img src="data_files/thanksall3d.png" alt="Figure 13: THANK-YOU-FOR-YOUR-ATTENTION graph." width="45%" /&gt;
+&lt;p class="caption"&gt;Figure 13: THANK-YOU-FOR-YOUR-ATTENTION graph.&lt;/p&gt;
 &lt;/div&gt;
 
     </textarea>

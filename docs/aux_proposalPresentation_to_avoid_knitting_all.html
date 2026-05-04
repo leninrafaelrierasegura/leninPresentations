@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Rational approximation for fractional diffusion and elliptic operators on metric graphs: scalable statistical modeling and optimal control</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Lenin Rafael Riera Segura" />
+    <script src="site_libs/header-attrs/header-attrs.js"></script>
+    <link href="site_libs/remark-css/default.css" rel="stylesheet" />
+    <script src="site_libs/clipboard/clipboard.min.js"></script>
+    <link href="site_libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="site_libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa-solid fa-clipboard\" style=\"color: #00008B\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="site_libs/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="site_libs/font-awesome/css/v4-shims.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="lenin.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Rational approximation for fractional diffusion and elliptic operators on metric graphs: scalable statistical modeling and optimal control
+]
+.subtitle[
+## PhD proposal
+]
+.author[
+### Lenin Rafael Riera Segura
+]
+.institute[
+### KAUST
+]
+.date[
+### 04-05-2026
+]
+
+---
+
+
+
+
+
+
+
+class: left, top
+
+&lt;!-- &lt;div style="position:absolute; top:40px; right:55px;"&gt; --&gt;
+&lt;!--   &lt;img src="kaustlogo.svg" width="120"&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+
+### Outline
+*********
+
+### - Preliminaries 
+### - Project 1
+### - Project 2
+### - Project 3
+### - Project 4
+
+
+---
+
+class: center, middle
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+
+
+## Project 4
+
+*********
+
+# An exponentially convergent Markov approximation of Gaussian Whittle-Matérn fields with arbitrary smoothness on metric graphs
+
+*********
+
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\in\mathbb{N}\)`
+*********
+
+&lt;div class="content-box-myblue"&gt;
+Assumption 1
+&lt;/div&gt;
+
+.content-box-blue[
+We assume that `\(\alpha \in \mathbb{N}\)`.
+]
+
+Again, our purpose is to approximate the covariance structure of the solution `\(u\)` to 
+`\begin{align}
+\tag{30}
+\label{eq:spde_on_metric_graph_for_4_Project}
+L^{\alpha/2} (\tau u) = \mathcal{W}, \quad \text{on } \Gamma,
+\end{align}`
+where `\(L = \kappa^2 - \Delta_{\Gamma}\)`, `\(u\)` satisfies the Kirchhoff vertex conditions `\((5)\)`, and `\(\kappa\)` and `\(\tau\)` are constant coefficients.
+
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\in\mathbb{N}\)` | Interval case
+*********
+
+.content-box-purple[
+We begin with the simpler interval setting
+$$
+L^{\alpha/2}(\tau u)=\mathcal{W},\quad\text{on }[0,\ell],\tag{31}
+$$
+where the Kirchhoff--Laplacian `\(\Delta_{\Gamma}\)` reduces to the Neumann Laplacian `\(\Delta\)`.
+]
+
+
+- When posed on `\(\mathbb{R}\)`, the solution `\(u\)` to `\((31)\)` satisfies `\(\boldsymbol{u}(t)\sim\mathsf{N}(\mathbf{0}, \boldsymbol{\varrho}(t_1,t_2))\)`, where
+
+`\begin{align}
+\label{eq:u_vector_value_process_on_R}
+    \boldsymbol{u}(t) = [u(t), u^{(1)}(t),\dots, u^{(\alpha-1)}(t)]^\top\quad\text{ and }\quad \boldsymbol{\varrho}(t_1,t_2) = \left[ \frac{\partial^{i-1}}{\partial t_2^{i-1}}\frac{\partial^{j-1}}{\partial t_1^{j-1}}\varrho(t_1-t_2)\right]_{ij\in\{1,2,\ldots, \alpha\}}.
+\end{align}`
+
+- By restricting to `\([0,\ell]\)`, we still have a centered Gaussian process `\(\boldsymbol{u}_{\ell}(t)\sim\mathsf{N}(\mathbf{0}, \boldsymbol{\varrho}_{\ell}(t_1,t_2))\)`, where `\(\boldsymbol{u}_{\ell} = \boldsymbol{u}|_{[0,\ell]}\)` and `\(\boldsymbol{\varrho}_{\ell} = \boldsymbol{\varrho}|_{[0,\ell] \times [0,\ell]}\)`.
+
+- We introduce the boundary evaluation operator
+`\begin{align*}
+    B_{\ell}^\alpha u_{\ell} = [\boldsymbol{u}_{\ell}(0)^\top, \boldsymbol{u}_{\ell}(\ell)^\top]^\top =
+    [u_{\ell}(0), u_{\ell}^{(1)}(0), \dots, u_{\ell}^{(\alpha-1)}(0),
+    u_{\ell}(\ell), u_{\ell}^{(1)}(\ell), \dots, u_{\ell}^{(\alpha-1)}(\ell)]^\top.
+\end{align*}`
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\in\mathbb{N}\)` | Interval case | WMB and BWM processes
+*********
+
+&lt;div class="content-box-myblue"&gt;
+Whittle-Matérn bridge process
+&lt;/div&gt;
+
+.content-box-blue[
+The *Whittle-Matérn bridge process* `\(u_{B_{\ell}^\alpha}(t)\sim\mathsf{N}(0,r_{B_{\ell}^\alpha}(t_1,t_2))\)` is defined as the conditional process `\(u_{B_{\ell}^\alpha}(t) = u_{\ell}(t) \,\big|\, \{B_{\ell}^\alpha u_{\ell} = \mathbf{0}\}\)`, `\(t \in [0,\ell]\)`, where
+`$$r_{B_{\ell}^\alpha}(t_1,t_2)=\varrho(t_1-t_2)-\mathbf{S}_e(t_1)\begin{bmatrix} \boldsymbol{\varrho}_{1\star}(0,t_2) &amp; \boldsymbol{\varrho}_{1\star}(\ell,t_2) \end{bmatrix}^\top,\quad t_1,t_2\in[0,\ell].$$`
+]
+
+
+&lt;div class="content-box-myblue"&gt;
+Boundaryless Whittle-Matérn process
+&lt;/div&gt;
+
+.content-box-blue[
+The *boundaryless Whittle--Matérn processs* is defined as `\(\widetilde{u}_\ell(t) = [\widetilde{\boldsymbol{u}}_\ell(t)]_1\)`, `\(t \in [0,\ell]\)`, where `\(\widetilde{\boldsymbol{u}}_\ell(t) =  [\widetilde{u}_\ell(t),\widetilde{u}_\ell^{(1)}(t),\dots, \widetilde{u}^{(\alpha-1)}(t)]^\top\sim\mathsf{N}(\mathbf{0},\widetilde{\boldsymbol{\varrho}}_{\ell}\left(t_1,t_2\right))\)`, `\(t\in[0,\ell]\)` and
+`\begin{align}
+    \label{eq:matrix_valued_cov_function_ofboundaryless_process}
+	\widetilde{\boldsymbol{\varrho}}_{\ell}\left(t_1,t_2\right) = \boldsymbol{\varrho}(t_1,t_2) +
+	\begin{bmatrix}\boldsymbol{\varrho}(t_1, 0) &amp; \boldsymbol{\varrho}(t_1,\ell)\end{bmatrix} 
+	\begin{bmatrix}
+		\boldsymbol{\varrho}(0,0)  &amp; 	-\boldsymbol{\varrho}(0,\ell) \\
+		-\boldsymbol{\varrho}(\ell,0)  &amp; 	\boldsymbol{\varrho}(0,0)
+	\end{bmatrix}^{-1} 
+	\begin{bmatrix}\boldsymbol{\varrho}(t_2,0)\\
+		\boldsymbol{\varrho}(t_2,\ell)
+	\end{bmatrix}.
+\end{align}`
+]
+  
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\in\mathbb{N}\)` | Interval case | Processes comparison
+*********
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/p_cov_diag_sample.png" alt="Figure 1: Comparison of covariance functions (left), marginal standard deviations (middle), and sample paths (right) for the ''Matérn'', ''FEM'', ''bridge'', and ''boundaryless'' processes on \([0,2]\)." width="100%" /&gt;
+&lt;p class="caption"&gt;Figure 1: Comparison of covariance functions (left), marginal standard deviations (middle), and sample paths (right) for the ''Matérn'', ''FEM'', ''bridge'', and ''boundaryless'' processes on \([0,2]\).&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\in\mathbb{N}\)` | Graph case | Notation
+*********
+
+- The vector-valued function `\(\boldsymbol{u}(s) = [u(s),u^{(1)}(s),\dots,u^{(\alpha-1)}(s)]^\top\)`, `\(s\in\Gamma\)` can be written compactly as
+`\begin{align}
+\label{eq:notation_for_vector_valued_function}
+\textstyle
+    \boldsymbol{u}(s) = \sum_{e\in\mathcal{E}} \mathbb{I}(s \in e)\boldsymbol{u}_e(s),\quad s\in\Gamma,
+\end{align}`
+where `\(\boldsymbol{u}_e(s) = [u_e(s),u_e^{(1)}(s),\dots,u_e^{(\alpha-1)}(s)]^\top\)`, `\(s\in e\)`.
+
+- Define the vector collecting the boundary values of `\(\boldsymbol{u}\)` across all edges as
+`\begin{align}
+\label{eq:dens_u2version2}
+\tag{32}
+   \mathbf{U} =  [\boldsymbol{u}_1(\underline{e}_1)^\top,
+   \boldsymbol{u}_1(\bar{e}_1)^\top,
+   \boldsymbol{u}_2(\underline{e}_2)^\top,
+   \boldsymbol{u}_2(\bar{e}_2)^\top,
+   \ldots,
+	\boldsymbol{u}_{|\mathcal{E}|}(\underline{e}_{|\mathcal{E}|})^\top,
+   \boldsymbol{u}_{|\mathcal{E}|}(\bar{e}_{|\mathcal{E}|})^\top]^\top\in\mathbb{R}^{2\alpha|\mathcal{E}|\times1}.
+\end{align}`
+
+- Define
+`\begin{align*}
+\textstyle
+    \widetilde{\boldsymbol{u}}(s) 
+    = \sum_{e\in\mathcal{E}} \mathbb{I}(s \in e)\,\widetilde{\boldsymbol{u}}_e(s), 
+    \quad s \in \Gamma,
+\end{align*}`
+where the processes `\(\widetilde{u}_e(s) = [\widetilde{\boldsymbol{u}}_e(s)]_1\)`, `\(s \in e\)` are independent boundaryless Whittle--Matérn processes.
+- In the same spirit as `\((32)\)`, define
+`\begin{align}
+	\widetilde{\mathbf{U}} = [\widetilde{\boldsymbol{u}}_1(\underline{e}_1)^\top,\widetilde{\boldsymbol{u}}_1(\bar{e}_1)^\top,\widetilde{\boldsymbol{u}}_2(\underline{e}_2)^\top,\widetilde{\boldsymbol{u}}_2(\bar{e}_2)^\top,\ldots, \widetilde{\boldsymbol{u}}_{|\mathcal{E}|}(\underline{e}_{|\mathcal{E}|})^\top,\widetilde{\boldsymbol{u}}_{|\mathcal{E}|}(\bar{e}_{|\mathcal{E}|})^\top]^\top\in\mathbb{R}^{2\alpha|\mathcal{E}|\times1}.
+\end{align}`
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\in\mathbb{N}\)` | Graph case | Two representation
+*********
+
+&lt;div class="content-box-myblue"&gt;
+Bridge representation of Whittle-Matérn processes on metric graphs
+&lt;/div&gt;
+
+.content-box-blue[
+Let `\(u\)` be a solution to `\((30)\)`. Then `\(u\)` has representation
+`\begin{align*}
+    u(s) = \sum_{e\in\mathcal{E}}\mathbf{S}_e(s)\mathbf{D}_e \mathbf{U} + \sum_{e\in\mathcal{E}}\widetilde{u}_{B_{\ell_e}^\alpha}(s), \quad s\in\Gamma,
+\end{align*}`
+where `\(\widetilde{u}_{B_{\ell_e}^\alpha}\)` are independent Whittle--Matérn bridge process defined on each edge and extended by zero.
+]
+
+&lt;div class="content-box-myblue"&gt;
+Boundaryless representation of Whittle-Matérn processes on metric graphs
+&lt;/div&gt;
+
+.content-box-blue[
+Define the conditioned process
+`\begin{align}
+\label{eq:process_u_defined_as_conditioned}
+    \boldsymbol{u}(s) = \widetilde{\boldsymbol{u}}(s)\, \big| \, \mathcal{K}_\alpha(\widetilde{u}), 
+    \quad s \in \Gamma.
+\end{align}`
+Then the scalar process `\(u(s) = [\boldsymbol{u}(s)]_1\)`, `\(s \in \Gamma\)`, is a solution to `\((30)\)`.
+]
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\in\mathbb{N}\)` | Graph case | Bridge representation
+*********
+
+
+```
+{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Decomposition of a Whittle-Matérn process with into independent bridges and a residual term.")}
+load(here::here("data_files/p_bridge.RData"))
+p_bridge
+```
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\in\mathbb{N}\)` | Graph case | Boundaryless representation
+*********
+
+
+```
+{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Boundaryless construction of a Whittle-Matérn process.")}
+load(here::here("data_files/p_boundaryless.RData"))
+p_boundaryless
+```
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\in\mathbb{N}\)` | Graph case | Sparse precision matrices
+*********
+
+**Exploiting the boundaryless representation**
+
+- Since the processes `\(\widetilde{\boldsymbol{u}}_e\)`, `\(e \in \mathcal{E}\)`, are mutually independent, centered, and Gaussian, it follows that
+`\begin{align}
+\label{eq:distribution_ofU_tilde}
+    \widetilde{\mathbf{U}}\sim\mathsf{N}(\mathbf{0}, \widetilde{\mathbf{Q}}^{-1}), \quad \widetilde{\mathbf{Q}} = \operatorname{diag}(\{\widetilde{\mathbf{Q}}_e\}_{e\in\mathcal{E}}).
+\end{align}`
+
+- The conditioning event `\(\mathcal{K}_\alpha(\widetilde{u})\)` can be written in matrix form as `\(\mathbf{K}\widetilde{\mathbf{U}} = \mathbf{0}\)`. Consequently, the vector `\(\mathbf{U}\)` can be expressed as `\(\mathbf{U} = \widetilde{\mathbf{U}} | \{\mathbf{K}\widetilde{\mathbf{U}} = \mathbf{0}\}\)`.
+- However, the precision matrix of `\(\mathbf{U}\)` **is not sparse**. This can be fixed by considering a change of basis `\(\widetilde{\mathbf{U}}^* = \mathbf{T}\widetilde{\mathbf{U}}\)`. Let `\(\widetilde{\mathbf{Q}}^* = \mathbf{T}\widetilde{\mathbf{Q}}\mathbf{T}^\top\)` and `\(\mathbf{A}\)` be such that `\(\mathbf{U}_v  = [u(v_1), u(v_2), \ldots, u(v_{|\mathcal{V}|})]^\top = \mathbf{A}\mathbf{U}\)`. 
+
+&lt;div class="content-box-myblue"&gt;
+Sparse representation
+&lt;/div&gt;
+
+.content-box-blue[
+Let `\(\mathbf{T}_{\mathcal{U}}\)` denote `\(\mathbf{T}\)` with its first `\(k\)` rows removed, and `\(\widetilde{\mathbf{Q}}^*_{\mathcal{U}\mathcal{U}}\)` the corresponding principal submatrix. Then
+`\begin{equation}
+\label{eq:Uv_sparse}
+\mathbf{U}_v \sim \mathsf{N}\!\Big(
+\mathbf{0},\,
+\mathbf{A}\mathbf{T}_{\mathcal{U}}^\top
+\Big(\widetilde{\mathbf{Q}}^*_{\mathcal{U}\mathcal{U}}\Big)^{-1}
+\mathbf{T}_{\mathcal{U}}\mathbf{A}^\top
+\Big).
+\end{equation}`
+]
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\not\in\mathbb{N}\)`
+*********
+
+For general `\(\alpha\)`, the solution `\(u\)` to `\((30)\)` is a centered Gaussian process with covariance operator `\(\mathcal{C} = \tau^{-2}L^{-\alpha}\)`, which we denote by `\(u \sim \mathsf{N}(0,\mathcal{C})\)`. Using the rational approximation, we approximate `\(\mathcal{C}\)` as
+`\begin{align*}
+    \mathcal{C}_\alpha = \tau^{-2}L^{-\lfloor\alpha\rfloor}P_m(L^{-1})Q_m(L^{-1})^{-1} = \tau^{-2}kL^{-\lfloor\alpha\rfloor} + \sum_{i=1}^m\tau^{-2}r_iL^{-\lfloor\alpha\rfloor}(L-p_iI)^{-1} = \mathcal{C}_0 + \sum_{i=1}^m \mathcal{C}_i.
+\end{align*}`
+
+Let `\(u_\alpha\sim \mathsf{N}(0,\mathcal{C}_\alpha)\)`. It can then be represented as a sum of independent Gaussian processes, `\(u_\alpha = u_0 + \sum_{i=1}^m u_i\)`, where `\(u_0 \sim \mathsf{N}(0,\mathcal{C}_0)\)` and `\(u_i \sim \mathsf{N}(0,\mathcal{C}_i)\)` for `\(i = 1, \dots, m\)`. Moreover, these processes satisfy the SPDEs
+
+$$
+`\begin{align}
+\mathcal{C}_0^{-1/2}u_0 = L^{\lfloor\alpha\rfloor/2}(\tau k^{-1/2}u_0) = \mathcal{W},&amp; \quad \text{on } \Gamma, \tag{33} \\
+\mathcal{C}_i^{-1/2}u_i  = (L^{\lfloor\alpha\rfloor}(L - p_i I))^{1/2}(\tau r_i^{-1/2}u_i) = \mathcal{W},&amp; \quad \text{on } \Gamma.\tag{34}
+\end{align}`
+$$
+
+[BMS25] showed that if we consider the SPDE `\((33)\)` on `\(\mathbb{R}\)`, then the solution `\(u_i\)` admits a stationary covariance function given by
+`\begin{align*}
+\varrho_i(h) = r_i\sigma^2 \frac{1}{p_i^{\lfloor\alpha\rfloor}}\varrho\Big(h;\kappa\sqrt{1-p_i}, 1/2, \sqrt{c_\alpha\sqrt{\pi}/\sqrt{1-p_i}}\Big)\quad - \sum_{j=1}^{\lfloor\alpha\rfloor} r_i\sigma^2 \frac{1}{p_i^{\lfloor\alpha\rfloor+1-j}} \varrho\left(h;\kappa, j-1/2, \sqrt{c_\alpha/c_j}\right).
+\end{align*}`
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Project 4 | `\(\alpha\not\in\mathbb{N}\)`
+*********
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/errorRatFEMcomparison_with_mathpazo.png" alt="Figure 2: Covariance errors in the \(L_2(\Gamma\times\Gamma)\)-norm (left) and \(L_\infty(\Gamma\times\Gamma)\)-norm (right) on the tadpole graph." width="80%" /&gt;
+&lt;p class="caption"&gt;Figure 2: Covariance errors in the \(L_2(\Gamma\times\Gamma)\)-norm (left) and \(L_\infty(\Gamma\times\Gamma)\)-norm (right) on the tadpole graph.&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### More information
+*********
+
+
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/qrcode.png" alt="Figure 3: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information." width="40%" /&gt;
+&lt;p class="caption"&gt;Figure 3: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information.&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### References
+*********
+
+[BMS25] D. Bolin, V. Mehandiratta, and A. B. Simas. "Linear cost and
+exponentially convergent approximation of Gaussian Matérn processes on
+intervals". In: _J. Mach. Learn. Res._ 26.96 (2025).
+&lt;http://jmlr.org/papers/v26/24-1779.html&gt;, pp. 1-34.
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Thanks
+*********
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/thanksall3d.png" alt="Figure 4: THANK-YOU-FOR-YOUR-ATTENTION graph." width="45%" /&gt;
+&lt;p class="caption"&gt;Figure 4: THANK-YOU-FOR-YOUR-ATTENTION graph.&lt;/p&gt;
+&lt;/div&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "ratio": "16:9",
+  "slideNumberFormat": "%current%",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "seal": false,
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

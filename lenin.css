@@ -98,7 +98,7 @@
 .content-box-myblue {
   box-sizing: border-box;
   border-radius: 0px;
-  margin: 50px 0 0;
+  margin: 10px 0 0; /* It was 50px 0 0 */
   overflow: hidden;
   padding: 0px 20px 0px 20px;
   width: 100%;

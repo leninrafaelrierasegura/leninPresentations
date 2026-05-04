@@ -1073,6 +1073,26 @@ knitr::include_graphics("data_files/p_all_nicer_tadpole_with_mathpazo.png")
 ```
 
 
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 2 | Beyond metric graphs
+*********
+
+```{r, echo = FALSE, fig.align='center', out.width='70%', fig.cap = captioner("Finite element discretizations on the unit square \\([0,1]^2\\) (left) and the unit sphere \\(\\mathbb{S}^2\\) (right).")}
+knitr::include_graphics("data_files/p_mesh_on_square_p_mesh_on_sphere.png")
+```
+
+
+
 ---
 
 class: center, middle

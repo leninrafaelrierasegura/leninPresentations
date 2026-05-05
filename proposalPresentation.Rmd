@@ -646,7 +646,7 @@ class: left, top
 *********
 
 
-```{r, echo = FALSE, fig.align='center', out.width='60%', fig.cap = captioner("Marginal standard deviation \\(\\sigma_{\\kappa}(\\cdot)\\) of a Whittle-Matérn field with \\(\\tau = 1\\) (left), and of a generalized Whittle-Matérn field with \\(\\tau(\\cdot) = \\sigma_{\\kappa}(\\cdot)\\) (right).")}
+```{r, echo = FALSE, fig.align='center', out.width='60%', fig.cap = captioner("Models for \\(\\tau(\\cdot)\\) (left), \\(\\kappa(\\cdot)\\) (center), and their simulated fields \\(u(\\cdot)\\) (right).")}
 knitr::include_graphics("data_files/kkk10_kkk11_kkk12_kkk7_kkk8_kkk9.png")
 ```
 

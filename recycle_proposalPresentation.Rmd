@@ -42,3 +42,14 @@ class: left, top
 <!-- ######################################## -->
 <!-- ######################################## -->
 <!-- THIS IS THE END OF THE TEMPLATE -->
+
+
+
+
+
+
+
+
+
+As a consequence, *all conditional distributions and marginal likelihood computations can be carried out using sparse linear algebra operations*. Another advantage is that the dependence on $\alpha$ is made explicit through the construction of the components $\mathbf{Q}_i$. This makes it possible to treat $\alpha$ *as an estimable parameter*.
+

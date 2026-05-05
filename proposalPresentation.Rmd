@@ -369,7 +369,6 @@ class: left, top
 Let $\alpha\in(0,1)$ and suppose $\widetilde{\mathbf{E}}$ is a (SPD) matrix  with eigenvalues $\{\lambda_i\}_{i=1}^n$ so that $\sigma(\widetilde{\mathbf{E}})\subset[\lambda_{\text{min}}, \lambda_{\text{max}}]$. Define $\mathbf{E} = \widetilde{\mathbf{E}}\lambda^{-1}_{\min}$. Since $\sigma(\mathbf{E})\subset[1, \lambda_{\max}\lambda^{-1}_{\min}]$, we may evaluate $(1)$ at $\mathbf{E}$, obtaining
 \begin{align}
 \tag{2}
-\textstyle
    \mathbf{E}^{-\{\alpha\}}\approx  k\mathbf{I}+\sum_{i=1}^mr_i(\mathbf{E}-p_i\mathbf{I})^{-1},\quad \sigma(\mathbf{E})\subset[1, \lambda_{\max}\lambda^{-1}_{\min}].
 \end{align}
 
@@ -397,7 +396,6 @@ class: left, top
 Let $\alpha\in(0,1)$ and suppose $\widetilde{\mathbf{E}}$ is a (SPD) matrix  with eigenvalues $\{\lambda_i\}_{i=1}^n$ so that $\sigma(\widetilde{\mathbf{E}})\subset[\lambda_{\text{min}}, \lambda_{\text{max}}]$. Define $\mathbf{E} = \widetilde{\mathbf{E}}\lambda^{-1}_{\min}$. Since $\sigma(\mathbf{E})\subset[1, \lambda_{\max}\lambda^{-1}_{\min}]$, we may evaluate $(1)$ at $\mathbf{E}$, obtaining
 \begin{align}
 \tag{2}
-\textstyle
    \mathbf{E}^{-\{\alpha\}}\approx  k\mathbf{I}+\sum_{i=1}^mr_i(\mathbf{E}-p_i\mathbf{I})^{-1},\quad \sigma(\mathbf{E})\subset[1, \lambda_{\max}\lambda^{-1}_{\min}].
 \end{align}
 
@@ -412,7 +410,7 @@ Using $(2)$, we may represent $\mathbf{u}$ as $\mathbf{u} = \mathbf{u}_0 + \sum_
 \end{align*}
 which are sparse whenever $\mathbf{E}$ is sparse. Define the stacked vector $\mathbf{U} = [\mathbf{u}_0^\top, \mathbf{u}_1^\top\dots,\mathbf{u}_{m}^\top]^\top$
 and the block-diagonal precision matrix $\mathbf{Q}=\operatorname{diag}\left(\mathbf{Q}_0,\mathbf{Q}_1, \ldots, \mathbf{Q}_{m}\right)$.
-Then we obtain $\mathbf{U} \sim \mathsf{N}\!\left(\mathbf{0},\, \mathbf{Q}^{-1}\right)$. As a consequence, *all conditional distributions and marginal likelihood computations can be carried out using sparse linear algebra operations*. Another advantage is that the dependence on $\alpha$ is made explicit through the construction of the components $\mathbf{Q}_i$. This makes it possible to treat $\alpha$ *as an estimable parameter*.
+Then we obtain $\mathbf{U} \sim \mathsf{N}\!\left(\mathbf{0},\, \mathbf{Q}^{-1}\right)$.
 
 
 
@@ -756,7 +754,7 @@ class: left, top
 ### Project 2 | Discretization | Space
 *********
 
-- The spatial domain is discretized using the **finite element method**.
+- The spatial domain $\Gamma$ is discretized using the **finite element method**.
 
 ---
 
@@ -771,21 +769,7 @@ class: left, top
 ### Project 2 | Discretization | Time
 *********
 
-- **Backward Euler scheme**
-
-- To discretize the time domain, we divide the interval $[0, T]$ into $N$ **uniform subintervals** with time steps $t_k = k\tau,\; k = 0, \dots, N$, where $\tau = T/N$ is the time step size. 
-
-- For a function $\phi$, we denote its value at $t_k$ by $\phi^k=\phi(t_k)$ and let $\phi^\tau$ denote the sequence of evaluations $\{\phi^k\}_{k=0}^N$ at the time step sequence $\{t_k\}_{k=0}^N$. 
-
-- For any sequence $\phi^\tau$, we let $\tilde{\phi}^\tau$ represent the piecewise constant function given by
-
-$$
-\begin{cases}
- \tilde{\phi}^\tau(0) = \phi^0\\
-\tilde{\phi}^\tau(t) = \phi^k,\quad t\in(t_{k-1},t_k],\quad k=1,\dots, N.
-\end{cases}
-$$
-
+- Using the **backward Euler scheme**, we discretize $[0,T]$ **uniformly** with time step $\tau$ and nodes $t_k = k\tau$, $k=0,\dots,N$.
 
 ---
 
@@ -1025,36 +1009,6 @@ class: left, top
 load(here::here("data_files/error_for_project2.RData"))
 error_for_project2
 ```
-
-
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 2 | Convergence behavior | Calibration
-*********
-
-From Theorem 4, recall that the total error satisfies
-$$\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim\tau+h^\alpha + h^{\alpha-2}e^{-2\pi\sqrt{(1-\alpha/2)m}}.$$
-
-To observe the convergence behavior with respect to $\tau$, $h$, and $m$, we need to calibrate the discretization parameters. That essentially means that we set
-$$\tau = h^\alpha = h^{\alpha-2}e^{-2\pi\sqrt{(1-\alpha/2)m}}$$
-and solve for the other two parameters when the other is the one of interest.
-
-**Example**: Convergence with respect to $h$.
-
-- For a given $h$, set $\tau = h^\alpha$ and $m = \lceil\log_{\text{e}}^2(h)/(\pi^2(1-\alpha/2))\rceil$.
-
-Therefore.
-
-$$\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim C_h h^\alpha.$$
 
 
 ---
@@ -1390,7 +1344,7 @@ class: left, top
   <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-### Project 3 | Matrix vs Vector form
+### Project 3 | Matrix vs Vector formulation
 *********
 
 
@@ -1441,7 +1395,7 @@ class: left, top
   <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-### Project 3 | Fixed-point iteration 1/5
+### Project 3 | Fixed-point iteration 1/2
 *********
 
 **Vectorized formulation**
@@ -1470,7 +1424,7 @@ class: left, top
   <img src="Kaust.png" height="50" style="margin-left:10px;">
 </div>
 
-### Project 3 | Fixed-point iteration 2/5
+### Project 3 | Fixed-point iteration 2/2
 *********
  
 The quadrature-based norm, natural for the matrix formulation, and the weighted Euclidean norm, natural for the vectorized formulation, are equivalent up to the factor $\sqrt{\tau}$:
@@ -1485,79 +1439,6 @@ If $\mu\kappa^{4\beta}>1$, then $\mathcal{T}$ is a contraction with respect to t
 ]
 
 By the Banach fixed-point theorem, $(\mathbf{\bar{z}}^{(n)})_{n\in\mathbb{N}}$ converges to a unique fixed point $\mathbf{\bar{z}}^\star$, which uniquely determines the optimal state via $\mathbf{\bar{u}}^{\star} = \mathbf{h} + \mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}(\mathbf{f}+\mathbf{M}\mathbf{\bar{z}}^{\star})$.
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 3 | Fixed-point iteration 3/5 | Idea of the proof 
-*********
- 
-Let $\mathbf{X}, \mathbf{Y}\in\mathbb{R}^{N_h\times(N+1)}$ and $\mathbf{x} =\text{vec}(\mathbf{X}),\mathbf{y} = \text{vec}(\mathbf{Y})\in \mathbb{R}^{(N+1)N_h}$ be their vectorized forms. Then
-
-\begin{align}
-    \|\mathcal{T}(\mathbf{X}) - \mathcal{T}(\mathbf{Y})\|_{\mathfrak{q}} & =  \|\text{vec}^{-1}(\mathfrak{T}(\mathbf{x})) - \text{vec}^{-1}(\mathfrak{T}(\mathbf{y}))\|_{\mathfrak{q}}\\
-    & =  \|\text{vec}^{-1}(\mathfrak{T}(\mathbf{x})-\mathfrak{T}(\mathbf{y}))\|_{\mathfrak{q}}\\
-    & = \sqrt{\tau}\|\mathfrak{T}(\mathbf{x})-\mathfrak{T}(\mathbf{y})\|_{\mathbf{C}_{N+1}}.\label{Lip1}
-\end{align}
-From the Lipschitz property of the componentwise projection operator $\Pi(\mathbf{x}) := \max\{\mathbf{a}, \min\{\mathbf{b}, -\mathbf{x}/\mu\}\}$, we have
-\begin{align}
-    \|\mathfrak{T}(\mathbf{x})-\mathfrak{T}(\mathbf{y})\|_{\mathbf{C}_{N+1}} &\leq (1/\mu)\| \mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{M}\mathbf{x}-\mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{M}\mathbf{y}\|_{\mathbf{C}_{N+1}}\\
-    &\leq (1/\mu)\| \mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{M}\|_{\mathbf{C}_{N+1}}\|\mathbf{x}-\mathbf{y}\|_{\mathbf{C}_{N+1}}\\
-    &= \gamma\|\mathbf{x}-\mathbf{y}\|_{\mathbf{C}_{N+1}},\label{Lip2}
-\end{align}
-where $\gamma = (1/\mu)\|\boldsymbol{\mathfrak{L}}\|_{\mathbf{C}_{N+1}}$ and $\boldsymbol{\mathfrak{L}} = \mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{M}$.
-
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 3 | Fixed-point iteration 4/5 | Example
-*********
-
-With $N=3$, matrix $\boldsymbol{\mathfrak{L}}$ has the form
-
-```{r, echo=FALSE, fig.align='center', out.width='70%'}
-# figures
-knitr::include_graphics("data_files/matrixL.png")
-```
-
-Define a scalar matrix $\mathbf{T}$ as $\mathbf{T}  = \begin{bmatrix}\omega^2+\omega^4+\omega^6 & \omega^3+\omega^5 & \omega^4\\\omega^3+\omega^5 & \omega^2+\omega^4 & \omega^3\\\omega^4 & \omega^3 & \omega^2\\\end{bmatrix}$, where $\omega = \dfrac{1}{1+\tau\kappa^{2\beta}}<1.$
-
-One can show that $\|\boldsymbol{\mathfrak{L}}\|_{\mathbf{C}_{N+1}} = \tau^2\|\mathbf{T}\|_2$ and $\|\mathbf{T}\|_2  \leq \dfrac{1}{\tau^2\kappa^{4\beta}}$. Consequently,
-$$\gamma = \dfrac{1}{\mu}\|\boldsymbol{\mathfrak{L}}\|_{\mathbf{C}_{N+1}} =  \dfrac{\tau^2}{\mu}\|\mathbf{T}\|_2 \leq \dfrac{\tau^2}{\mu} \dfrac{1}{\tau^2\kappa^{4\beta}} = \dfrac{1}{\mu\kappa^{4\beta}}.$$
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 3 | Fixed-point iteration 5/5 | Contraction constant
-*********
-
-
-```{r, echo=FALSE, fig.align='center', out.width='70%', fig.cap = captioner("Comparison between the contraction constant and its upper bound.")}
-# figures
-knitr::include_graphics("data_files/fixedpointconvergence_combined2_with_mathpazo.png")
-```
 
 ---
 
@@ -2042,5 +1923,153 @@ class: left, top
 ```{r, eval =TRUE, fig.align='center', out.width = "45%", fig.cap = captioner("THANK-YOU-FOR-YOUR-ATTENTION graph.")}
 # figures
 knitr::include_graphics("data_files/thanksall3d.png")
+```
+
+
+
+---
+
+class: center, middle
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+#### THE END
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 2 | Discretization | Time
+*********
+
+- **Backward Euler scheme**
+
+- To discretize the time domain, we divide the interval $[0, T]$ into $N$ **uniform subintervals** with time steps $t_k = k\tau,\; k = 0, \dots, N$, where $\tau = T/N$ is the time step size. 
+
+- For a function $\phi$, we denote its value at $t_k$ by $\phi^k=\phi(t_k)$ and let $\phi^\tau$ denote the sequence of evaluations $\{\phi^k\}_{k=0}^N$ at the time step sequence $\{t_k\}_{k=0}^N$. 
+
+- For any sequence $\phi^\tau$, we let $\tilde{\phi}^\tau$ represent the piecewise constant function given by
+
+$$
+\begin{cases}
+ \tilde{\phi}^\tau(0) = \phi^0\\
+\tilde{\phi}^\tau(t) = \phi^k,\quad t\in(t_{k-1},t_k],\quad k=1,\dots, N.
+\end{cases}
+$$
+
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 2 | Convergence behavior | Calibration
+*********
+
+From Theorem 4, recall that the total error satisfies
+$$\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim\tau+h^\alpha + h^{\alpha-2}e^{-2\pi\sqrt{(1-\alpha/2)m}}.$$
+
+To observe the convergence behavior with respect to $\tau$, $h$, and $m$, we need to calibrate the discretization parameters. That essentially means that we set
+$$\tau = h^\alpha = h^{\alpha-2}e^{-2\pi\sqrt{(1-\alpha/2)m}}$$
+and solve for the other two parameters when the other is the one of interest.
+
+**Example**: Convergence with respect to $h$.
+
+- For a given $h$, set $\tau = h^\alpha$ and $m = \lceil\log_{\text{e}}^2(h)/(\pi^2(1-\alpha/2))\rceil$.
+
+Therefore.
+
+$$\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim C_h h^\alpha.$$
+
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 3 | Fixed-point iteration 3/5 | Idea of the proof 
+*********
+ 
+Let $\mathbf{X}, \mathbf{Y}\in\mathbb{R}^{N_h\times(N+1)}$ and $\mathbf{x} =\text{vec}(\mathbf{X}),\mathbf{y} = \text{vec}(\mathbf{Y})\in \mathbb{R}^{(N+1)N_h}$ be their vectorized forms. Then
+
+\begin{align}
+    \|\mathcal{T}(\mathbf{X}) - \mathcal{T}(\mathbf{Y})\|_{\mathfrak{q}} & =  \|\text{vec}^{-1}(\mathfrak{T}(\mathbf{x})) - \text{vec}^{-1}(\mathfrak{T}(\mathbf{y}))\|_{\mathfrak{q}}\\
+    & =  \|\text{vec}^{-1}(\mathfrak{T}(\mathbf{x})-\mathfrak{T}(\mathbf{y}))\|_{\mathfrak{q}}\\
+    & = \sqrt{\tau}\|\mathfrak{T}(\mathbf{x})-\mathfrak{T}(\mathbf{y})\|_{\mathbf{C}_{N+1}}.\label{Lip1}
+\end{align}
+From the Lipschitz property of the componentwise projection operator $\Pi(\mathbf{x}) := \max\{\mathbf{a}, \min\{\mathbf{b}, -\mathbf{x}/\mu\}\}$, we have
+\begin{align}
+    \|\mathfrak{T}(\mathbf{x})-\mathfrak{T}(\mathbf{y})\|_{\mathbf{C}_{N+1}} &\leq (1/\mu)\| \mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{M}\mathbf{x}-\mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{M}\mathbf{y}\|_{\mathbf{C}_{N+1}}\\
+    &\leq (1/\mu)\| \mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{M}\|_{\mathbf{C}_{N+1}}\|\mathbf{x}-\mathbf{y}\|_{\mathbf{C}_{N+1}}\\
+    &= \gamma\|\mathbf{x}-\mathbf{y}\|_{\mathbf{C}_{N+1}},\label{Lip2}
+\end{align}
+where $\gamma = (1/\mu)\|\boldsymbol{\mathfrak{L}}\|_{\mathbf{C}_{N+1}}$ and $\boldsymbol{\mathfrak{L}} = \mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{M}$.
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 3 | Fixed-point iteration 4/5 | Example
+*********
+
+With $N=3$, matrix $\boldsymbol{\mathfrak{L}}$ has the form
+
+```{r, echo=FALSE, fig.align='center', out.width='70%'}
+# figures
+knitr::include_graphics("data_files/matrixL.png")
+```
+
+Define a scalar matrix $\mathbf{T}$ as $\mathbf{T}  = \begin{bmatrix}\omega^2+\omega^4+\omega^6 & \omega^3+\omega^5 & \omega^4\\\omega^3+\omega^5 & \omega^2+\omega^4 & \omega^3\\\omega^4 & \omega^3 & \omega^2\\\end{bmatrix}$, where $\omega = \dfrac{1}{1+\tau\kappa^{2\beta}}<1.$
+
+One can show that $\|\boldsymbol{\mathfrak{L}}\|_{\mathbf{C}_{N+1}} = \tau^2\|\mathbf{T}\|_2$ and $\|\mathbf{T}\|_2  \leq \dfrac{1}{\tau^2\kappa^{4\beta}}$. Consequently,
+$$\gamma = \dfrac{1}{\mu}\|\boldsymbol{\mathfrak{L}}\|_{\mathbf{C}_{N+1}} =  \dfrac{\tau^2}{\mu}\|\mathbf{T}\|_2 \leq \dfrac{\tau^2}{\mu} \dfrac{1}{\tau^2\kappa^{4\beta}} = \dfrac{1}{\mu\kappa^{4\beta}}.$$
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 3 | Fixed-point iteration 5/5 | Contraction constant
+*********
+
+
+```{r, echo=FALSE, fig.align='center', out.width='70%', fig.cap = captioner("Comparison between the contraction constant and its upper bound.")}
+# figures
+knitr::include_graphics("data_files/fixedpointconvergence_combined2_with_mathpazo.png")
 ```
 

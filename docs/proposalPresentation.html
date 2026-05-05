@@ -247,7 +247,7 @@ which yields a linear system that, in matrix form, reads
 `\begin{align*}
 (\mathbf{G} + \mathbf{C}^\kappa)\mathbf{u} = \mathbf{W}.
 \end{align*}`
-It follows that `\(\mathbf{u}\sim N(\mathbf{0}, \mathbf{Q}_2^{-1})\)`, where `\(\mathbf{Q}_2=\mathbf{L}^\top\mathbf{C}^{-1}\mathbf{L}\)` with `\(\mathbf{L}= \mathbf{G}+\mathbf{C}^\kappa\)`.
+It follows that `\(\mathbf{u}\sim \mathsf{N}(\mathbf{0}, \mathbf{Q}_2^{-1})\)`, where `\(\mathbf{Q}_2=\mathbf{L}^\top\mathbf{C}^{-1}\mathbf{L}\)` with `\(\mathbf{L}= \mathbf{G}+\mathbf{C}^\kappa\)`.
 
 
 ---
@@ -562,7 +562,7 @@ The covariance matrix of the weights `\(\mathbf{u} =  [u_1,\dots,u_{N_h}]^\top\)
 \textstyle
     \mathbf{\Sigma}_{\mathbf{u}} = \boldsymbol{\tau}^{-1}(\mathbf{L}^{-1}\mathbf{C})^{\lfloor \alpha \rfloor}\sum_{i=1}^mr_i(\mathbf{L}-p_i\mathbf{C})^{-1}\boldsymbol{\tau}^{-1} + \boldsymbol{\tau}^{-1}\mathbf{K}_{\lfloor \alpha \rfloor}\boldsymbol{\tau}^{-1},
 \end{equation}`
-which let us to express `\(\mathbf{u} = \sum_{i=1}^{m+1} \mathbf{u}_i\)`, where `\(\mathbf{u}_i\sim N(\mathbf{0}, \mathbf{Q}_i^{-1})\)` and 
+which let us to express `\(\mathbf{u} = \sum_{i=1}^{m+1} \mathbf{u}_i\)`, where `\(\mathbf{u}_i\sim \mathsf{N}(\mathbf{0}, \mathbf{Q}_i^{-1})\)` and 
 `\begin{equation*}
     \mathbf{Q}_i = 
     \begin{cases}
@@ -1374,7 +1374,7 @@ class: left, top
 **Vectorized formulation**
 
 `\begin{align*}
-    \mathbf{\bar{z}}  =  \underbrace{\max\{\mathbf{a}, \min\{\mathbf{b}, -(\mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{h}+\mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{f}-\mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{d}+\mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{M}\mathbf{\bar{z}})/\mu\}\}}_{\mathfrak{T}(\mathbf{z})}.
+    \mathbf{\bar{z}}  =  \underbrace{\max\{\mathbf{a}, \min\{\mathbf{b}, -(\mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{h}+\mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{f}-\mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{d}+\mathbf{S}_{\mathrm{B}}\mathbf{\hat{R}}\mathbf{M}\mathbf{S}_{\mathrm{F}}\mathbf{\hat{R}}\mathbf{M}\mathbf{\bar{z}})/\mu\}\}}_{\mathfrak{T}(\mathbf{\bar{z}})}.
 \end{align*}`
 The vectorized formulation naturally induces the iterative scheme `\(\mathbf{\bar{z}}^{(n+1)}  = \mathfrak{T}(\mathbf{\bar{z}}^{(n)})\)`.
 

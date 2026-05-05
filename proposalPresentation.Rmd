@@ -600,10 +600,10 @@ which let us to express $\mathbf{u} = \sum_{i=1}^{m+1} \mathbf{u}_i$, where $\ma
         \boldsymbol{\tau}\mathbf{K}^{-1}_{\lfloor \alpha \rfloor}\boldsymbol{\tau}&\text{ if } i = m+1.
     \end{cases}
 \end{equation*}
-Suppose we observe $\mathbf{y} = [y_1,\dots,y_n]^\top$ following $y_i \mid u(\cdot) \sim \mathsf{N}(u(s_i), \sigma_\epsilon^2)$, $i=1,\dots,n$. Then the model admits
+Suppose we observe $\mathbf{y} = [y_1,\dots,y_n]^\top$ following $y_i \mid u(\cdot) \sim \mathsf{N}(u(s_i), \sigma_\epsilon^2)$, $i=1,\dots,n$. Then, by letting, $\mathbf{Q}_\epsilon = \sigma_\epsilon^{-2}\mathbf{I}$, $\mathbf{U} = [\mathbf{u}_1^\top,\dots,\mathbf{u}_{m+1}^\top]^\top$, and $\mathbf{Q} = \operatorname{diag}(\mathbf{Q}_1,\ldots,\mathbf{Q}_{m+1})$, the model can be written hierarchically as
 \begin{align*}
     \mathbf{U} \sim \mathsf{N}(\mathbf{0}, \mathbf{Q}^{-1}), \quad
-    \mathbf{y} \mid \mathbf{U} \sim \mathsf{N}(\overline{\mathbf{A}}\mathbf{U}, \mathbf{Q}_\epsilon^{-1}), \quad \mathbf{Q}_\epsilon = \sigma_\epsilon^{-2}\mathbf{I}, \quad  \mathbf{U} = [\mathbf{u}_1^\top,\dots,\mathbf{u}_{m+1}^\top]^\top, \quad \mathbf{Q} = \operatorname{diag}(\mathbf{Q}_1,\ldots,\mathbf{Q}_{m+1}).
+    \mathbf{y} \mid \mathbf{U} \sim \mathsf{N}(\overline{\mathbf{A}}\mathbf{U}, \mathbf{Q}_\epsilon^{-1}).
 \end{align*}
 
 This yields an efficient kriging predictor $\boldsymbol{\mu}_{\mathbf{U} \mid \mathbf{y}} = \mathbf{Q}_{\mathbf{U} \mid \mathbf{y}}^{-1}\,\overline{\mathbf{A}}^\top \mathbf{Q}_\epsilon \mathbf{y}$ and the log-likelihood $\ell(\mathbf{y})$ is given by
@@ -630,6 +630,27 @@ class: left, top
 ```{r, echo = FALSE, fig.align='center', out.width='90%', fig.cap = captioner("Illustration of the nonstationarity (left) and arbitrary smoothness (right) of the covariance function \\(\\varrho^{\\alpha}_{h,m}(s_i,\\cdot)\\).")}
 knitr::include_graphics("data_files/p_A_p_B.png")
 ```
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 1 | The role of $\tau(\cdot)$ and $\kappa(\cdot)$ in the regularity of $u(\cdot)$
+*********
+
+
+```{r, echo = FALSE, fig.align='center', out.width='60%', fig.cap = captioner("Marginal standard deviation \\(\\sigma_{\\kappa}(\\cdot)\\) of a Whittle-Matérn field with \\(\\tau = 1\\) (left), and of a generalized Whittle-Matérn field with \\(\\tau(\\cdot) = \\sigma_{\\kappa}(\\cdot)\\) (right).")}
+knitr::include_graphics("data_files/kkk10_kkk11_kkk12_kkk7_kkk8_kkk9.png")
+```
+
+
 
 
 ---

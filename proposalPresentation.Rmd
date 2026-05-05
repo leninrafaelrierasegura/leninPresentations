@@ -1,10 +1,10 @@
 ---
 title: "Rational approximation for fractional diffusion and elliptic operators on metric graphs: scalable statistical modeling and optimal control"
 #title: "RATIONAL APPROXIMATION FOR FRACTIONAL DIFFUSION AND ELLIPTIC OPERATORS ON METRIC GRAPHS:"
-subtitle: "PhD proposal"
-author: "Lenin Rafael Riera Segura"# \n Joint work with David Bolin and Alexandre B. Simas"
-institute: "KAUST"
-date: "`r format(Sys.time(), '%d-%m-%Y')`"
+subtitle: "Lenin Rafael Riera Segura"
+author: "PhD proposal \n Advisor: David Bolin, Coadvisor: Alexandre B. Simas."
+institute: "KAUST `r format(Sys.time(), '%d-%m-%Y')`"
+#date: "`r format(Sys.time(), '%d-%m-%Y')`"
 output:
   xaringan::moon_reader:
     #self_contained: false
@@ -470,6 +470,7 @@ class: center, middle
 
 *********
 
+### Status: ██████████ 99% (Submitted)
 
 ---
 
@@ -671,6 +672,8 @@ class: center, middle
 # Numerical approximation of fractional diffusion equations on metric graphs
 
 *********
+
+### Status: ████████░░ ~80%
 
 
 ---
@@ -1005,7 +1008,7 @@ class: left, top
 *********
 
 ```
-{r, eval = TRUE, fig.height = 1.5, out.width = "100%", fig.cap = captioner("Comparison between the exact and approximate solutions.")}
+{r, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between the exact and approximate solutions.")}
 load(here::here("data_files/error_for_project2.RData"))
 error_for_project2
 ```
@@ -1106,6 +1109,7 @@ class: center, middle
 
 *********
 
+### Status: ████████░░ ~80%
 
 ---
 
@@ -1502,6 +1506,7 @@ class: center, middle
 
 *********
 
+### Status: █████░░░░░ ~50%
 
 ---
 
@@ -1697,7 +1702,7 @@ class: left, top
 *********
 
 <div class="content-box-myblue">
-Bridge representation of Whittle-Matérn processes on metric graphs
+Bridge representation of Whittle-Matérn processes on metric graphs `r Cite(myBib, "Bolin2023Statistical")`
 </div>
 
 .content-box-blue[
@@ -1709,7 +1714,7 @@ where $\widetilde{u}_{B_{\ell_e}^\alpha}$ are independent Whittle--Matérn bridg
 ]
 
 <div class="content-box-myblue">
-Boundaryless representation of Whittle-Matérn processes on metric graphs
+Boundaryless representation of Whittle-Matérn processes on metric graphs `r Cite(myBib, "Bolin2023Statistical")`
 </div>
 
 .content-box-blue[
@@ -1789,7 +1794,7 @@ class: left, top
 - However, the precision matrix of $\mathbf{U}$ **is not sparse**. This can be fixed by considering a change of basis $\widetilde{\mathbf{U}}^* = \mathbf{T}\widetilde{\mathbf{U}}$. Let $\widetilde{\mathbf{Q}}^* = \mathbf{T}\widetilde{\mathbf{Q}}\mathbf{T}^\top$ and $\mathbf{A}$ be such that $\mathbf{U}_v  = [u(v_1), u(v_2), \ldots, u(v_{|\mathcal{V}|})]^\top = \mathbf{A}\mathbf{U}$. 
 
 <div class="content-box-myblue">
-Sparse representation
+Sparse representation `r Cite(myBib, "Bolin2023Statistical")`
 </div>
 
 .content-box-blue[
@@ -1851,11 +1856,30 @@ class: left, top
 ### Project 4 | $\alpha\not\in\mathbb{N}$
 *********
 
-```{r, echo = FALSE, fig.align='center', out.width='80%', fig.cap = captioner("Covariance errors in the \\(L_2(\\Gamma\\times\\Gamma)\\)-norm (left) and \\(L_\\infty(\\Gamma\\times\\Gamma)\\)-norm (right) on the tadpole graph.")}
+```
+{r, echo = FALSE, fig.align='center', out.width='80%', fig.cap = captioner("Covariance errors in the \\(L_2(\\Gamma\\times\\Gamma)\\)-norm (left) and \\(L_\\infty(\\Gamma\\times\\Gamma)\\)-norm (right) on the tadpole graph.")}
 knitr::include_graphics("data_files/errorRatFEMcomparison_with_mathpazo.png")
 ```
 
 
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\not\in\mathbb{N}$
+*********
+
+```
+{r, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between \\(|\\varrho_{\\alpha}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\) and \\(|\\varrho^{\\alpha}_{h,m}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\).")}
+load(here::here("data_files/diff_true_FEM_RAT.RData"))
+diff_true_FEM_RAT
+```
 
 ---
 

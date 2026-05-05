@@ -4,5 +4,5 @@ title: "My Presentations"
 
 This website contains my presentations
 
-- [Proposal Presentation](https://leninrafaelrierasegura.github.io/leninPresentations/proposalPresentation.html)
+- Proposal Presentation: [https://leninrafaelrierasegura.github.io/leninPresentations/proposalPresentation.html](https://leninrafaelrierasegura.github.io/leninPresentations/proposalPresentation.html)
 

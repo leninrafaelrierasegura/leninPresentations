@@ -1,0 +1,55 @@
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Preliminaries | The rational approximation | Illustration
+*********
+
+
+```{r, echo = FALSE, fig.align='center', out.width='65%', fig.cap = captioner("Illustration of the rational approximatio of $x^{-\\alpha}$.")}
+knitr::include_graphics("data_files/p_RAT1_with_mathpazo.png")
+```
+
+
+<!-- THIS IS THE START OF THE TEMPLATE -->
+<!-- ######################################## -->
+<!-- ######################################## -->
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Title template
+*********
+
+# level 1
+## level 2
+### level 3
+#### level 4
+
+<!-- ######################################## -->
+<!-- ######################################## -->
+<!-- THIS IS THE END OF THE TEMPLATE -->
+
+
+
+
+
+
+
+
+
+As a consequence, *all conditional distributions and marginal likelihood computations can be carried out using sparse linear algebra operations*. Another advantage is that the dependence on $\alpha$ is made explicit through the construction of the components $\mathbf{Q}_i$. This makes it possible to treat $\alpha$ *as an estimable parameter*.
+

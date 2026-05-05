@@ -3,7 +3,7 @@
   <head>
     <title>Rational approximation for fractional diffusion and elliptic operators on metric graphs: scalable statistical modeling and optimal control</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Lenin Rafael Riera Segura" />
+    <meta name="author" content="PhD proposal Advisor: David Bolin, Coadvisor: Alexandre B. Simas." />
     <script src="site_libs/header-attrs/header-attrs.js"></script>
     <link href="site_libs/remark-css/default.css" rel="stylesheet" />
     <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -23,16 +23,14 @@ class: center, middle, inverse, title-slide
 # Rational approximation for fractional diffusion and elliptic operators on metric graphs: scalable statistical modeling and optimal control
 ]
 .subtitle[
-## PhD proposal
+## Lenin Rafael Riera Segura
 ]
 .author[
-### Lenin Rafael Riera Segura
+### PhD proposal
+Advisor: David Bolin, Coadvisor: Alexandre B. Simas.
 ]
 .institute[
-### KAUST
-]
-.date[
-### 05-05-2026
+### KAUST 05-05-2026
 ]
 
 ---
@@ -440,6 +438,7 @@ class: center, middle
 
 *********
 
+### Status: ██████████ 99% (Submitted)
 
 ---
 
@@ -644,6 +643,8 @@ class: center, middle
 # Numerical approximation of fractional diffusion equations on metric graphs
 
 *********
+
+### Status: ████████░░ ~80%
 
 
 ---
@@ -978,7 +979,7 @@ class: left, top
 *********
 
 ```
-{r, eval = TRUE, fig.height = 1.5, out.width = "100%", fig.cap = captioner("Comparison between the exact and approximate solutions.")}
+{r, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between the exact and approximate solutions.")}
 load(here::here("data_files/error_for_project2.RData"))
 error_for_project2
 ```
@@ -1083,6 +1084,7 @@ class: center, middle
 
 *********
 
+### Status: ████████░░ ~80%
 
 ---
 
@@ -1473,6 +1475,7 @@ class: center, middle
 
 *********
 
+### Status: █████░░░░░ ~50%
 
 ---
 
@@ -1669,7 +1672,7 @@ class: left, top
 *********
 
 &lt;div class="content-box-myblue"&gt;
-Bridge representation of Whittle-Matérn processes on metric graphs
+Bridge representation of Whittle-Matérn processes on metric graphs [BSW23]
 &lt;/div&gt;
 
 .content-box-blue[
@@ -1681,7 +1684,7 @@ where `\(\widetilde{u}_{B_{\ell_e}^\alpha}\)` are independent Whittle--Matérn b
 ]
 
 &lt;div class="content-box-myblue"&gt;
-Boundaryless representation of Whittle-Matérn processes on metric graphs
+Boundaryless representation of Whittle-Matérn processes on metric graphs [BSW23]
 &lt;/div&gt;
 
 .content-box-blue[
@@ -1761,7 +1764,7 @@ class: left, top
 - However, the precision matrix of `\(\mathbf{U}\)` **is not sparse**. This can be fixed by considering a change of basis `\(\widetilde{\mathbf{U}}^* = \mathbf{T}\widetilde{\mathbf{U}}\)`. Let `\(\widetilde{\mathbf{Q}}^* = \mathbf{T}\widetilde{\mathbf{Q}}\mathbf{T}^\top\)` and `\(\mathbf{A}\)` be such that `\(\mathbf{U}_v  = [u(v_1), u(v_2), \ldots, u(v_{|\mathcal{V}|})]^\top = \mathbf{A}\mathbf{U}\)`. 
 
 &lt;div class="content-box-myblue"&gt;
-Sparse representation
+Sparse representation [BSW23]
 &lt;/div&gt;
 
 .content-box-blue[
@@ -1823,12 +1826,30 @@ class: left, top
 ### Project 4 | `\(\alpha\not\in\mathbb{N}\)`
 *********
 
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/errorRatFEMcomparison_with_mathpazo.png" alt="Figure 17: Covariance errors in the \(L_2(\Gamma\times\Gamma)\)-norm (left) and \(L_\infty(\Gamma\times\Gamma)\)-norm (right) on the tadpole graph." width="80%" /&gt;
-&lt;p class="caption"&gt;Figure 17: Covariance errors in the \(L_2(\Gamma\times\Gamma)\)-norm (left) and \(L_\infty(\Gamma\times\Gamma)\)-norm (right) on the tadpole graph.&lt;/p&gt;
+```
+{r, echo = FALSE, fig.align='center', out.width='80%', fig.cap = captioner("Covariance errors in the \\(L_2(\\Gamma\\times\\Gamma)\\)-norm (left) and \\(L_\\infty(\\Gamma\\times\\Gamma)\\)-norm (right) on the tadpole graph.")}
+knitr::include_graphics("data_files/errorRatFEMcomparison_with_mathpazo.png")
+```
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="50" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="50" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
+### Project 4 | `\(\alpha\not\in\mathbb{N}\)`
+*********
 
+```
+{r, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between \\(|\\varrho_{\\alpha}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\) and \\(|\\varrho^{\\alpha}_{h,m}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\).")}
+load(here::here("data_files/diff_true_FEM_RAT.RData"))
+diff_true_FEM_RAT
+```
 
 ---
 
@@ -1847,8 +1868,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/qrcode.png" alt="Figure 18: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information." width="40%" /&gt;
-&lt;p class="caption"&gt;Figure 18: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information.&lt;/p&gt;
+&lt;img src="data_files/qrcode.png" alt="Figure 17: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information." width="40%" /&gt;
+&lt;p class="caption"&gt;Figure 17: Visit https://leninrafaelrierasegura.github.io/PhD_thesis/index.html for more information.&lt;/p&gt;
 &lt;/div&gt;
 
 ---
@@ -1870,6 +1891,10 @@ class: left, top
 exponentially convergent approximation of Gaussian Matérn processes on
 intervals". In: _J. Mach. Learn. Res._ 26.96 (2025).
 &lt;http://jmlr.org/papers/v26/24-1779.html&gt;, pp. 1-34.
+
+[BSW23] D. Bolin, A. B. Simas, and J. Wallin. "Statistical inference
+for Gaussian Whittle-Matérn fields on metric graphs". Preprint
+arXiv:2304.10372.  &lt;https://arxiv.org/abs/2304.10372&gt;. 2023.
 
 [BSW24] D. Bolin, A. B. Simas, and J. Wallin. "Gaussian Whittle-Matérn
 fields on metric graphs". In: _Bernoulli_ 30.2 (2024).
@@ -1912,8 +1937,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/thanksall3d.png" alt="Figure 19: THANK-YOU-FOR-YOUR-ATTENTION graph." width="45%" /&gt;
-&lt;p class="caption"&gt;Figure 19: THANK-YOU-FOR-YOUR-ATTENTION graph.&lt;/p&gt;
+&lt;img src="data_files/thanksall3d.png" alt="Figure 18: THANK-YOU-FOR-YOUR-ATTENTION graph." width="45%" /&gt;
+&lt;p class="caption"&gt;Figure 18: THANK-YOU-FOR-YOUR-ATTENTION graph.&lt;/p&gt;
 &lt;/div&gt;
 
 
@@ -2057,8 +2082,8 @@ class: left, top
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/fixedpointconvergence_combined2_with_mathpazo.png" alt="Figure 20: Comparison between the contraction constant and its upper bound." width="70%" /&gt;
-&lt;p class="caption"&gt;Figure 20: Comparison between the contraction constant and its upper bound.&lt;/p&gt;
+&lt;img src="data_files/fixedpointconvergence_combined2_with_mathpazo.png" alt="Figure 19: Comparison between the contraction constant and its upper bound." width="70%" /&gt;
+&lt;p class="caption"&gt;Figure 19: Comparison between the contraction constant and its upper bound.&lt;/p&gt;
 &lt;/div&gt;
 
     </textarea>

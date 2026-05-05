@@ -1,3 +1,3 @@
-For the website of all my presentations, follow this [link](https://leninrafaelrierasegura.github.io/leninPresentations/).
+For the website of all my presentations, go to [https://leninrafaelrierasegura.github.io/leninPresentations/](https://leninrafaelrierasegura.github.io/leninPresentations/).
 
-- For the Proposal Presentation, press [Proposal Presentation](https://leninrafaelrierasegura.github.io/leninPresentations/proposalPresentation.html).
+- For the Proposal Presentation, go to [https://leninrafaelrierasegura.github.io/leninPresentations/proposalPresentation.html](https://leninrafaelrierasegura.github.io/leninPresentations/proposalPresentation.html).

@@ -159,7 +159,7 @@ class: left, top
 *********
 
 
-```{r p1plotly, eval = FALSE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Arc-length parametrization.")}
+```{r p1plotly, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Arc-length parametrization.")}
 load(here::here("data_files/p_from_graph_to_interval_transformation.RData"))
 p_from_graph_to_interval_transformation
 ```
@@ -199,7 +199,7 @@ class: left, top
 
 
       
-```{r, echo = FALSE, fig.align='center', out.width='80%', fig.cap = captioner("The \\(n\\)-sphere fully connected graph (left) and its planar projection onto the plane (right).")}
+```{r, echo = FALSE, fig.align='center', out.width='80%', fig.cap = captioner("The \\(n\\)-sphere fully connected graph (left) and its projection onto the plane (right).")}
 knitr::include_graphics("data_files/graph_on_sphere_sphere2dplot_with_mathpazo.png")
 ```
 
@@ -930,7 +930,7 @@ class: left, top
 *********
 
 
-```{r p3plotly, eval = FALSE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Decomposition of a Whittle-Matérn process with into independent bridges and a residual term.")}
+```{r p3plotly, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Decomposition of a Whittle-Matérn process with into independent bridges and a residual term.")}
 load(here::here("data_files/p_bridge.RData"))
 p_bridge
 ```
@@ -950,7 +950,7 @@ class: left, top
 *********
 
 
-```{r p4plotly, eval = FALSE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Boundaryless construction of a Whittle-Matérn process.")}
+```{r p4plotly, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Boundaryless construction of a Whittle-Matérn process.")}
 load(here::here("data_files/p_boundaryless.RData"))
 p_boundaryless
 ```
@@ -1062,7 +1062,7 @@ class: left, top
 ### Project 4 | $\alpha\not\in\mathbb{N}$
 *********
 
-```{r p5plotly, eval = FALSE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between \\(|\\varrho_{\\alpha}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\) and \\(|\\varrho^{\\alpha}_{h,m}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\).")}
+```{r p5plotly, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between \\(|\\varrho_{\\alpha}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\) and \\(|\\varrho^{\\alpha}_{h,m}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\).")}
 load(here::here("data_files/diff_true_FEM_RAT.RData"))
 diff_true_FEM_RAT
 ```
@@ -1152,9 +1152,9 @@ Theorem 1
 </div>
 
 .content-box-blue[
-If $f\in L_2(\Gamma\times(0,T))$  and $u_0\in \dot{H}^{\alpha}(\Gamma)$, then $(7)$ has a unique mild solution given by the variation of parameters formula
+If $f\in L_2(\Gamma\times(0,T))$  and $u_0\in \dot{H}^{\alpha}(\Gamma)$, then $(12)$ has a unique mild solution given by the variation of parameters formula
 \begin{equation}
-\tag{8}
+\tag{13}
 \label{solbyvarform}
 u(t) = T(t)u_0 + \int_0^t T(t-r)f(r)dr,\quad t\geq 0.
 \end{equation}
@@ -1209,17 +1209,17 @@ Definition 1
 
 .content-box-blue[
 For $\alpha\in[0,2]$, we define the discrete version of $L^{\alpha/2}$ as $L_h^{\alpha/2}:V_h\to V_h$ via 
-$$(L_h^{\alpha/2}\phi_h,\psi_h)_{L_2(\Gamma)} = \mathfrak{a}(\phi_h, \psi_h),\quad \phi_h,\psi_h\in V_h,\tag{9}$$ where the bilinear form $\mathfrak{a}:\dot{H}^{\alpha/2}(\Gamma)\times \dot{H}^{\alpha/2}(\Gamma)\to \mathbb{R}$ is defined by
+$$(L_h^{\alpha/2}\phi_h,\psi_h)_{L_2(\Gamma)} = \mathfrak{a}(\phi_h, \psi_h),\quad \phi_h,\psi_h\in V_h,\tag{14}$$ where the bilinear form $\mathfrak{a}:\dot{H}^{\alpha/2}(\Gamma)\times \dot{H}^{\alpha/2}(\Gamma)\to \mathbb{R}$ is defined by
 $$\mathfrak{a}(\phi,\psi) := (L^{\alpha/4}\phi,L^{\alpha/4}\psi)_{L_2(\Gamma)}, \quad \phi,\psi\in\dot{H}^{\alpha/2}(\Gamma).$$
 ]
 
-**Weak form of $(1)$**: Find $u$ such that
+**Weak form of $(11)$**: Find $u$ such that
 $$
 \begin{cases}
     \langle\partial_tu,\phi\rangle + \mathfrak{a}(u,\phi) &= \langle f,\phi\rangle,\quad\forall \phi\in \dot{H}^{\alpha/2}(\Gamma),\quad \text{a.e. } t\in(0,T),\\  
     u(0)&=u_0.
 \end{cases}
-\tag{10}
+\tag{15}
 $$
 
 ---
@@ -1235,13 +1235,13 @@ class: left, top
 ### Project 2 | Approximation | time-level
 *********
 
-Let $\alpha>0$ and $U^\tau$ denote the sequence of approximations of the solution to problem $(10)$ at each time step. That is, $U^{\tau}\subset\dot{H}^{\alpha/2}(\Gamma)$ solves
+Let $\alpha>0$ and $U^\tau$ denote the sequence of approximations of the solution to problem $(15)$ at each time step. That is, $U^{\tau}\subset\dot{H}^{\alpha/2}(\Gamma)$ solves
 $$
 \begin{cases}
     \langle\delta U^{k+1},\phi\rangle + \mathfrak{a}(U^{k+1},\phi)  &= \langle f^{k+1},\phi\rangle , \quad\forall\phi\in \dot{H}^{\alpha/2}(\Gamma),\quad k=0,\dots, N-1, \\
     U^0 &= u_0.
 \end{cases}
-\tag{11}
+\tag{16}
 $$
 
 <div class="content-box-myblue">
@@ -1249,7 +1249,7 @@ Theorem 2
 </div>
 
 .content-box-blue[
-Let $\alpha>0$ and $u$ be the solution to $(10)$. Let $\tilde{U}^\tau$ be the piecewise constant function constructed from the solution to $(11)$. If $f\in L_\infty(\Gamma\times(0,T))$ and $u_0\in\dot{H}^{\alpha/2}(\Gamma)$, then
+Let $\alpha>0$ and $u$ be the solution to $(15)$. Let $\tilde{U}^\tau$ be the piecewise constant function constructed from the solution to $(16)$. If $f\in L_\infty(\Gamma\times(0,T))$ and $u_0\in\dot{H}^{\alpha/2}(\Gamma)$, then
 $$\|u-\tilde{U}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim \tau \left(\|u_0\|_{\dot{H}^{\alpha/2}(\Gamma)}+\|f\|_{L_\infty(\Gamma\times(0,T))}\right).$$
 ]
 
@@ -1267,14 +1267,14 @@ class: left, top
 *********
 
 
-Let $\alpha\in(0,2]$ and $U_h^\tau$ denote the sequence of approximations of the solution to problem $(10)$ at each time step on a mesh indexed by $h$. That is, $U_h^{\tau}\subset V_h$ solves
+Let $\alpha\in(0,2]$ and $U_h^\tau$ denote the sequence of approximations of the solution to problem $(15)$ at each time step on a mesh indexed by $h$. That is, $U_h^{\tau}\subset V_h$ solves
 $$
 \begin{cases}
     \langle\delta U_h^{k+1},\phi\rangle + \mathfrak{a}(
         U_h^{k+1},\phi) &= \langle f^{k+1},\phi\rangle, \quad\forall\phi\in V_h,\quad k=0,\dots, N-1, \\
     U^0_h &= P_hu_0, 
 \end{cases}
-\tag{12}
+\tag{17}
 $$
 
 <div class="content-box-myblue">
@@ -1282,7 +1282,7 @@ Theorem 3
 </div>
 
 .content-box-blue[
-Let $\alpha\in[0,2]$ and $U^\tau$ and $U_h^\tau$ be the solutions to $(11)$ and $(12)$, respectively. If $f\in L_2(\Gamma\times(0,T))$ and $u_0\in\dot{H}^{\alpha}(\Gamma)$, then
+Let $\alpha\in[0,2]$ and $U^\tau$ and $U_h^\tau$ be the solutions to $(16)$ and $(17)$, respectively. If $f\in L_2(\Gamma\times(0,T))$ and $u_0\in\dot{H}^{\alpha}(\Gamma)$, then
 $$\|U^\tau-U_h^\tau\|_{\ell^2(L_2(\Gamma))}\lesssim h^{\alpha}\left(\|u_0\|_{\dot{H}^{\alpha}(\Gamma)} + \|f^\tau\|_{\ell^2(L_2(\Gamma))}\right).$$
 ]
 
@@ -1300,13 +1300,13 @@ class: left, top
 ### Project 2 | Approximation | rational approx-level 1/2
 *********
 
-The corresponding strong form of $(12)$ is given by
-$$(I_{V_h}+\tau (\kappa^{2})^{\alpha/2}(L_h/\kappa^2)^{\alpha/2})U_h^{k+1} = U_h^{k}+\tau f^{k+1}.\tag{13}$$
-Let $\beta = \alpha/2$. Applying $(L_h/\kappa^2)^{-\beta}$ to $(13)$ yields 
-$$((L_h/\kappa^2)^{-\beta}+\tau \kappa^{2\beta} I_{V_h})U_h^{k+1}=(L_h/\kappa^2)^{-\beta}(U_h^{k}+\tau f^{k+1}).\tag{14}$$
+The corresponding strong form of $(17)$ is given by
+$$(I_{V_h}+\tau (\kappa^{2})^{\alpha/2}(L_h/\kappa^2)^{\alpha/2})U_h^{k+1} = U_h^{k}+\tau f^{k+1}.\tag{18}$$
+Let $\beta = \alpha/2$. Applying $(L_h/\kappa^2)^{-\beta}$ to $(18)$ yields 
+$$((L_h/\kappa^2)^{-\beta}+\tau \kappa^{2\beta} I_{V_h})U_h^{k+1}=(L_h/\kappa^2)^{-\beta}(U_h^{k}+\tau f^{k+1}).\tag{19}$$
 .content-box-blue[
 We now consider a rational approximation of $(L_h/\kappa^2)^{-\beta}$ of the form 
-$$r_m((L_h/\kappa^2)^{-1})= p_\ell(L_h/\kappa^2)^{-1}p_r(L_h/\kappa^2).\tag{15}$$
+$$r_m((L_h/\kappa^2)^{-1})= p_\ell(L_h/\kappa^2)^{-1}p_r(L_h/\kappa^2).\tag{20}$$
 ]
 
 
@@ -1323,8 +1323,8 @@ class: left, top
 ### Project 2 | Approximation | rational approx-level 2/2
 *********
 
-Replacing the rational approximation of $(L_h/\kappa^2)^{-\beta}$ in $(14)$ yields 
-$$(r_m((L_h/\kappa^2)^{-1})+\tau \kappa^{2\beta} I_{V_h})U_{h,m}^{k+1}=r_m((L_h/\kappa^2)^{-1})(U_{h,m}^{k}+\tau f^{k+1}),\tag{16}$$
+Replacing the rational approximation of $(L_h/\kappa^2)^{-\beta}$ in $(19)$ yields 
+$$(r_m((L_h/\kappa^2)^{-1})+\tau \kappa^{2\beta} I_{V_h})U_{h,m}^{k+1}=r_m((L_h/\kappa^2)^{-1})(U_{h,m}^{k}+\tau f^{k+1}),\tag{21}$$
 where the subindex $m$ indicates the dependence of the solution on the degree of the rational approximation.
 
 
@@ -1333,8 +1333,8 @@ Theorem 4
 </div>
 
 .content-box-blue[
-Let $\alpha\in[0,2]$ and $u$ be the solution to $(10)$. Assume further that for $k=0,\dots,N-1$, $U^{k+1}_{h,m}\in V_h$ solves the weak form of $(16)$ with $U^{0}_{h,m}= U^{0}_{h}$. If $f\in L_\infty(\Gamma\times(0,T))$ and $u_0\in\dot{H}^{\alpha}(\Gamma)$, then
-$$\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim\tau+h^\alpha + h^{\alpha-2}\mathrm{e}^{-2\pi\sqrt{(1-\alpha/2)m}},\tag{17}$$
+Let $\alpha\in[0,2]$ and $u$ be the solution to $(15)$. Assume further that for $k=0,\dots,N-1$, $U^{k+1}_{h,m}\in V_h$ solves the weak form of $(21)$ with $U^{0}_{h,m}= U^{0}_{h}$. If $f\in L_\infty(\Gamma\times(0,T))$ and $u_0\in\dot{H}^{\alpha}(\Gamma)$, then
+$$\|u-U_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim\tau+h^\alpha + h^{\alpha-2}\mathrm{e}^{-2\pi\sqrt{(1-\alpha/2)m}},\tag{22}$$
 where the hidden constant depends on $\|u_0\|_{L_2(\Gamma)} +\|f\|_{L_\infty(\Gamma\times(0,T))}$.
 ]
 
@@ -1352,12 +1352,12 @@ class: left, top
 *********
 
 
-To derive the matrix representation of the numerical scheme, we first use $(15)$ to rewrite $(16)$ as
-$$(p_r(L_h/\kappa^2)+\tau \kappa^{2\beta}p_\ell(L_h/\kappa^2))U_{h,m}^{k+1}= p_r(L_h/\kappa^2) (U_{h,m}^{k}+\tau f^{k+1}).\tag{18}$$
+To derive the matrix representation of the numerical scheme, we first use $(20)$ to rewrite $(21)$ as
+$$(p_r(L_h/\kappa^2)+\tau \kappa^{2\beta}p_\ell(L_h/\kappa^2))U_{h,m}^{k+1}= p_r(L_h/\kappa^2) (U_{h,m}^{k}+\tau f^{k+1}).\tag{23}$$
 We can now go one step further and isolate the numerical solution at time $t_{k+1}$ by consider the following partial fraction decomposition 
-$$\dfrac{p_r(x)}{p_r(x)+\tau \kappa^{2\beta}p_\ell(x)} =  \sum_{k=1}^{m+1}a_k(x-p_k)^{-1} + r,\tag{19}$$
-where $\{a_k\}_{k=1}^{m+1}$ and $\{p_k\}_{k=1}^{m+1}$ are the residues and poles, respectively, and $r$ denotes the remainder. Substituting this into $(18)$ gives the iteration rule
-$$U_{h,m}^{k+1}= \left(\sum_{k=1}^{m+1}a_k(L_h/\kappa^2-p_kI_{V_h})^{-1} + rI_{V_h}\right) (U_{h,m}^{k}+\tau f^{k+1}).\tag{20}$$
+$$\dfrac{p_r(x)}{p_r(x)+\tau \kappa^{2\beta}p_\ell(x)} =  \sum_{k=1}^{m+1}a_k(x-p_k)^{-1} + r,\tag{24}$$
+where $\{a_k\}_{k=1}^{m+1}$ and $\{p_k\}_{k=1}^{m+1}$ are the residues and poles, respectively, and $r$ denotes the remainder. Substituting this into $(23)$ gives the iteration rule
+$$U_{h,m}^{k+1}= \left(\sum_{k=1}^{m+1}a_k(L_h/\kappa^2-p_kI_{V_h})^{-1} + rI_{V_h}\right) (U_{h,m}^{k}+\tau f^{k+1}).\tag{25}$$
 
 
 ---
@@ -1374,12 +1374,12 @@ class: left, top
 *********
 
 
-Substituting the expansion $U_h^k(s) =  \sum_{i=1}^{N_h}u_i^k\psi^i_h(s)$, $s\in\Gamma$ into the weak form $(20)$ yields the following matrix iteration
-$$\mathbf{U}_{k+1} = \mathbf{C}^{-1}\left(\sum_{k=1}^{m+1} a_k\left(\mathbf{L}\mathbf{C}^{-1}/\kappa^2-p_k\mathbf{I}_{N_h}\right)^{-1} + r\mathbf{I}_{N_h}\right) (\mathbf{C}\mathbf{U}_k+\tau \mathbf{F}_{k+1}),\tag{21}$$
+Substituting the expansion $U_h^k(s) =  \sum_{i=1}^{N_h}u_i^k\psi^i_h(s)$, $s\in\Gamma$ into the weak form $(25)$ yields the following matrix iteration
+$$\mathbf{U}_{k+1} = \mathbf{C}^{-1}\left(\sum_{k=1}^{m+1} a_k\left(\mathbf{L}\mathbf{C}^{-1}/\kappa^2-p_k\mathbf{I}_{N_h}\right)^{-1} + r\mathbf{I}_{N_h}\right) (\mathbf{C}\mathbf{U}_k+\tau \mathbf{F}_{k+1}),\tag{26}$$
 where $\mathbf{L} = \kappa^2\mathbf{C}+\mathbf{G}$, the matrix $\mathbf{C}\in\mathbb{R}^{N_h\times N_h}$ has entries $\mathbf{C}_{i,j} = (\psi^i_h,\psi^j_h)_{L_2(\Gamma)}$, $\mathbf{G}\in\mathbb{R}^{N_h\times N_h}$ has entries $\mathbf{G}_{i,j} = ({\psi^{i}_h}',{\psi^{j}_h}')_{L_2(\Gamma)}$, $\mathbf{U}_k\in\mathbb{R}^{N_h}$ has entries $u_i^k$, and $\mathbf{F}_k\in\mathbb{R}^{N_h}$ has components $(f^{k},\psi^i_h)_{L_2(\Gamma)}$. 
 
-In practice, since the rational function in $(19)$ is proper, there is no remainder $r$. Moreover, since $( \mathbf{L}\mathbf{C}^{-1}/\kappa^2-p_k\mathbf{I}_{N_h})^{-1}  = \mathbf{C}(\mathbf{L}/\kappa^2-p_k\mathbf{C})^{-1}$, iteration $(21)$ reduces to
-$$\mathbf{U}_{k+1} = \mathbf{R}(\mathbf{C}\mathbf{U}_k+\tau \mathbf{F}_{k+1}),\quad \mathbf{R} = \sum_{k=1}^{m+1} a_k\left(\mathbf{L}/\kappa^2-p_k\mathbf{C}\right)^{-1},\tag{22}$$
+In practice, since the rational function in $(24)$ is proper, there is no remainder $r$. Moreover, since $( \mathbf{L}\mathbf{C}^{-1}/\kappa^2-p_k\mathbf{I}_{N_h})^{-1}  = \mathbf{C}(\mathbf{L}/\kappa^2-p_k\mathbf{C})^{-1}$, iteration $(26)$ reduces to
+$$\mathbf{U}_{k+1} = \mathbf{R}(\mathbf{C}\mathbf{U}_k+\tau \mathbf{F}_{k+1}),\quad \mathbf{R} = \sum_{k=1}^{m+1} a_k\left(\mathbf{L}/\kappa^2-p_k\mathbf{C}\right)^{-1},\tag{27}$$
 where it is evident that only sparse solves are required.
 
 ---
@@ -1395,7 +1395,7 @@ class: left, top
 ### Project 2 | Numerical experiments 1/2
 *********
 
-Using the spectral representation $(3)$ of the semigroup $T(t)$, the solution $(8)$ of problem $(7)$ can be expressed as
+Using the spectral representation $(3)$ of the semigroup $T(t)$, the solution $(13)$ of problem $(12)$ can be expressed as
 
 .content-box-blue[
 $$u(s,t) = \displaystyle\sum_{j\in\mathbb{N}}\text{e}^{-\lambda^{\alpha/2}_jt}\left(u_0, e_j\right)_{L_2(\Gamma)}e_j(s) + \int_0^t \displaystyle\sum_{j\in\mathbb{N}}\text{e}^{-\lambda^{\alpha/2}_j(t-r)}\left(f(r), e_j\right)_{L_2(\Gamma)}e_j(s)dr.$$
@@ -1423,7 +1423,7 @@ class: left, top
 ### Project 2 | Numerical experiments 2/2
 *********
 
-```{r p2plotly, eval = FALSE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between the exact and approximate solutions.")}
+```{r p2plotly, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between the exact and approximate solutions.")}
 load(here::here("data_files/error_for_project2.RData"))
 error_for_project2
 ```
@@ -1540,7 +1540,7 @@ class: left, top
 *********
 
 Let $u_d$ be the desired state, $z$ denote the control variable, and  $\mu>0$ a regularization parameter. We are concerned with the following PDE-constrained optimization problem: Find
-$$\min\; J(u, z),\quad J(u, z)=  \frac{1}{2}\int_0^T\left(\left\|u-u_d\right\|_{L_2(\Gamma)}^2+\mu\|z\|_{L_2(\Gamma)}^2\right) dt\tag{23}$$
+$$\min\; J(u, z),\quad J(u, z)=  \frac{1}{2}\int_0^T\left(\left\|u-u_d\right\|_{L_2(\Gamma)}^2+\mu\|z\|_{L_2(\Gamma)}^2\right) dt\tag{28}$$
 subject to the fractional diffusion equation 
 
 .content-box-blue[
@@ -1549,14 +1549,14 @@ $$
 \partial_t u(s,t) + (\kappa^2 - \Delta_\Gamma)^{\alpha/2} u(s,t) & = f(s,t)+z(s,t), \quad (s,t) \in \Gamma \times (0, T), \\
 u(s,0) & = u_0(s), \quad s \in \Gamma,
 \end{cases}
-\tag{24}
+\tag{29}
 $$
 ]
 
 where $u(\cdot,t)$ satisfies the Kirchhoff vertex conditions $(5)$, and $z$ satisfies the control constraints 
 \begin{align}
 \label{control_constraints}
-\tag{25}
+\tag{30}
     a(s,t)\leq z(s,t)\leq b(s,t)\quad\text{ a.e. } (s,t)\in\Gamma \times(0, T).
 \end{align}
 
@@ -1592,7 +1592,7 @@ $$
     -\partial_t p(s,t) + (\kappa^2 - \Delta_\Gamma)^{\alpha/2} p(s,t) &= u(s,t)-u_d(s,t),  \quad (s,t) \in \Gamma \times (0, T), \\
     p(s,T) &= 0,  \quad s \in \Gamma,
 \end{cases}
-\tag{26}
+\tag{31}
 $$
 is called the fractional adjoint state associated to $u = u(z)$
 ]
@@ -1615,7 +1615,7 @@ class: left, top
 
 The optimal control variable $\bar{z}$ is related to the optimal adjoint state $\bar{p}$ via the projection formula `r Cite(myBib, "Troltzsch2025optimal")`.
 \begin{align}
-\tag{27}
+\tag{32}
 \label{proj_formula}
     \bar{z}  = \min\left\{b ,\max\left\{a ,-\bar{p}/\mu \right\}\right\}.
 \end{align}
@@ -1627,7 +1627,7 @@ Lemma
 </div>
 
 .content-box-blue[
-A triple $(u, p, z)$ is optimal for $(23)$ - $(25)$ if and only if $u$ and $p$ satisfy the state and adjoint equations, respectively, and $z$ satisfies $(27)$.
+A triple $(u, p, z)$ is optimal for $(28)$ - $(30)$ if and only if $u$ and $p$ satisfy the state and adjoint equations, respectively, and $z$ satisfies $(32)$.
 ]
 
 
@@ -1649,7 +1649,7 @@ Theorem 5
 </div>
 
 .content-box-blue[
-Let $\alpha\in[0,2]$ and $\bar{u}$ be the solution to $(24)$ corresponding to the optimal control $\bar{z}$ of $(23)$ - $(25)$. Let $\bar{U}_{h,m}^\tau$ denote the piecewise linear approximation of the optimal discrete state obtained from the discrete scheme after the rational approximation. Let $\bar{Z}_{h,m}^\tau$ denote the corresponding piecewise constant approximation of the optimal discrete control. If $f,u_d\in L_2((0,T);\dot{H}^\beta(\Gamma)) \cap L_\infty(\Gamma\times(0,T))$ for $\beta<1$ and $u_0\in\dot{H}^{\alpha}(\Gamma)$ , then
+Let $\alpha\in[0,2]$ and $\bar{u}$ be the solution to $(29)$ corresponding to the optimal control $\bar{z}$ of $(28)$ - $(30)$. Let $\bar{U}_{h,m}^\tau$ denote the piecewise linear approximation of the optimal discrete state obtained from the discrete scheme after the rational approximation. Let $\bar{Z}_{h,m}^\tau$ denote the corresponding piecewise constant approximation of the optimal discrete control. If $f,u_d\in L_2((0,T);\dot{H}^\beta(\Gamma)) \cap L_\infty(\Gamma\times(0,T))$ for $\beta<1$ and $u_0\in\dot{H}^{\alpha}(\Gamma)$ , then
 
 $$\|\bar{u}-\bar{U}_{h,m}^\tau\|_{L_2(\Gamma\times(0,T))}\lesssim\tau+h^\alpha + h^{\alpha-2}e^{-2\pi\sqrt{(1-\alpha/2)m}}$$
 
@@ -1676,11 +1676,11 @@ At a high level, FBSM follows these steps.
 
 a. *Initialization:* Choose an initial approximation for $\bar{z}$. 
 
-b. *State solve:* Using $\bar{z}$, solve $(24)$ to obtain $\bar{u}$. 
+b. *State solve:* Using $\bar{z}$, solve $(29)$ to obtain $\bar{u}$. 
 
-c. *Adjoint solve:* Using $\bar{u}$, solve $(26)$ to obtain $\bar{p}$. 
+c. *Adjoint solve:* Using $\bar{u}$, solve $(31)$ to obtain $\bar{p}$. 
 
-d. *Control update:* Update $\bar{z}$ via the projection formula $(27)$. 
+d. *Control update:* Update $\bar{z}$ via the projection formula $(32)$. 
 
 e. *Iteration:* Repeat steps b - d until convergence. 
 
@@ -1706,7 +1706,7 @@ $$
   \mathbf{\bar{U}}_{k+1}  &= \mathbf{R}\mathbf{C}\mathbf{\bar{U}}_k+\tau \mathbf{R}(\mathbf{F}_{k+1}+\mathbf{C}\mathbf{\bar{Z}}_{k+1}),\quad k = 0,\dots, N-1,\\
     \mathbf{\bar{U}}_{0} & = [u_0(s_1), \dots, u_0(s_{N_h})]^\top.
 \end{cases}
-\tag{28}
+\tag{33}
 $$
 
 3 *Adjoint solve:* Given $\mathbf{\bar{U}}$ from Step 2, compute $\mathbf{\bar{P}}\in \mathbb{R}^{N_{h}\times (N+1)}$ with the iteration
@@ -1715,7 +1715,7 @@ $$
     \mathbf{\bar{P}}_{k} & = \mathbf{R}\mathbf{C}\mathbf{\bar{P}}_{k+1}+\tau \mathbf{R}(\mathbf{C}\mathbf{\bar{U}}_{k+1}-\mathbf{D}_{k+1}),\quad k = N-1,\dots, 0,\\
     \mathbf{\bar{P}}_{N} & = \mathbf{0}.
 \end{cases}
-\tag{29}
+\tag{34}
 $$
 
 
@@ -1738,7 +1738,7 @@ class: left, top
 ### Project 3 | Convergence analysis of the FBSM
 *********
 
-The unfolded iterations in $(28)$ and $(29)$ can equivalently be written in block-matrix form as
+The unfolded iterations in $(33)$ and $(34)$ can equivalently be written in block-matrix form as
 
 
 ```{r, echo=FALSE, fig.align='center', out.width='70%'}

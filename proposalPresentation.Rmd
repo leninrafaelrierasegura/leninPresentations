@@ -1010,7 +1010,7 @@ class: left, top
 ### Project 4 | $\alpha\not\in\mathbb{N}$
 *********
 
-For general $\alpha$, the solution $u$ to $(30)$ is a centered Gaussian process with covariance operator $\mathcal{C} = \tau^{-2}L^{-\alpha}$, which we denote by $u \sim \mathsf{N}(0,\mathcal{C})$. Using the rational approximation, we approximate $\mathcal{C}$ as
+For general $\alpha$, the solution $u$ to $(6)$ is a centered Gaussian process with covariance operator $\mathcal{C} = \tau^{-2}L^{-\alpha}$, which we denote by $u \sim \mathsf{N}(0,\mathcal{C})$. Using the rational approximation, we approximate $\mathcal{C}$ as
 \begin{align*}
 \textstyle
     \mathcal{C}_\alpha = \tau^{-2}L^{-\lfloor\alpha\rfloor}P_m(L^{-1})Q_m(L^{-1})^{-1} = \tau^{-2}kL^{-\lfloor\alpha\rfloor} + \sum_{i=1}^m\tau^{-2}r_iL^{-\lfloor\alpha\rfloor}(L-p_iI)^{-1} = \mathcal{C}_0 + \sum_{i=1}^m \mathcal{C}_i.

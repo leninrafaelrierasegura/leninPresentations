@@ -97,9 +97,10 @@ class: left, top
 
 ### - Preliminaries 
 ### - Project 1
+### - Project 4
 ### - Project 2
 ### - Project 3
-### - Project 4
+
 
 ---
 
@@ -158,7 +159,7 @@ class: left, top
 *********
 
 
-```{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Arc-length parametrization.")}
+```{r p1plotly, eval = FALSE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Arc-length parametrization.")}
 load(here::here("data_files/p_from_graph_to_interval_transformation.RData"))
 p_from_graph_to_interval_transformation
 ```
@@ -673,6 +674,401 @@ knitr::include_graphics("data_files/msdwmf_msdvswmf.png")
 
 
 
+
+---
+
+class: center, middle
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+
+
+## Project 4
+
+*********
+
+# An exponentially convergent Markov approximation of Gaussian Whittle-Matérn fields with arbitrary smoothness on metric graphs
+
+*********
+
+### Status: █████░░░░░ ~50%
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\in\mathbb{N}$
+*********
+
+<div class="content-box-myblue">
+Assumption 1
+</div>
+
+.content-box-blue[
+We assume that $\alpha \in \mathbb{N}$.
+]
+
+Again, our purpose is to approximate the covariance structure of the solution $u$ to 
+\begin{align}
+\tag{6}
+\label{eq:spde_on_metric_graph_for_4_Project}
+L^{\alpha/2} (\tau u) = \mathcal{W}, \quad \text{on } \Gamma,
+\end{align}
+where $L = \kappa^2 - \Delta_{\Gamma}$, $u$ satisfies the Kirchhoff vertex conditions $(5)$, and $\kappa$ and $\tau$ are constant coefficients.
+
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\in\mathbb{N}$ | Interval case
+*********
+
+.content-box-purple[
+We begin with the simpler interval setting
+$$
+L^{\alpha/2}(\tau u)=\mathcal{W},\quad\text{on }[0,\ell],\tag{7}
+$$
+where the Kirchhoff--Laplacian $\Delta_{\Gamma}$ reduces to the Neumann Laplacian $\Delta$.
+]
+
+
+- When posed on $\mathbb{R}$, the solution $u$ to $(7)$ satisfies $\boldsymbol{u}(t)\sim\mathsf{N}(\mathbf{0}, \boldsymbol{\varrho}(t_1,t_2))$, where
+
+\begin{align}
+\label{eq:u_vector_value_process_on_R}
+    \boldsymbol{u}(t) = [u(t), u^{(1)}(t),\dots, u^{(\alpha-1)}(t)]^\top\quad\text{ and }\quad \boldsymbol{\varrho}(t_1,t_2) = \left[ \frac{\partial^{i-1}}{\partial t_2^{i-1}}\frac{\partial^{j-1}}{\partial t_1^{j-1}}\varrho(t_1-t_2)\right]_{ij\in\{1,2,\ldots, \alpha\}}.
+\end{align}
+
+- By restricting to $[0,\ell]$, we still have a centered Gaussian process $\boldsymbol{u}_{\ell}(t)\sim\mathsf{N}(\mathbf{0}, \boldsymbol{\varrho}_{\ell}(t_1,t_2))$, where $\boldsymbol{u}_{\ell} = \boldsymbol{u}|_{[0,\ell]}$ and $\boldsymbol{\varrho}_{\ell} = \boldsymbol{\varrho}|_{[0,\ell] \times [0,\ell]}$.
+
+- We introduce the boundary evaluation operator
+\begin{align*}
+    B_{\ell}^\alpha u_{\ell} = [\boldsymbol{u}_{\ell}(0)^\top, \boldsymbol{u}_{\ell}(\ell)^\top]^\top =
+    [u_{\ell}(0), u_{\ell}^{(1)}(0), \dots, u_{\ell}^{(\alpha-1)}(0),
+    u_{\ell}(\ell), u_{\ell}^{(1)}(\ell), \dots, u_{\ell}^{(\alpha-1)}(\ell)]^\top.
+\end{align*}
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\in\mathbb{N}$ | Interval case | WMB and BWM processes
+*********
+
+<div class="content-box-myblue">
+Whittle-Matérn bridge process
+</div>
+
+.content-box-blue[
+The *Whittle-Matérn bridge process* $u_{B_{\ell}^\alpha}(t)\sim\mathsf{N}(0,r_{B_{\ell}^\alpha}(t_1,t_2))$ is defined as the conditional process $u_{B_{\ell}^\alpha}(t) = u_{\ell}(t) \,\big|\, \{B_{\ell}^\alpha u_{\ell} = \mathbf{0}\}$, $t \in [0,\ell]$, where
+$$r_{B_{\ell}^\alpha}(t_1,t_2)=\varrho(t_1-t_2)-\mathbf{S}_e(t_1)\begin{bmatrix} \boldsymbol{\varrho}_{1\star}(0,t_2) & \boldsymbol{\varrho}_{1\star}(\ell,t_2) \end{bmatrix}^\top,\quad t_1,t_2\in[0,\ell].$$
+]
+
+
+<div class="content-box-myblue">
+Boundaryless Whittle-Matérn process
+</div>
+
+.content-box-blue[
+The *boundaryless Whittle--Matérn processs* is defined as $\widetilde{u}_\ell(t) = [\widetilde{\boldsymbol{u}}_\ell(t)]_1$, $t \in [0,\ell]$, where $\widetilde{\boldsymbol{u}}_\ell(t) =  [\widetilde{u}_\ell(t),\widetilde{u}_\ell^{(1)}(t),\dots, \widetilde{u}^{(\alpha-1)}(t)]^\top\sim\mathsf{N}(\mathbf{0},\widetilde{\boldsymbol{\varrho}}_{\ell}\left(t_1,t_2\right))$, $t\in[0,\ell]$ and
+\begin{align}
+    \label{eq:matrix_valued_cov_function_ofboundaryless_process}
+	\widetilde{\boldsymbol{\varrho}}_{\ell}\left(t_1,t_2\right) = \boldsymbol{\varrho}(t_1,t_2) +
+	\begin{bmatrix}\boldsymbol{\varrho}(t_1, 0) & \boldsymbol{\varrho}(t_1,\ell)\end{bmatrix} 
+	\begin{bmatrix}
+		\boldsymbol{\varrho}(0,0)  & 	-\boldsymbol{\varrho}(0,\ell) \\
+		-\boldsymbol{\varrho}(\ell,0)  & 	\boldsymbol{\varrho}(0,0)
+	\end{bmatrix}^{-1} 
+	\begin{bmatrix}\boldsymbol{\varrho}(t_2,0)\\
+		\boldsymbol{\varrho}(t_2,\ell)
+	\end{bmatrix}.
+\end{align}
+]
+  
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\in\mathbb{N}$ | Interval case | Processes comparison
+*********
+
+```{r, echo = FALSE, fig.align='center', out.width='100%', fig.cap = captioner("Comparison of covariance functions (left), marginal standard deviations (middle), and sample paths (right) for the ''Matérn'', ''FEM'', ''bridge'', and ''boundaryless'' processes on \\([0,2]\\).")}
+knitr::include_graphics("data_files/p_cov_diag_sample.png")
+```
+
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\in\mathbb{N}$ | Graph case | Notation
+*********
+
+- The vector-valued function $\boldsymbol{u}(s) = [u(s),u^{(1)}(s),\dots,u^{(\alpha-1)}(s)]^\top$, $s\in\Gamma$ can be written compactly as
+\begin{align}
+\label{eq:notation_for_vector_valued_function}
+\textstyle
+    \boldsymbol{u}(s) = \sum_{e\in\mathcal{E}} \mathbb{I}(s \in e)\boldsymbol{u}_e(s),\quad s\in\Gamma,
+\end{align}
+where $\boldsymbol{u}_e(s) = [u_e(s),u_e^{(1)}(s),\dots,u_e^{(\alpha-1)}(s)]^\top$, $s\in e$.
+
+- Define the vector collecting the boundary values of $\boldsymbol{u}$ across all edges as
+\begin{align}
+\label{eq:dens_u2version2}
+\tag{8}
+   \mathbf{U} =  [\boldsymbol{u}_1(\underline{e}_1)^\top,
+   \boldsymbol{u}_1(\bar{e}_1)^\top,
+   \boldsymbol{u}_2(\underline{e}_2)^\top,
+   \boldsymbol{u}_2(\bar{e}_2)^\top,
+   \ldots,
+	\boldsymbol{u}_{|\mathcal{E}|}(\underline{e}_{|\mathcal{E}|})^\top,
+   \boldsymbol{u}_{|\mathcal{E}|}(\bar{e}_{|\mathcal{E}|})^\top]^\top\in\mathbb{R}^{2\alpha|\mathcal{E}|\times1}.
+\end{align}
+
+- Define
+\begin{align*}
+\textstyle
+    \widetilde{\boldsymbol{u}}(s) 
+    = \sum_{e\in\mathcal{E}} \mathbb{I}(s \in e)\,\widetilde{\boldsymbol{u}}_e(s), 
+    \quad s \in \Gamma,
+\end{align*}
+where the processes $\widetilde{u}_e(s) = [\widetilde{\boldsymbol{u}}_e(s)]_1$, $s \in e$ are independent boundaryless Whittle--Matérn processes.
+- In the same spirit as $(8)$, define
+\begin{align}
+	\widetilde{\mathbf{U}} = [\widetilde{\boldsymbol{u}}_1(\underline{e}_1)^\top,\widetilde{\boldsymbol{u}}_1(\bar{e}_1)^\top,\widetilde{\boldsymbol{u}}_2(\underline{e}_2)^\top,\widetilde{\boldsymbol{u}}_2(\bar{e}_2)^\top,\ldots, \widetilde{\boldsymbol{u}}_{|\mathcal{E}|}(\underline{e}_{|\mathcal{E}|})^\top,\widetilde{\boldsymbol{u}}_{|\mathcal{E}|}(\bar{e}_{|\mathcal{E}|})^\top]^\top\in\mathbb{R}^{2\alpha|\mathcal{E}|\times1}.
+\end{align}
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\in\mathbb{N}$ | Graph case | Two representation
+*********
+
+<div class="content-box-myblue">
+Bridge representation of Whittle-Matérn processes on metric graphs `r Cite(myBib, "Bolin2023Statistical")`
+</div>
+
+.content-box-blue[
+Let $u$ be a solution to $(6)$. Then $u$ has representation
+\begin{align*}
+    u(s) = \sum_{e\in\mathcal{E}}\mathbf{S}_e(s)\mathbf{D}_e \mathbf{U} + \sum_{e\in\mathcal{E}}\widetilde{u}_{B_{\ell_e}^\alpha}(s), \quad s\in\Gamma,
+\end{align*}
+where $\widetilde{u}_{B_{\ell_e}^\alpha}$ are independent Whittle--Matérn bridge process defined on each edge and extended by zero.
+]
+
+<div class="content-box-myblue">
+Boundaryless representation of Whittle-Matérn processes on metric graphs `r Cite(myBib, "Bolin2023Statistical")`
+</div>
+
+.content-box-blue[
+Define the conditioned process
+\begin{align}
+\label{eq:process_u_defined_as_conditioned}
+    \boldsymbol{u}(s) = \widetilde{\boldsymbol{u}}(s)\, \big| \, \mathcal{K}_\alpha(\widetilde{u}), 
+    \quad s \in \Gamma.
+\end{align}
+Then the scalar process $u(s) = [\boldsymbol{u}(s)]_1$, $s \in \Gamma$, is a solution to $(6)$.
+]
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\in\mathbb{N}$ | Graph case | Bridge representation
+*********
+
+
+```{r p3plotly, eval = FALSE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Decomposition of a Whittle-Matérn process with into independent bridges and a residual term.")}
+load(here::here("data_files/p_bridge.RData"))
+p_bridge
+```
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\in\mathbb{N}$ | Graph case | Boundaryless representation
+*********
+
+
+```{r p4plotly, eval = FALSE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Boundaryless construction of a Whittle-Matérn process.")}
+load(here::here("data_files/p_boundaryless.RData"))
+p_boundaryless
+```
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\in\mathbb{N}$ | Graph case | Sparse precision matrices
+*********
+
+**Exploiting the boundaryless representation**
+
+- Since the processes $\widetilde{\boldsymbol{u}}_e$, $e \in \mathcal{E}$, are mutually independent, centered, and Gaussian, it follows that
+\begin{align}
+\label{eq:distribution_ofU_tilde}
+    \widetilde{\mathbf{U}}\sim\mathsf{N}(\mathbf{0}, \widetilde{\mathbf{Q}}^{-1}), \quad \widetilde{\mathbf{Q}} = \operatorname{diag}(\{\widetilde{\mathbf{Q}}_e\}_{e\in\mathcal{E}}).
+\end{align}
+
+- The conditioning event $\mathcal{K}_\alpha(\widetilde{u})$ can be written in matrix form as $\mathbf{K}\widetilde{\mathbf{U}} = \mathbf{0}$. Consequently, the vector $\mathbf{U}$ can be expressed as $\mathbf{U} = \widetilde{\mathbf{U}} | \{\mathbf{K}\widetilde{\mathbf{U}} = \mathbf{0}\}$.
+- However, the precision matrix of $\mathbf{U}$ **is not sparse**. This can be fixed by considering a change of basis $\widetilde{\mathbf{U}}^* = \mathbf{T}\widetilde{\mathbf{U}}$. Let $\widetilde{\mathbf{Q}}^* = \mathbf{T}\widetilde{\mathbf{Q}}\mathbf{T}^\top$ and $\mathbf{A}$ be such that $\mathbf{U}_v  = [u(v_1), u(v_2), \ldots, u(v_{|\mathcal{V}|})]^\top = \mathbf{A}\mathbf{U}$. 
+
+<div class="content-box-myblue">
+Sparse representation `r Cite(myBib, "Bolin2023Statistical")`
+</div>
+
+.content-box-blue[
+Let $\mathbf{T}_{\mathcal{U}}$ denote $\mathbf{T}$ with its first $k$ rows removed, and $\widetilde{\mathbf{Q}}^*_{\mathcal{U}\mathcal{U}}$ the corresponding principal submatrix. Then
+\begin{equation}
+\label{eq:Uv_sparse}
+\mathbf{U}_v \sim \mathsf{N}\!\Big(
+\mathbf{0},\,
+\mathbf{A}\mathbf{T}_{\mathcal{U}}^\top
+\Big(\widetilde{\mathbf{Q}}^*_{\mathcal{U}\mathcal{U}}\Big)^{-1}
+\mathbf{T}_{\mathcal{U}}\mathbf{A}^\top
+\Big).
+\end{equation}
+]
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\not\in\mathbb{N}$
+*********
+
+For general $\alpha$, the solution $u$ to $(30)$ is a centered Gaussian process with covariance operator $\mathcal{C} = \tau^{-2}L^{-\alpha}$, which we denote by $u \sim \mathsf{N}(0,\mathcal{C})$. Using the rational approximation, we approximate $\mathcal{C}$ as
+\begin{align*}
+\textstyle
+    \mathcal{C}_\alpha = \tau^{-2}L^{-\lfloor\alpha\rfloor}P_m(L^{-1})Q_m(L^{-1})^{-1} = \tau^{-2}kL^{-\lfloor\alpha\rfloor} + \sum_{i=1}^m\tau^{-2}r_iL^{-\lfloor\alpha\rfloor}(L-p_iI)^{-1} = \mathcal{C}_0 + \sum_{i=1}^m \mathcal{C}_i.
+\end{align*}
+
+Let $u_\alpha\sim \mathsf{N}(0,\mathcal{C}_\alpha)$. It can then be represented as a sum of independent Gaussian processes, $u_\alpha = u_0 + \sum_{i=1}^m u_i$, where $u_0 \sim \mathsf{N}(0,\mathcal{C}_0)$ and $u_i \sim \mathsf{N}(0,\mathcal{C}_i)$ for $i = 1, \dots, m$. Moreover, these processes satisfy the SPDEs
+
+$$
+\begin{align}
+\mathcal{C}_0^{-1/2}u_0 = L^{\lfloor\alpha\rfloor/2}(\tau k^{-1/2}u_0) = \mathcal{W},& \quad \text{on } \Gamma, \tag{9} \\
+\mathcal{C}_i^{-1/2}u_i  = (L^{\lfloor\alpha\rfloor}(L - p_i I))^{1/2}(\tau r_i^{-1/2}u_i) = \mathcal{W},& \quad \text{on } \Gamma.\tag{10}
+\end{align}
+$$
+
+`r Cite(myBib, "Bolin2025Linear")` showed that if we consider the SPDE $(10)$ on $\mathbb{R}$, then the solution $u_i$ admits a stationary covariance function given by
+\begin{align*}
+\varrho_i(h) = r_i\sigma^2 \frac{1}{p_i^{\lfloor\alpha\rfloor}}\varrho\Big(h;\kappa\sqrt{1-p_i}, 1/2, \sqrt{c_\alpha\sqrt{\pi}/\sqrt{1-p_i}}\Big)\quad - \sum_{j=1}^{\lfloor\alpha\rfloor} r_i\sigma^2 \frac{1}{p_i^{\lfloor\alpha\rfloor+1-j}} \varrho\left(h;\kappa, j-1/2, \sqrt{c_\alpha/c_j}\right).
+\end{align*}
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\not\in\mathbb{N}$
+*********
+
+```{r, echo = FALSE, fig.align='center', out.width='80%', fig.cap = captioner("Covariance errors in the \\(L_2(\\Gamma\\times\\Gamma)\\)-norm (left) and \\(L_\\infty(\\Gamma\\times\\Gamma)\\)-norm (right) on the tadpole graph.")}
+knitr::include_graphics("data_files/errorRatFEMcomparison_with_mathpazo.png")
+```
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Project 4 | $\alpha\not\in\mathbb{N}$
+*********
+
+```{r p5plotly, eval = FALSE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between \\(|\\varrho_{\\alpha}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\) and \\(|\\varrho^{\\alpha}_{h,m}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\).")}
+load(here::here("data_files/diff_true_FEM_RAT.RData"))
+diff_true_FEM_RAT
+```
+
+
+
 ---
 
 class: center, middle
@@ -714,7 +1110,7 @@ We analyze and numerically approximate solutions to fractional diffusion equatio
 
 .custom-box[
 $$
-\tag{6}
+\tag{11}
 \begin{cases}
   \partial_t u(s,t) + (\kappa^2 - \Delta_\Gamma)^{\alpha/2} u(s,t) & = f(s,t), \quad (s,t) \in \Gamma \times (0, T), \\
   u(s,0) & = u_0(s), \quad s \in \Gamma,
@@ -738,11 +1134,11 @@ class: left, top
 ### Project 2 | Existence and uniqueness
 *********
 
-We interpret $(6)$ as an abstract Cauchy problem in $L_2(\Gamma)$, given by
+We interpret $(11)$ as an abstract Cauchy problem in $L_2(\Gamma)$, given by
 
 .custom-box[
 $$
-\tag{7}
+\tag{12}
 \begin{cases}
     \partial_tu(t)+L^{\alpha/2}u(t)=f(t),\quad t\in (0, T),\\  
     u(0)=u_0\in D(L^{\alpha/2}).
@@ -1027,7 +1423,7 @@ class: left, top
 ### Project 2 | Numerical experiments 2/2
 *********
 
-```{r, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between the exact and approximate solutions.")}
+```{r p2plotly, eval = FALSE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between the exact and approximate solutions.")}
 load(here::here("data_files/error_for_project2.RData"))
 error_for_project2
 ```
@@ -1504,399 +1900,6 @@ knitr::include_graphics("data_files/p_all_z_nicer_tadpole_with_mathpazo.png")
 ```
 
 
-
----
-
-class: center, middle
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-
-
-## Project 4
-
-*********
-
-# An exponentially convergent Markov approximation of Gaussian Whittle-Matérn fields with arbitrary smoothness on metric graphs
-
-*********
-
-### Status: █████░░░░░ ~50%
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\in\mathbb{N}$
-*********
-
-<div class="content-box-myblue">
-Assumption 1
-</div>
-
-.content-box-blue[
-We assume that $\alpha \in \mathbb{N}$.
-]
-
-Again, our purpose is to approximate the covariance structure of the solution $u$ to 
-\begin{align}
-\tag{30}
-\label{eq:spde_on_metric_graph_for_4_Project}
-L^{\alpha/2} (\tau u) = \mathcal{W}, \quad \text{on } \Gamma,
-\end{align}
-where $L = \kappa^2 - \Delta_{\Gamma}$, $u$ satisfies the Kirchhoff vertex conditions $(5)$, and $\kappa$ and $\tau$ are constant coefficients.
-
-
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\in\mathbb{N}$ | Interval case
-*********
-
-.content-box-purple[
-We begin with the simpler interval setting
-$$
-L^{\alpha/2}(\tau u)=\mathcal{W},\quad\text{on }[0,\ell],\tag{31}
-$$
-where the Kirchhoff--Laplacian $\Delta_{\Gamma}$ reduces to the Neumann Laplacian $\Delta$.
-]
-
-
-- When posed on $\mathbb{R}$, the solution $u$ to $(31)$ satisfies $\boldsymbol{u}(t)\sim\mathsf{N}(\mathbf{0}, \boldsymbol{\varrho}(t_1,t_2))$, where
-
-\begin{align}
-\label{eq:u_vector_value_process_on_R}
-    \boldsymbol{u}(t) = [u(t), u^{(1)}(t),\dots, u^{(\alpha-1)}(t)]^\top\quad\text{ and }\quad \boldsymbol{\varrho}(t_1,t_2) = \left[ \frac{\partial^{i-1}}{\partial t_2^{i-1}}\frac{\partial^{j-1}}{\partial t_1^{j-1}}\varrho(t_1-t_2)\right]_{ij\in\{1,2,\ldots, \alpha\}}.
-\end{align}
-
-- By restricting to $[0,\ell]$, we still have a centered Gaussian process $\boldsymbol{u}_{\ell}(t)\sim\mathsf{N}(\mathbf{0}, \boldsymbol{\varrho}_{\ell}(t_1,t_2))$, where $\boldsymbol{u}_{\ell} = \boldsymbol{u}|_{[0,\ell]}$ and $\boldsymbol{\varrho}_{\ell} = \boldsymbol{\varrho}|_{[0,\ell] \times [0,\ell]}$.
-
-- We introduce the boundary evaluation operator
-\begin{align*}
-    B_{\ell}^\alpha u_{\ell} = [\boldsymbol{u}_{\ell}(0)^\top, \boldsymbol{u}_{\ell}(\ell)^\top]^\top =
-    [u_{\ell}(0), u_{\ell}^{(1)}(0), \dots, u_{\ell}^{(\alpha-1)}(0),
-    u_{\ell}(\ell), u_{\ell}^{(1)}(\ell), \dots, u_{\ell}^{(\alpha-1)}(\ell)]^\top.
-\end{align*}
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\in\mathbb{N}$ | Interval case | WMB and BWM processes
-*********
-
-<div class="content-box-myblue">
-Whittle-Matérn bridge process
-</div>
-
-.content-box-blue[
-The *Whittle-Matérn bridge process* $u_{B_{\ell}^\alpha}(t)\sim\mathsf{N}(0,r_{B_{\ell}^\alpha}(t_1,t_2))$ is defined as the conditional process $u_{B_{\ell}^\alpha}(t) = u_{\ell}(t) \,\big|\, \{B_{\ell}^\alpha u_{\ell} = \mathbf{0}\}$, $t \in [0,\ell]$, where
-$$r_{B_{\ell}^\alpha}(t_1,t_2)=\varrho(t_1-t_2)-\mathbf{S}_e(t_1)\begin{bmatrix} \boldsymbol{\varrho}_{1\star}(0,t_2) & \boldsymbol{\varrho}_{1\star}(\ell,t_2) \end{bmatrix}^\top,\quad t_1,t_2\in[0,\ell].$$
-]
-
-
-<div class="content-box-myblue">
-Boundaryless Whittle-Matérn process
-</div>
-
-.content-box-blue[
-The *boundaryless Whittle--Matérn processs* is defined as $\widetilde{u}_\ell(t) = [\widetilde{\boldsymbol{u}}_\ell(t)]_1$, $t \in [0,\ell]$, where $\widetilde{\boldsymbol{u}}_\ell(t) =  [\widetilde{u}_\ell(t),\widetilde{u}_\ell^{(1)}(t),\dots, \widetilde{u}^{(\alpha-1)}(t)]^\top\sim\mathsf{N}(\mathbf{0},\widetilde{\boldsymbol{\varrho}}_{\ell}\left(t_1,t_2\right))$, $t\in[0,\ell]$ and
-\begin{align}
-    \label{eq:matrix_valued_cov_function_ofboundaryless_process}
-	\widetilde{\boldsymbol{\varrho}}_{\ell}\left(t_1,t_2\right) = \boldsymbol{\varrho}(t_1,t_2) +
-	\begin{bmatrix}\boldsymbol{\varrho}(t_1, 0) & \boldsymbol{\varrho}(t_1,\ell)\end{bmatrix} 
-	\begin{bmatrix}
-		\boldsymbol{\varrho}(0,0)  & 	-\boldsymbol{\varrho}(0,\ell) \\
-		-\boldsymbol{\varrho}(\ell,0)  & 	\boldsymbol{\varrho}(0,0)
-	\end{bmatrix}^{-1} 
-	\begin{bmatrix}\boldsymbol{\varrho}(t_2,0)\\
-		\boldsymbol{\varrho}(t_2,\ell)
-	\end{bmatrix}.
-\end{align}
-]
-  
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\in\mathbb{N}$ | Interval case | Processes comparison
-*********
-
-```{r, echo = FALSE, fig.align='center', out.width='100%', fig.cap = captioner("Comparison of covariance functions (left), marginal standard deviations (middle), and sample paths (right) for the ''Matérn'', ''FEM'', ''bridge'', and ''boundaryless'' processes on \\([0,2]\\).")}
-knitr::include_graphics("data_files/p_cov_diag_sample.png")
-```
-
-
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\in\mathbb{N}$ | Graph case | Notation
-*********
-
-- The vector-valued function $\boldsymbol{u}(s) = [u(s),u^{(1)}(s),\dots,u^{(\alpha-1)}(s)]^\top$, $s\in\Gamma$ can be written compactly as
-\begin{align}
-\label{eq:notation_for_vector_valued_function}
-\textstyle
-    \boldsymbol{u}(s) = \sum_{e\in\mathcal{E}} \mathbb{I}(s \in e)\boldsymbol{u}_e(s),\quad s\in\Gamma,
-\end{align}
-where $\boldsymbol{u}_e(s) = [u_e(s),u_e^{(1)}(s),\dots,u_e^{(\alpha-1)}(s)]^\top$, $s\in e$.
-
-- Define the vector collecting the boundary values of $\boldsymbol{u}$ across all edges as
-\begin{align}
-\label{eq:dens_u2version2}
-\tag{32}
-   \mathbf{U} =  [\boldsymbol{u}_1(\underline{e}_1)^\top,
-   \boldsymbol{u}_1(\bar{e}_1)^\top,
-   \boldsymbol{u}_2(\underline{e}_2)^\top,
-   \boldsymbol{u}_2(\bar{e}_2)^\top,
-   \ldots,
-	\boldsymbol{u}_{|\mathcal{E}|}(\underline{e}_{|\mathcal{E}|})^\top,
-   \boldsymbol{u}_{|\mathcal{E}|}(\bar{e}_{|\mathcal{E}|})^\top]^\top\in\mathbb{R}^{2\alpha|\mathcal{E}|\times1}.
-\end{align}
-
-- Define
-\begin{align*}
-\textstyle
-    \widetilde{\boldsymbol{u}}(s) 
-    = \sum_{e\in\mathcal{E}} \mathbb{I}(s \in e)\,\widetilde{\boldsymbol{u}}_e(s), 
-    \quad s \in \Gamma,
-\end{align*}
-where the processes $\widetilde{u}_e(s) = [\widetilde{\boldsymbol{u}}_e(s)]_1$, $s \in e$ are independent boundaryless Whittle--Matérn processes.
-- In the same spirit as $(32)$, define
-\begin{align}
-	\widetilde{\mathbf{U}} = [\widetilde{\boldsymbol{u}}_1(\underline{e}_1)^\top,\widetilde{\boldsymbol{u}}_1(\bar{e}_1)^\top,\widetilde{\boldsymbol{u}}_2(\underline{e}_2)^\top,\widetilde{\boldsymbol{u}}_2(\bar{e}_2)^\top,\ldots, \widetilde{\boldsymbol{u}}_{|\mathcal{E}|}(\underline{e}_{|\mathcal{E}|})^\top,\widetilde{\boldsymbol{u}}_{|\mathcal{E}|}(\bar{e}_{|\mathcal{E}|})^\top]^\top\in\mathbb{R}^{2\alpha|\mathcal{E}|\times1}.
-\end{align}
-
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\in\mathbb{N}$ | Graph case | Two representation
-*********
-
-<div class="content-box-myblue">
-Bridge representation of Whittle-Matérn processes on metric graphs `r Cite(myBib, "Bolin2023Statistical")`
-</div>
-
-.content-box-blue[
-Let $u$ be a solution to $(30)$. Then $u$ has representation
-\begin{align*}
-    u(s) = \sum_{e\in\mathcal{E}}\mathbf{S}_e(s)\mathbf{D}_e \mathbf{U} + \sum_{e\in\mathcal{E}}\widetilde{u}_{B_{\ell_e}^\alpha}(s), \quad s\in\Gamma,
-\end{align*}
-where $\widetilde{u}_{B_{\ell_e}^\alpha}$ are independent Whittle--Matérn bridge process defined on each edge and extended by zero.
-]
-
-<div class="content-box-myblue">
-Boundaryless representation of Whittle-Matérn processes on metric graphs `r Cite(myBib, "Bolin2023Statistical")`
-</div>
-
-.content-box-blue[
-Define the conditioned process
-\begin{align}
-\label{eq:process_u_defined_as_conditioned}
-    \boldsymbol{u}(s) = \widetilde{\boldsymbol{u}}(s)\, \big| \, \mathcal{K}_\alpha(\widetilde{u}), 
-    \quad s \in \Gamma.
-\end{align}
-Then the scalar process $u(s) = [\boldsymbol{u}(s)]_1$, $s \in \Gamma$, is a solution to $(30)$.
-]
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\in\mathbb{N}$ | Graph case | Bridge representation
-*********
-
-
-```{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Decomposition of a Whittle-Matérn process with into independent bridges and a residual term.")}
-load(here::here("data_files/p_bridge.RData"))
-p_bridge
-```
-
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\in\mathbb{N}$ | Graph case | Boundaryless representation
-*********
-
-
-```{r, eval =TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Boundaryless construction of a Whittle-Matérn process.")}
-load(here::here("data_files/p_boundaryless.RData"))
-p_boundaryless
-```
-
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\in\mathbb{N}$ | Graph case | Sparse precision matrices
-*********
-
-**Exploiting the boundaryless representation**
-
-- Since the processes $\widetilde{\boldsymbol{u}}_e$, $e \in \mathcal{E}$, are mutually independent, centered, and Gaussian, it follows that
-\begin{align}
-\label{eq:distribution_ofU_tilde}
-    \widetilde{\mathbf{U}}\sim\mathsf{N}(\mathbf{0}, \widetilde{\mathbf{Q}}^{-1}), \quad \widetilde{\mathbf{Q}} = \operatorname{diag}(\{\widetilde{\mathbf{Q}}_e\}_{e\in\mathcal{E}}).
-\end{align}
-
-- The conditioning event $\mathcal{K}_\alpha(\widetilde{u})$ can be written in matrix form as $\mathbf{K}\widetilde{\mathbf{U}} = \mathbf{0}$. Consequently, the vector $\mathbf{U}$ can be expressed as $\mathbf{U} = \widetilde{\mathbf{U}} | \{\mathbf{K}\widetilde{\mathbf{U}} = \mathbf{0}\}$.
-- However, the precision matrix of $\mathbf{U}$ **is not sparse**. This can be fixed by considering a change of basis $\widetilde{\mathbf{U}}^* = \mathbf{T}\widetilde{\mathbf{U}}$. Let $\widetilde{\mathbf{Q}}^* = \mathbf{T}\widetilde{\mathbf{Q}}\mathbf{T}^\top$ and $\mathbf{A}$ be such that $\mathbf{U}_v  = [u(v_1), u(v_2), \ldots, u(v_{|\mathcal{V}|})]^\top = \mathbf{A}\mathbf{U}$. 
-
-<div class="content-box-myblue">
-Sparse representation `r Cite(myBib, "Bolin2023Statistical")`
-</div>
-
-.content-box-blue[
-Let $\mathbf{T}_{\mathcal{U}}$ denote $\mathbf{T}$ with its first $k$ rows removed, and $\widetilde{\mathbf{Q}}^*_{\mathcal{U}\mathcal{U}}$ the corresponding principal submatrix. Then
-\begin{equation}
-\label{eq:Uv_sparse}
-\mathbf{U}_v \sim \mathsf{N}\!\Big(
-\mathbf{0},\,
-\mathbf{A}\mathbf{T}_{\mathcal{U}}^\top
-\Big(\widetilde{\mathbf{Q}}^*_{\mathcal{U}\mathcal{U}}\Big)^{-1}
-\mathbf{T}_{\mathcal{U}}\mathbf{A}^\top
-\Big).
-\end{equation}
-]
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\not\in\mathbb{N}$
-*********
-
-For general $\alpha$, the solution $u$ to $(30)$ is a centered Gaussian process with covariance operator $\mathcal{C} = \tau^{-2}L^{-\alpha}$, which we denote by $u \sim \mathsf{N}(0,\mathcal{C})$. Using the rational approximation, we approximate $\mathcal{C}$ as
-\begin{align*}
-\textstyle
-    \mathcal{C}_\alpha = \tau^{-2}L^{-\lfloor\alpha\rfloor}P_m(L^{-1})Q_m(L^{-1})^{-1} = \tau^{-2}kL^{-\lfloor\alpha\rfloor} + \sum_{i=1}^m\tau^{-2}r_iL^{-\lfloor\alpha\rfloor}(L-p_iI)^{-1} = \mathcal{C}_0 + \sum_{i=1}^m \mathcal{C}_i.
-\end{align*}
-
-Let $u_\alpha\sim \mathsf{N}(0,\mathcal{C}_\alpha)$. It can then be represented as a sum of independent Gaussian processes, $u_\alpha = u_0 + \sum_{i=1}^m u_i$, where $u_0 \sim \mathsf{N}(0,\mathcal{C}_0)$ and $u_i \sim \mathsf{N}(0,\mathcal{C}_i)$ for $i = 1, \dots, m$. Moreover, these processes satisfy the SPDEs
-
-$$
-\begin{align}
-\mathcal{C}_0^{-1/2}u_0 = L^{\lfloor\alpha\rfloor/2}(\tau k^{-1/2}u_0) = \mathcal{W},& \quad \text{on } \Gamma, \tag{33} \\
-\mathcal{C}_i^{-1/2}u_i  = (L^{\lfloor\alpha\rfloor}(L - p_i I))^{1/2}(\tau r_i^{-1/2}u_i) = \mathcal{W},& \quad \text{on } \Gamma.\tag{34}
-\end{align}
-$$
-
-`r Cite(myBib, "Bolin2025Linear")` showed that if we consider the SPDE $(34)$ on $\mathbb{R}$, then the solution $u_i$ admits a stationary covariance function given by
-\begin{align*}
-\varrho_i(h) = r_i\sigma^2 \frac{1}{p_i^{\lfloor\alpha\rfloor}}\varrho\Big(h;\kappa\sqrt{1-p_i}, 1/2, \sqrt{c_\alpha\sqrt{\pi}/\sqrt{1-p_i}}\Big)\quad - \sum_{j=1}^{\lfloor\alpha\rfloor} r_i\sigma^2 \frac{1}{p_i^{\lfloor\alpha\rfloor+1-j}} \varrho\left(h;\kappa, j-1/2, \sqrt{c_\alpha/c_j}\right).
-\end{align*}
-
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\not\in\mathbb{N}$
-*********
-
-```{r, echo = FALSE, fig.align='center', out.width='80%', fig.cap = captioner("Covariance errors in the \\(L_2(\\Gamma\\times\\Gamma)\\)-norm (left) and \\(L_\\infty(\\Gamma\\times\\Gamma)\\)-norm (right) on the tadpole graph.")}
-knitr::include_graphics("data_files/errorRatFEMcomparison_with_mathpazo.png")
-```
-
-
----
-
-class: left, top
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="50" style="margin-left:10px;">
-  <img src="statlogo.png" height="50" style="margin-left:10px;">
-  <img src="Kaust.png" height="50" style="margin-left:10px;">
-</div>
-
-### Project 4 | $\alpha\not\in\mathbb{N}$
-*********
-
-```{r, eval = TRUE, fig.height = 1.55, out.width = "100%", fig.cap = captioner("Comparison between \\(|\\varrho_{\\alpha}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\) and \\(|\\varrho^{\\alpha}_{h,m}(v_2,\\cdot) - \\varrho(v_2,\\cdot)|\\).")}
-load(here::here("data_files/diff_true_FEM_RAT.RData"))
-diff_true_FEM_RAT
-```
-
 ---
 
 class: left, top
@@ -1978,6 +1981,28 @@ class: center, middle
 </div>
 
 #### THE END
+
+
+
+---
+
+class: left, top
+
+<div style="position:absolute; top:40px; right:55px;">
+  <img src="group_logo2.png" height="50" style="margin-left:10px;">
+  <img src="statlogo.png" height="50" style="margin-left:10px;">
+  <img src="Kaust.png" height="50" style="margin-left:10px;">
+</div>
+
+### Preliminaries | Metric graphs | Not a metric graph
+*********
+
+
+      
+```{r, echo = FALSE, fig.align='center', out.width='85%', fig.cap = captioner("PhD-Proposal-Abstract graph. This is not a metric graph since it is not connected. One may restrict to the largest connected component to obtain a connected metric graph.")}
+knitr::include_graphics("data_files/PhDProposalAbstract.png")
+```
+
 
 
 ---

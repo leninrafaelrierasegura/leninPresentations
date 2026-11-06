@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Numerical approximation of fractional diffusion equations on metric graphs</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Lenin Rafael Riera Segura" />
+    <script src="site_libs/header-attrs/header-attrs.js"></script>
+    <link href="site_libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="lenin.css" type="text/css" />
+    <link rel="stylesheet" href="tuesdaymeeting2p.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Numerical approximation of fractional diffusion equations on metric graphs
+]
+.subtitle[
+## Project 2 · Tuesday meeting
+]
+.author[
+### Lenin Rafael Riera Segura
+]
+.institute[
+### KAUST · David Bolin and Alexandre B. Simas
+]
+
+---
+
+
+
+
+layout: true
+class: left, top
+
+&lt;div class="meeting-logos"&gt;
+  &lt;img src="group_logo2.png"&gt;
+  &lt;img src="statlogo.png"&gt;
+  &lt;img src="Kaust.png"&gt;
+&lt;/div&gt;
+
+---
+
+### Project 2 · Overview
+*********
+
+### Fractional diffusion on a metric graph
+
+- Model, discrete operator, and regularity-dependent error estimate
+
+- Rational approximation of the complete backward Euler update
+
+### Updated numerical experiments
+
+- Isolated rational convergence and smooth-data time and space convergence
+
+- Rough forcing, unresolved modes, and the logarithmic spatial correction
+
+???
+Theory: /home/rierasl/Desktop/6ac76d140751a76e98ae4d0b/main.tex.
+Numerical evidence: the four notebooks named on the final source slide.
+
+---
+
+### Project 2 · Problem setting
+*********
+
+.custom-box[
+$$
+`\begin{cases}
+\partial_tu(s,t)+\nu L^{\alpha/2}u(s,t)=f(s,t),
+   &amp;(s,t)\in\Gamma\times(0,T),\\
+u(s,0)=u_0(s),&amp;s\in\Gamma,
+\end{cases}`
+\qquad L=\kappa^2-\Delta_\Gamma.
+$$
+]
+
+- `\(\Gamma\)` is a compact, connected metric graph and `\(\kappa&gt;0\)`.
+- `\(0&lt;\alpha\le2\)` is the spatial order. The experiments include `\(\nu&gt;0\)`.
+- `\(L\)` encodes continuity and conservation of flux at graph vertices:
+`\begin{equation*}
+u\text{ is continuous},\qquad
+\sum_{e\sim v}\partial_eu(v)=0\quad\text{for }u\in D(L).
+\end{equation*}`
+
+For fractional powers, vertex compatibility is encoded through the spectral domains of `\(L\)`.
+
+???
+Source: main.tex, Introduction and Notation and Preliminaries.
+The paper's analysis uses nu=1. A fixed positive nu changes constants.
+Avoid imposing classical pointwise derivative conditions on every low-regularity fractional-domain function.
+
+---
+
+### Project 2 · Functional framework
+*********
+
+Let `\(Le_j=\lambda_je_j\)`, where `\(\{e_j\}\)` is orthonormal in `\(L_2(\Gamma)\)`.
+
+.content-box-blue[
+`\begin{equation*}
+L^{\alpha/2}v=\sum_j\lambda_j^{\alpha/2}(v,e_j)e_j,
+\qquad
+\|v\|_{\dot H^s(\Gamma)}^2=\sum_j\lambda_j^s|(v,e_j)|^2.
+\end{equation*}`
+]
+
+For `\(u_0\in\dot H^{\alpha/2}(\Gamma)\)` and `\(f\in L_2(0,T;L_2(\Gamma))\)`,
+the unique solution has the representation
+`\begin{equation*}
+u(t)=e^{-\nu tL^{\alpha/2}}u_0+
+\int_0^t e^{-\nu(t-r)L^{\alpha/2}}f(r)\,dr,
+\end{equation*}`
+and satisfies
+`\begin{equation*}
+u\in L_2(0,T;\dot H^\alpha)\cap H^1(0,T;L_2)
+\cap C([0,T];\dot H^{\alpha/2}).
+\end{equation*}`
+
+???
+Source: main.tex, Theorem labelled theorem:existenceuniquenessandregularity, specialized to r=0.
+The general theorem holds on the spectral scale for arbitrary r.
+
+---
+
+### Project 2 · Discretization
+*********
+
+**Space.** Continuous P1 finite elements `\(V_h\)` on conforming, quasi-uniform graph meshes.
+Define `\(L_h\)` first, then take its fractional power:
+`\begin{equation*}
+(L_hv_h,w_h)=\kappa^2(v_h,w_h)+(v_h',w_h'),
+\qquad L_h^\beta\text{ by finite-dimensional spectral calculus},
+\quad \beta=\alpha/2.
+\end{equation*}`
+
+**Time.** Backward Euler with `\(\tau=T/N\)`, projected initial data, and averaged forcing:
+.content-box-blue[
+`\begin{equation*}
+(I+\tau\nu L_h^\beta)U_h^{k+1}
+=U_h^k+\tau P_hf^{k+1},\qquad U_h^0=P_hu_0,
+\end{equation*}`
+`\begin{equation*}
+f^{k+1}=\frac1\tau\int_{t_k}^{t_{k+1}}f(t)\,dt.
+\end{equation*}`
+]
+
+Use `\(U_h^\tau(t)=U_h^k\)` for `\(t\in(t_{k-1},t_k]\)` in the space–time norm.
+
+???
+Source: main.tex, Numerical approximation and system:fully_discrete_scheme.
+This updates the older proposal slides: the discrete power is the power of L_h,
+rather than a direct restriction of the continuous fractional energy form.
+
+---
+
+### Project 2 · Approximation estimates
+*********
+
+The analysis combines approximation on the spectral scale with stability of the projected data.
+
+&lt;div class="content-box-myblue"&gt;Fractional elliptic projection&lt;/div&gt;
+.content-box-blue[
+`\begin{equation*}
+\|v-G_{h,\alpha}v\|_{L_2(\Gamma)}
+\lesssim h^\alpha\|v\|_{\dot H^\alpha(\Gamma)},
+\qquad 0&lt;\alpha\le2.
+\end{equation*}`
+]
+
+&lt;div class="content-box-myblue"&gt;Stability of the discrete fractional operator&lt;/div&gt;
+.content-box-blue[
+`\begin{equation*}
+\|L_h^{\alpha/2}P_hv\|_{L_2(\Gamma)}
+\lesssim\|L^{\alpha/2}v\|_{L_2(\Gamma)}.
+\end{equation*}`
+]
+
+The constants are uniform in `\(h\)`. The approximation argument also covers data for which nodal interpolation is unavailable.
+
+???
+Source: main.tex, Lemma lem:graph-fractional-fe-approx and Propositions
+proposition:with_elliptic_projection and prop:controlofLhbyL.
+G_{h,alpha} uses the continuous fractional energy form for the analysis.
+It is distinct from constructing the discrete evolution with powers of L_h.
+
+---
+
+### Project 2 · Fully discrete error
+*********
+
+Assume `\(u_0\in\dot H^{s_0}(\Gamma)\)`, `\(s_0\ge\alpha/2\)`, and
+`\(f\in L_2(0,T;\dot H^{s_f}(\Gamma))\)`, `\(s_f\ge0\)`.
+
+&lt;div class="content-box-myblue"&gt;Error estimate for 0 &amp;lt; α &amp;lt; 2&lt;/div&gt;
+.content-box-blue[
+`\begin{equation*}
+\|u-U_{h,m}^\tau\|_{L_2(0,T;L_2(\Gamma))}
+\lesssim \tau+h^{q-\epsilon}+e^{-2\pi\sqrt{(\alpha/2)m}},
+\end{equation*}`
+`\begin{equation*}
+q=\min\{s_0+\alpha/2,\ s_f+\alpha,\ 2\},
+\qquad \epsilon&gt;0\text{ sufficiently small}.
+\end{equation*}`
+]
+
+- Smooth finite spectral sums permit `\(q=2\)`.
+- Minimal initial regularity and `\(L_2\)` forcing give `\(q=\alpha\)`.
+- At `\(\alpha=2\)`, the rational representation is exact and the bound is `\(\tau+h^2\)`.
+
+???
+Source: main.tex, Theorem lastlasttheorem, equation finalfinalest.
+The stated exponential term assumes the best uniform rational approximation quality.
+Installed, sometimes interpolated, BRASIL coefficients are assessed numerically against this benchmark.
+Data norms, nu, kappa, and T enter the hidden constant.
+
+---
+
+### Project 2 · Rational approximation
+*********
+
+Set `\(A_h=L_h/\kappa^2\)` and `\(\beta=\alpha/2\)`. Then
+`\(\sigma(A_h^{-1})\subset[\delta_h,1]\)`.
+
+.custom-box[
+`\begin{equation*}
+r_m(x)\approx x^\beta\quad\text{on }[0,1],\qquad
+\delta_m=\sup_{[0,1]}|x^\beta-r_m(x)|
+\lesssim e^{-2\pi\sqrt{\beta m}}.
+\end{equation*}`
+]
+
+With `\(R_{h,m}=r_m(A_h^{-1})\)` and `\(s=\tau\nu\kappa^{2\beta}\)`,
+`\begin{equation*}
+(R_{h,m}+sI)U_{h,m}^{k+1}
+=R_{h,m}(U_{h,m}^k+\tau P_hf^{k+1}).
+\end{equation*}`
+
+The source coefficients can be reused across meshes. The complete time-step rational function depends on `\(s\)`, hence on `\(\tau\)` and `\(\nu\)`.
+
+???
+Sources: main.tex, Rational approximation; conv_in_m_isolated.Rmd, Steps 2 and 5.
+r_m is type (m,m). BRASIL tables can interpolate coefficients in beta.
+The best-approximation rate is a benchmark for those numerical coefficients,
+not a certified bound for every interpolated approximant.
+
+---
+
+### Project 2 · Shifted sparse solves
+*********
+
+Write the source approximation and the time-step function as
+`\begin{equation*}
+S_m(y)=r_m(y^{-1})=d_m+\sum_{j=1}^m\frac{\rho_j}{y-\eta_j},
+\qquad
+H_m(y)=\frac{S_m(y)}{S_m(y)+s}
+=r_\tau+\sum_{n=1}^m\frac{a_n}{y-z_n},
+\end{equation*}`
+where `\(r_\tau=d_m/(d_m+s)\)`, `\(z_n&lt;0\)`, and `\(a_n&gt;0\)`.
+
+.content-box-blue[
+`\begin{equation*}
+\mathbf U^{k+1}_{h,m}=\left[
+r_\tau\mathbf C^{-1}+\sum_{n=1}^m a_n
+(\mathbf L/\kappa^2-z_n\mathbf C)^{-1}\right]
+(\mathbf C\mathbf U^k_{h,m}+\tau\mathbf F^{k+1}),
+\end{equation*}`
+`\begin{equation*}
+\mathbf C_{ij}=(\psi_j,\psi_i),\quad
+\mathbf G_{ij}=(\psi_j',\psi_i'),\quad
+\mathbf L=\kappa^2\mathbf C+\mathbf G.
+\end{equation*}`
+]
+
+**Retain the constant-term mass solve.** Factorizations of the `\(m\)` shifted matrices and `\(\mathbf C\)` are reusable within a run.
+
+???
+Sources: main.tex, thenumericalscheme; all four notebooks, matrix method.
+The actual update contains m shifted elliptic solves plus the constant mass solve.
+Source poles eta_j and time-step poles z_n are different.
+This replaces the older proposal claim that the remainder vanishes.
+No eigenpairs are required for the production rational evolution.
+
+---
+
+### Experiments · Common setting
+*********
+
+.pull-left[
+All four studies use the **tadpole graph** with stem length `\(1\)` and loop length `\(2\)`.
+
+`\begin{equation*}
+T=1,\qquad\kappa=4,
+\end{equation*}`
+`\begin{equation*}
+\alpha\in\{0.9,1.0,\ldots,1.7\}.
+\end{equation*}`
+
+The exact eigenfunctions define the data and reference solution. The FEM evolution uses shifted sparse solves.
+]
+
+.pull-right[
+&lt;img src="data_files/basis.png" alt="" width="100%" style="display: block; margin: auto;" /&gt;
+.meeting-caption[
+Continuous P1 basis functions on the tadpole graph.
+]
+]
+
+???
+Sources: the four notebook problem statements; existing proposal asset data_files/basis.png.
+The graph is the same in the rational, temporal, smooth spatial, and rough spatial studies.
+
+---
+
+### Experiments · Smooth data
+*********
+
+The updated initial condition contains **16 normalized modes**:
+`\begin{equation*}
+u_0=\frac{10}{\sqrt{16}}\sum_{j\in\mathcal J_{16}}e_j,
+\qquad\mathcal J_{16}=\{5,6,8,\ldots,21\},
+\qquad f(t)=10\sin(\pi t)e_7.
+\end{equation*}`
+
+With `\(\gamma_j=\nu\lambda_j^{\alpha/2}\)`, the exact solution is
+.content-box-blue[
+`\begin{equation*}
+u(s,t)=\frac{10}{\sqrt{16}}\sum_{j\in\mathcal J_{16}}
+e^{-\gamma_jt}e_j(s)+c_7(t)e_7(s),
+\end{equation*}`
+`\begin{equation*}
+c_7(t)=\frac{10}{\gamma_7^2+\pi^2}
+\left[\gamma_7\sin(\pi t)-\pi\cos(\pi t)+\pi e^{-\gamma_7t}\right].
+\end{equation*}`
+]
+
+`\(\|u_0\|_{L_2}=10\)`. All 17 active solution modes are included in the reference, and both data have arbitrarily high spectral spatial regularity.
+
+???
+Sources: conv_in_m_isolated.Rmd, conv_in_tau_mat.Rmd, cov_in_h_mat.Rmd;
+the saved K16 metadata agree across these studies.
+The manuscript still describes the earlier initial condition 10 e_5.
+
+---
+
+### Experiments · Error norms
+*********
+
+**Time and space studies:** approximate the total continuum error using exact solution values on a fixed reference grid.
+`\begin{equation*}
+E_{\rm sampled}^2=\tau_\star\sum_{\ell=1}^{N_\star}
+\mathbf d_\ell^\top\mathbf C^\star\mathbf d_\ell,
+\qquad
+\mathbf d_\ell=\mathbf u^\star(t_\ell^\star)
+-\boldsymbol\Psi\mathbf U^{k(\ell)}_{h,m}.
+\end{equation*}`
+Here `\(t_\ell^\star\in(t_{k(\ell)-1},t_{k(\ell)}]\)` and
+`\(\Psi_{ij}=\psi_j(s_i^\star)\)`.
+
+**Rational study:** compare two FEM trajectories on the same mesh and time grid.
+.content-box-blue[
+`\begin{equation*}
+E_m^2=\tau\sum_{k=1}^N
+(\mathbf U_h^k-\mathbf U_{h,m}^k)^\top\mathbf C
+(\mathbf U_h^k-\mathbf U_{h,m}^k).
+\end{equation*}`
+]
+
+The sampled norm uses reference quadrature. The isolated rational norm integrates both right-constant FEM trajectories exactly in time.
+
+???
+Sources: conv_in_tau_mat.Rmd and cov_in_h_mat.Rmd, Error computation;
+conv_in_m_isolated.Rmd, Step 3; cov_in_h_rough_as_in_mat.Rmd, sampled norm.
+The rough reference is a finite-series reference u_K, with separate tail control.
+
+---
+
+### Rational study · Independent reference
+*********
+
+Fix `\(h=0.02\)`, `\(\tau=0.005\)`, and `\(\nu=1\)`. Vary `\(m=2,\ldots,16\)`.
+
+Use the **complete numerical eigensystem** for the reference:
+`\begin{equation*}
+\mathbf L\mathbf V=\mathbf C\mathbf V\boldsymbol\Lambda,
+\qquad \mathbf V^\top\mathbf C\mathbf V=\mathbf I,
+\end{equation*}`
+`\begin{equation*}
+\mathbf U_h^{k+1}=\mathbf V\operatorname{diag}
+\left((1+\tau\nu\lambda_{j,h}^{\alpha/2})^{-1}\right)
+\mathbf V^\top(\mathbf C\mathbf U_h^k+\tau\mathbf F^{k+1}).
+\end{equation*}`
+
+Both trajectories use the same projected initial value and averaged forcing.
+
+.custom-box[
+Their difference isolates the rational change to the discrete propagator. Shared FEM and backward Euler errors do not create a continuum error floor in `\(E_m\)`.
+]
+
+???
+Source: conv_in_m_isolated.Rmd, Steps 1–4 and saved isolated_m_results_K16.rds.
+All 150 numerical modes are retained in the reference, not only the active continuum modes.
+The sparse solve trajectory is independently checked against scalar rational propagation in this basis.
+
+---
+
+### Rational study · Convergence in m
+*********
+
+.meeting-figure[
+&lt;img src="tuesdaymeeting2p_files/figure-html/isolated-m-1.png" alt="" width="94%" style="display: block; margin: auto;" /&gt;
+]
+
+.meeting-caption[
+Dashed curves: `\(C_\alpha e^{-2\pi\sqrt{(\alpha/2)m}}\)`. Filled markers pass the notebook's empirical resolution criterion.
+]
+
+???
+Source: conv_in_m_isolated.Rmd, matrix-figure, using the saved K16 results.
+Guides average the prescribed model curves anchored at all measured points.
+The natural-log regression is against sqrt(m).
+
+---
+
+### Rational study · Regression slopes
+*********
+
+Fit `\(\ln E_m=s_m\sqrt m+b_m\)`. Compare with `\(c_\alpha=-2\pi\sqrt{\alpha/2}\)`.
+
+.meeting-table[
+
+|   α| Benchmark| All orders| Resolved only| Resolved / 15|
+|---:|---------:|----------:|-------------:|-------------:|
+| 0.9|   -4.2149|    -4.2998|       -4.2998|            15|
+| 1.0|   -4.4429|    -4.4842|       -4.4842|            15|
+| 1.1|   -4.6597|    -4.6496|       -4.6496|            15|
+| 1.2|   -4.8669|    -4.8113|       -4.8113|            15|
+| 1.3|   -5.0657|    -4.9857|       -4.9857|            15|
+| 1.4|   -5.2569|    -5.1633|       -5.1633|            15|
+| 1.5|   -5.4414|    -5.3278|       -5.3278|            15|
+| 1.6|   -5.6199|    -5.4877|       -5.4877|            15|
+| 1.7|   -5.7928|    -5.6523|       -5.6523|            15|
+]
+
+All 135 cases pass the empirical resolution criterion. The `\(\alpha=2\)` control error is 5.05e-14.
+
+The benchmark is an upper-bound scale. A finite-range fitted slope need not equal its exponent.
+
+???
+Source: isolated_m_results_K16.rds. Slopes are recomputed from the saved errors.
+Resolution criterion: product_error &gt; 100 max(absolute_error_disagreement,
+alpha=2 control error, double.xmin). It is empirical, not a roundoff certificate.
+All-order and resolved-only slopes coincide because all saved cases pass.
+
+---
+
+### Smooth data · Convergence in time
+*********
+
+`\(h=10^{-3}\)`, `\(m=8\)`, `\(\nu=10^{-3}\)`.
+Vary `\(\tau=1/N\)` for `\(N\in\{200,63,20,6,2\}\)`.
+
+.meeting-figure[
+&lt;img src="tuesdaymeeting2p_files/figure-html/temporal-convergence-1.png" alt="" width="94%" style="display: block; margin: auto;" /&gt;
+]
+
+.meeting-caption[
+Dashed curves: `\(C_\alpha\tau\)`. Observed slopes range from 0.9874 to 0.9885. Reference resolutions: `\(h_\star=\tau_\star=10^{-5}\)`.
+]
+
+???
+Source: conv_in_tau_mat.Rmd, parameters, plot-results, rates;
+errors_projected_tau_mat_K16.RData. Actual integer-step time grids are used.
+The forcing is averaged analytically on each time step.
+
+---
+
+### Smooth data · Convergence in space
+*********
+
+`\(\tau=2\cdot10^{-5}\)`, `\(m=8\)`, `\(\nu=10^{-3}\)`.
+Vary `\(h\in\{1/512,1/256,1/128,1/64,1/32\}\)`.
+
+.meeting-figure[
+&lt;img src="tuesdaymeeting2p_files/figure-html/smooth-spatial-convergence-1.png" alt="" width="94%" style="display: block; margin: auto;" /&gt;
+]
+
+.meeting-caption[
+Dashed curves: `\(C_\alpha h^2\)`. Smooth spectral data permit the P1 spatial limit. Reference resolutions: `\(h_\star=\tau_\star=10^{-5}\)`.
+]
+
+???
+Source: cov_in_h_mat.Rmd, parameters, plot-results, rates;
+errors_projected_h_mat_K16.RData.
+The current saved mesh range differs from the range still stated in the paper.
+The theorem permits h^(2-epsilon) for sufficiently small positive epsilon.
+The plotted h^2 guides are comparison curves, not certified bounds.
+
+---
+
+### Smooth data · Observed rates
+*********
+
+.meeting-table[
+
+|   α| Spatial slope, reference 2| Temporal slope, reference 1|
+|---:|--------------------------:|---------------------------:|
+| 0.9|                    2.01008|                     0.98854|
+| 1.0|                    2.01005|                     0.98847|
+| 1.1|                    2.01003|                     0.98838|
+| 1.2|                    2.00999|                     0.98828|
+| 1.3|                    2.00996|                     0.98816|
+| 1.4|                    2.00991|                     0.98801|
+| 1.5|                    2.00981|                     0.98784|
+| 1.6|                    2.00960|                     0.98764|
+| 1.7|                    2.00917|                     0.98739|
+]
+
+.custom-box[
+The smooth-data experiments support second-order spatial and first-order temporal convergence across the tested fractional orders.
+]
+
+???
+Sources: errors_projected_h_mat_K16.RData and errors_projected_tau_mat_K16.RData.
+Both regressions use log10(error) against log10(the saved refinement axis).
+Finite-mode data cannot reveal the minimal-regularity alpha-dependent spatial order.
+
+---
+
+### Rough forcing · Data and regularity
+*********
+
+Set `\(u_0=0\)` and use the same infinite forcing on every mesh:
+.custom-box[
+`\begin{equation*}
+g=\sum_{j=1}^\infty\frac{\phi_j}{j},\qquad
+\phi_j=0\text{ on the stem},\qquad
+\phi_j(x)=\sin(2^j\pi x)\text{ on the loop }[0,2].
+\end{equation*}`
+]
+
+These orthonormal Kirchhoff modes have `\(\mu_j=\kappa^2+\pi^2 2^{2j}\)`, so
+`\begin{equation*}
+\|g\|_{L_2}^2=\sum_jj^{-2}&lt;\infty,
+\qquad \|g\|_{\dot H^s}^2=\sum_jj^{-2}\mu_j^s=\infty\quad(s&gt;0).
+\end{equation*}`
+
+With `\(a_j=\nu\mu_j^{\alpha/2}\)`, the exact solution is
+`\begin{equation*}
+u(t)=\sum_{j=1}^\infty b_j(t)\phi_j,\qquad b_j(t)=\frac{1-e^{-a_jt}}{ja_j}.
+\end{equation*}`
+
+???
+Source: cov_in_h_rough_as_in_mat.Rmd, The experiment and Step 1.
+Here delta_m denotes the rational approximation-error scale.
+u_0=0 allows arbitrary s_0, while the forcing allows only s_f=0.
+
+---
+
+### Rough forcing · Unresolved modes
+*********
+
+On the aligned dyadic mesh `\(h_J=2^{-J}\)`, analytic sine–hat integrals satisfy
+`\begin{equation*}
+(\phi_j,\psi_i)=0\quad\text{for every FEM hat and every }j\ge J.
+\end{equation*}`
+
+The original infinite forcing therefore has the **exact finite load**
+`\begin{equation*}
+\mathbf F_i=\sum_{j=1}^{J-1}\frac{(\phi_j,\psi_i)}{j}.
+\end{equation*}`
+
+Split `\(u=u_{&lt;J}+u_{\ge J}\)`. Orthogonality gives
+.content-box-blue[
+`\begin{equation*}
+E_{h_J}^2=\|u_{&lt;J}-U_{h_J,m}^\tau\|_{L_2(0,T;L_2)}^2
++E_{\rm tail}^2,
+\qquad E_{\rm tail}^2=\sum_{j=J}^\infty\int_0^T b_j(t)^2\,dt.
+\end{equation*}`
+]
+
+Unresolved modes remain in the continuum solution. Their orthogonality to `\(V_h\)` gives a lower bound on the total error.
+
+???
+Source: cov_in_h_rough_as_in_mat.Rmd, Steps 2–5.
+The tail starts at j=J, including that index. Squared norms add in this identity.
+Modes below J have nonzero projections but are not represented exactly by P1 functions.
+
+---
+
+### Rough forcing · Logarithmic correction
+*********
+
+Since `\(a_j\asymp2^{\alpha j}\)`, the unresolved tail satisfies
+`\begin{equation*}
+E_{\rm tail}^2\asymp\sum_{j=J}^\infty\frac{2^{-2\alpha j}}{j^2},
+\qquad
+E_{\rm tail}\asymp\frac{h_J^\alpha}{J}
+=\frac{h_J^\alpha}{\log_2(1/h_J)}.
+\end{equation*}`
+
+If this contribution controls the measured error, then
+`\begin{equation*}
+\log_2\frac{E_{h_J}}{E_{h_{J+1}}}
+\approx\alpha+\log_2\frac{J+1}{J}&gt;\alpha.
+\end{equation*}`
+
+.custom-box[
+Compare the raw errors with `\(C_\alpha h_J^\alpha/J\)`, and fit
+`\begin{equation*}
+\log_{10}(JE_{h_J})=s_{\rm corrected}\log_{10}h_J+b
+\end{equation*}`
+to compare the corrected slope with `\(\alpha\)`.
+]
+
+???
+Source: cov_in_h_rough_as_in_mat.Rmd, Steps 8–9.
+The tail gives a lower bound and motivates the model; it does not prove
+a matching upper bound for every contribution to the total error.
+The logarithm is specific to this forcing's amplitudes 1/j.
+Multiplication by J changes the rate comparison, not the underlying error norm.
+
+---
+
+### Rough forcing · Raw spatial error
+*********
+
+`\(\nu=1\)`, `\(m=14\)`, `\(\tau=8\cdot10^{-7}\)`.
+Use `\(J=5,\ldots,9\)`, with `\(h_J=2^{-J}\)`.
+
+.meeting-figure[
+&lt;img src="tuesdaymeeting2p_files/figure-html/rough-raw-1.png" alt="" width="94%" style="display: block; margin: auto;" /&gt;
+]
+
+.meeting-caption[
+Dashed curves: `\(C_\alpha h^\alpha/J\)`. The sampled reference uses cutoff `\(K=16\)`, `\(h_\star=2^{-18}\)`, and `\(\tau_\star=10^{-5}\)`.
+]
+
+???
+Source: cov_in_h_rough_as_in_mat.Rmd and rough_h_as_in_mat_results.rds,
+generated_at 2026-11-04 17:32:27 +03. All 45 cases use the same solver time step.
+The bound B_K is not added to any plotted error.
+
+---
+
+### Rough forcing · Corrected spatial error
+*********
+
+The same sampled errors, multiplied by `\(J=\log_2(1/h)\)`.
+
+.meeting-figure[
+&lt;img src="tuesdaymeeting2p_files/figure-html/rough-corrected-1.png" alt="" width="94%" style="display: block; margin: auto;" /&gt;
+]
+
+.meeting-caption[
+Dashed curves: `\(C_\alpha h^\alpha\)`. This forcing-specific correction removes the leading logarithmic factor from the comparison.
+]
+
+???
+Source: cov_in_h_rough_as_in_mat.Rmd, corrected-figure and rates;
+rough_h_as_in_mat_results.rds. Guide constants average all measured/model ratios.
+No theoretical tail sum or bound is added to the sampled norm.
+
+---
+
+### Rough forcing · Observed rates
+*********
+
+.meeting-table[
+
+|   α| Raw slope| Corrected slope| Corrected − α|
+|---:|---------:|---------------:|-------------:|
+| 0.9|   1.10562|         0.89452|      -0.00548|
+| 1.0|   1.21026|         0.99916|      -0.00084|
+| 1.1|   1.31512|         1.10401|       0.00401|
+| 1.2|   1.42042|         1.20932|       0.00932|
+| 1.3|   1.52587|         1.31477|       0.01477|
+| 1.4|   1.63002|         1.41892|       0.01892|
+| 1.5|   1.72929|         1.51818|       0.01818|
+| 1.6|   1.81735|         1.60625|       0.00625|
+| 1.7|   1.88696|         1.67586|      -0.02414|
+]
+
+The corrected slopes are within 0.024 of `\(\alpha\)`.
+The largest omitted-tail bound is 0.0013% of the measured squared error.
+
+Time-refinement checks for all nine fractional orders are still pending in the notebook.
+
+???
+Source: rough_h_as_in_mat_results.rds and cov_in_h_rough_as_in_mat.Rmd,
+Parameters and Checks for the original eight-alpha run.
+The original eight-alpha checks do not establish completed time refinement for the present nine-alpha grid.
+At alpha near 2, a lower-mode h^2 contribution can be slow to separate from h^alpha/J.
+That possibility alone does not establish the cause of a particular fitted slope.
+
+---
+
+### Project 2 · Discussion
+*********
+
+&lt;div class="content-box-myblue"&gt;Numerical evidence&lt;/div&gt;
+.content-box-blue[
+- The isolated rational error follows the root-exponential scale across `\(m=2,\ldots,16\)`.
+- Smooth finite-mode data give spatial slopes near `\(2\)` and temporal slopes near `\(1\)`.
+- Rough `\(L_2\)` forcing reveals the `\(\alpha\)`-dependent spatial order after the logarithmic correction.
+]
+
+**Interpretation.** Data regularity determines the spatial rate. The studies measure different error contributions and need separate reference constructions.
+
+**Next numerical check.** Complete solver-time refinement for the current rough-data grid, keeping reference quadrature and truncation checks separate.
+
+???
+Sources: saved outputs of all four requested notebooks and their rate discussions.
+Numerical slopes support the estimates over the tested ranges; they do not prove asymptotic sharpness.
+Coefficient interpolation means the ideal rational rate remains a benchmark rather than an automatic certificate.
+
+---
+class: center, middle
+
+## Additional details
+*********
+
+# Experiment updates and accuracy checks
+
+*********
+
+---
+class: left, top
+
+### Appendix · Changes from the paper
+*********
+
+.meeting-table.meeting-small[
+| Item | Current manuscript | Notebook results used here |
+|:---|:---|:---|
+| Smooth initial data | `\(10e_5\)` | `\(10\sum_{j\in\mathcal J_{16}}e_j/\sqrt{16}\)` |
+| Rational orders | `\(m=2,\ldots,8\)` | `\(m=2,\ldots,16\)` |
+| Smooth spatial meshes | `\(1/128,\ldots,1/8\)` | `\(1/512,\ldots,1/32\)` |
+| Smooth spatial slopes | About 2.0155 | About 2.0092–2.0101 |
+| Rational fits | Earlier `\(m\)` regression | All-order and resolved-only regressions |
+]
+
+The temporal slopes also change slightly with the updated smooth data.
+The saved rough-data results retain the stated fixed solver time step and logarithmically corrected rates.
+
+???
+Sources: main.tex, Numerical experiments and Table tab:num-rates;
+saved K16 results and rough_h_as_in_mat_results.rds.
+The paper source is not changed by this presentation.
+
+---
+
+### Appendix · Accuracy diagnostics
+*********
+
+**Isolated rational study**
+
+- Complete numerical spectrum: 150 modes.
+- Eigen-equation relative residual: 5.54e-13.
+- Mass orthogonality error: 9.21e-15.
+- Compare sparse rational propagation with scalar propagation in the full numerical eigenbasis.
+
+**Rough spatial study**
+
+- Fixed cutoff `\(K=16\ge\max J-1\)` preserves the infinite forcing's FEM load.
+- `\(h_\star=2^{-18}\)` resolves the highest retained frequency.
+- The omitted-tail bound is below the `\(0.2\%\)` squared-error budget.
+- Earlier diagnostics for eight fractional orders include reference and solver refinements. Solver-time refinement for all nine orders remains pending.
+
+???
+Sources: isolated_m_results_K16.rds diagnostics and control;
+cov_in_h_rough_as_in_mat.Rmd, Error computation and final checks section.
+The empirical resolution indicator is not a rigorous floating-point certificate.
+
+---
+
+### Appendix · Reference truncation
+*********
+
+The rough-data reference is the finite series
+`\begin{equation*}
+u_K(t)=\sum_{j=1}^K\frac{1-e^{-a_jt}}{ja_j}\phi_j.
+\end{equation*}`
+
+For `\(K\ge\max J-1\)`, orthogonality gives, in the continuum norm,
+`\begin{equation*}
+\|u-U_h^\tau\|^2=\|u_K-U_h^\tau\|^2+\|u-u_K\|^2.
+\end{equation*}`
+
+.content-box-blue[
+`\begin{equation*}
+\|u-u_K\|^2\le B_K:=
+\frac{T}{\nu^2\pi^{2\alpha}}
+\frac{2^{-2\alpha(K+1)}}{(K+1)^2(1-2^{-2\alpha})}.
+\end{equation*}`
+]
+
+The reported errors approximate `\(\|u_K-U_h^\tau\|\)` through reference-mass and reference-time quadrature. **The code records `\(B_K\)` as a diagnostic and does not add it to the measured errors.**
+
+???
+Source: cov_in_h_rough_as_in_mat.Rmd, Step 6 and finite-reference discussion.
+All unlabelled norms on this slide are L2(0,T;L2(Gamma)) norms.
+The exact orthogonal identity applies to the continuum norm, not literally to its sampled approximation.
+
+---
+
+### Appendix · Sources
+*********
+
+.meeting-source[
+**Paper and reference style**
+
+- `/home/rierasl/Desktop/6ac76d140751a76e98ae4d0b/main.tex`
+- `proposalPresentation.Rmd`, Project 2 and shared theme assets
+
+**Updated experiments in `/home/rierasl/Desktop/NAP/`**
+
+- `conv_in_m_isolated.Rmd` — isolated rational error, K16 data
+- `conv_in_tau_mat.Rmd` — smooth temporal convergence, K16 data
+- `cov_in_h_mat.Rmd` — smooth spatial convergence, K16 data
+- `cov_in_h_rough_as_in_mat.Rmd` — rough spatial convergence and correction
+
+Saved result snapshots and source hashes: `data_files/tuesdaymeeting2p/`.
+]
+
+???
+The four local snapshots preserve the notebook output as inspected for this presentation.
+All numerical slopes in the slides are calculated from those saved errors at knit time.
+The R Markdown uses local snapshots and shared reference assets without sourcing or modifying the original notebooks.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "ratio": "16:9",
+  "slideNumberFormat": "%current%",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "seal": false,
+  "navigation": {
+    "scroll": true
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

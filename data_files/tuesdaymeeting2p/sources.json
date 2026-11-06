@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/home/rierasl/Desktop/leninPresentations/proposalPresentation.Rmd",
+    "sha256": "63d2620d6ad28d629b014e64c2c5277a073f3ee2a4de02e23fdf9b64f2ebdfc9"
+  },
+  {
+    "path": "/home/rierasl/Desktop/6ac76d140751a76e98ae4d0b/main.tex",
+    "sha256": "6758d02847f4b04dcb0e7e8a7c4fdecd397692f59d66c4d8d047d81acb27c392"
+  },
+  {
+    "path": "/home/rierasl/Desktop/NAP/conv_in_m_isolated.Rmd",
+    "sha256": "d4d6bc078c4412b99c17ebe4fd2c23e7cfc3941c808e513120e62d99915352e7"
+  },
+  {
+    "path": "/home/rierasl/Desktop/NAP/conv_in_tau_mat.Rmd",
+    "sha256": "9311917fb11d95ffe0384d6f71390e9cc1e0c2e5b018364c35a73251e1d4bf1f"
+  },
+  {
+    "path": "/home/rierasl/Desktop/NAP/cov_in_h_mat.Rmd",
+    "sha256": "d04dfad7a09eb2cbe830224c72205f83887154299465eb0f120ac5e717ce8eb9"
+  },
+  {
+    "path": "/home/rierasl/Desktop/NAP/cov_in_h_rough_as_in_mat.Rmd",
+    "sha256": "e4d81771261627c5e1f2444d200b11c673db3b59b4dbde3b0b88f68e5aa3770c"
+  },
+  {
+    "path": "/home/rierasl/Desktop/leninPresentations/data_files/tuesdaymeeting2p/rough_h_as_in_mat_results.rds",
+    "sha256": "871826b6eeee5cb074e6f86a573d697e7d48f5d9b58282929082ca6fcc600dd0"
+  },
+  {
+    "path": "/home/rierasl/Desktop/leninPresentations/data_files/tuesdaymeeting2p/errors_projected_h_mat_K16.RData",
+    "sha256": "fbc1d2c8b31ae047724a51fe2934201b320365ad5b46da974a6f12ef188e9714"
+  },
+  {
+    "path": "/home/rierasl/Desktop/leninPresentations/data_files/tuesdaymeeting2p/errors_projected_tau_mat_K16.RData",
+    "sha256": "a57abf5605607fd6178143f04991b320f841946a6b5786522c949897154065c6"
+  },
+  {
+    "path": "/home/rierasl/Desktop/leninPresentations/data_files/tuesdaymeeting2p/isolated_m_results_K16.rds",
+    "sha256": "fb933b494f60c7d0d7dbc9b531d09375b665341bbe8ace17ae8afd1a6670d949"
+  }
+]

@@ -1,14 +1,9 @@
-/* Small layout additions to the unchanged proposal presentation theme. */
+/* Small layout additions to the shared Tuesday meeting presentation theme. */
 .remark-slide-content:not(.title-slide) h3 { max-width: 75%; }
 .meeting-logos { position: absolute; top: 40px; right: 55px; }
-.meeting-logos img { height: 50px; margin-left: 10px; }
+.meeting-logos img { height: 70px; margin-left: 10px; }
 .meeting-caption { font-size: 0.9em; margin-top: 0.2em; }
 .meeting-small { font-size: 0.9em; }
-.meeting-table table { width: 100%; border-collapse: collapse; }
-.meeting-table th, .meeting-table td { padding: 5px 14px; }
-.meeting-table thead { border-bottom: 2px solid #0D2244; }
-.meeting-table tbody tr:nth-child(even) { background: #f5f7fa; }
-.meeting-table table { margin-top: 12px; margin-bottom: 12px; }
 .meeting-figure p { margin: 0; }
 .meeting-source { font-size: 0.85em; overflow-wrap: anywhere; }
 .meeting-equation { font-size: 0.95em; }

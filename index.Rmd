@@ -1,5 +1,6 @@
 ---
 title: "My Presentations"
+site: 'function(input, ...) { base::source(file.path(input, "_site.R"), local = TRUE); presentation_site(input, ...) }'
 ---
 
 This website contains my presentations

@@ -1,5 +1,8 @@
 name: "my-website"
 output_dir: "docs"
+# Skip these sources during Build Website; they can still be knitted manually.
+render_exclude:
+  - proposalPresentation.Rmd
 navbar:
   title: "My Presentations"
   left:

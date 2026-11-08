@@ -5,7 +5,8 @@ author: "Lenin Rafael Riera Segura"
 institute: "KAUST · David Bolin and Alexandre B. Simas"
 output:
   xaringan::moon_reader:
-    lib_dir: libs/tuesdaymeeting2p
+    # Keep widget dependencies inside the website output directory.
+    lib_dir: docs/libs/tuesdaymeeting2p
     nature:
       ratio: '16:9'
       slideNumberFormat: '%current%'
@@ -144,11 +145,56 @@ Numerical evidence: the four notebooks named on the final source slide.
 ### Project 2 · Overview
 *********
 
-```{r p5plotly, eval = TRUE, fig.height = 2.5, out.width = "100%"}
+```{r p5plotly, eval = TRUE, fig.height = 4.5, out.width = "100%"}
 load(here::here("data_files/logo_five_diffusion_animation.RData"))
-logo_five_diffusion_animation
+# Keep animation frames outside remark's slide source so the deck opens quickly.
+widget_file <- here::here("data_files/logo_five_diffusion_animation.html")
+local({
+  widget_libdir <- tempfile("logo_diffusion_libs_", tmpdir=dirname(widget_file))
+  on.exit(unlink(widget_libdir, recursive=TRUE), add=TRUE)
+  htmlwidgets::saveWidget(logo_five_diffusion_animation, widget_file,
+    selfcontained=TRUE, libdir=widget_libdir, title="Diffusion on the logo graph")
+})
+docs_widget_file <- here::here("docs", "data_files", basename(widget_file))
+dir.create(dirname(docs_widget_file), recursive=TRUE, showWarnings=FALSE)
+stopifnot(file.copy(widget_file, docs_widget_file, overwrite=TRUE))
+htmltools::tags$iframe(
+  src=file.path("data_files", basename(widget_file)), width="100%",
+  height=round(knitr::opts_current$get("fig.height")*96),
+  style="border:0; display:block;", loading="lazy",
+  title="Interactive diffusion animation")
 ```
 
+???
+Think of this graph as a network of thin wires heated at five locations. After the heating stops, the temperature spreads along the wires and through their junctions. This illustrates ordinary diffusion on a graph. We then extend the mathematical model to fractional diffusion, which allows nonlocal transport across the network.
+
+---
+
+### Project 2 · Fractional diffusion
+*********
+
+```{r fractional-diffusion-animation, eval = TRUE, fig.height = 4.5, out.width = "100%"}
+load(here::here("data_files/logo_five_fractional_diffusion_animation.RData"))
+# Keep animation frames outside remark's slide source so the deck opens quickly.
+fractional_widget_file <- here::here("data_files/logo_five_fractional_diffusion_animation.html")
+local({
+  fractional_widget_libdir <- tempfile("logo_diffusion_libs_", tmpdir=dirname(fractional_widget_file))
+  on.exit(unlink(fractional_widget_libdir, recursive=TRUE), add=TRUE)
+  htmlwidgets::saveWidget(logo_five_fractional_diffusion_animation, fractional_widget_file,
+    selfcontained=TRUE, libdir=fractional_widget_libdir, title="Fractional diffusion on the logo graph")
+})
+fractional_docs_widget_file <- here::here("docs", "data_files", basename(fractional_widget_file))
+dir.create(dirname(fractional_docs_widget_file), recursive=TRUE, showWarnings=FALSE)
+stopifnot(file.copy(fractional_widget_file, fractional_docs_widget_file, overwrite=TRUE))
+htmltools::tags$iframe(
+  src=file.path("data_files", basename(fractional_widget_file)), width="100%",
+  height=round(knitr::opts_current$get("fig.height")*96),
+  style="border:0; display:block;", loading="lazy",
+  title="Interactive fractional diffusion animation")
+```
+
+???
+The same five Gaussian hot spots now evolve with alpha=1 and kappa=1: spatial fractional diffusion with decay. The temperature colors use a fixed scale, and kappa and alpha are displayed in the animation. Compare the h=0.1 solution with the independently computed h=1 solution; the coarse mesh nodes are marked.
 
 ---
 

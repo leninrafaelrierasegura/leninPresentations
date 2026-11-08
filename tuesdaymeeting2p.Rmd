@@ -141,6 +141,17 @@ Numerical evidence: the four notebooks named on the final source slide.
 
 ---
 
+### Project 2 · Overview
+*********
+
+```{r p5plotly, eval = TRUE, fig.height = 2.5, out.width = "100%"}
+load(here::here("data_files/logo_five_diffusion_animation.RData"))
+logo_five_diffusion_animation
+```
+
+
+---
+
 ### Project 2 · Problem setting
 *********
 

@@ -165,6 +165,7 @@ htmltools::tags$iframe(
 Think of this graph as a network of thin wires heated at five locations. After the heating stops, the temperature spreads along the wires and through their junctions. This illustrates ordinary diffusion on a graph. We then extend the mathematical model to fractional diffusion, which allows nonlocal transport across the network.
 
 
+
 ---
 
 class: left, top
@@ -203,26 +204,7 @@ htmltools::tags$iframe(
 The same five Gaussian hot spots now evolve with alpha=1 and kappa=1: spatial fractional diffusion with decay. The temperature colors use a fixed scale, and kappa and alpha are displayed in the animation. Compare the h=0.1 solution with the independently computed h=1 solution; the coarse mesh nodes are marked.
 
 
----
 
-class: center, middle
-
-<!-- <div style="position:absolute; top:40px; right:55px;"> -->
-<!--   <img src="kaustlogo.svg" width="120"> -->
-<!-- </div> -->
-
-<div style="position:absolute; top:40px; right:55px;">
-  <img src="group_logo2.png" height="70" style="margin-left:10px;">
-  <img src="statlogo.png" height="70" style="margin-left:10px;">
-  <img src="Kaust.png" height="70" style="margin-left:10px;">
-</div>
-
-
-
-# Part I
-
-
-#### Numerical Analysis
 
 
 ---
@@ -239,9 +221,10 @@ class: left, top
 *********
 
 
-We study space-fractional diffusion on a compact, connected metric graph $\Gamma$:
 
-.content-box-gray[
+Diffusion on a metric graph couples the evolution along its edges through conditions at the vertices. On a compact, connected graph $\Gamma$, the fractional model is
+
+.content-box-blue[
 $$
 \begin{cases}
 \partial_tu(s,t)+L^{\alpha/2}u(s,t)=f(s,t),&(s,t)\in\Gamma\times(0,T),\\
@@ -251,13 +234,13 @@ u(s,0)=u_0(s),&s\in\Gamma,
 $$
 ]
 
-Here $\kappa>0$ and $0<\alpha\le2$. The domain of the Kirchhoff–Laplacian imposes continuity and conservation of flux:
+Here $\kappa>0$ and $0<\alpha\le2$. The Kirchhoff–Laplacian acts edgewise, while its domain incorporates continuity and conservation of flux:
 \begin{equation}
 v\in C(\Gamma),\qquad \sum_{s\in w}\partial v(s)=0
 \quad\text{at each vertex }w,\quad v\in D(L).\tag{2}
 \end{equation}
 
-The sum counts every incident edge endpoint, including both ends of a loop. For fractional powers, vertex compatibility is encoded by $\dot H^s(\Gamma)=D(L^{s/2})$.
+The sum includes both endpoints of a loop. These vertex conditions determine the operator whose spectral powers govern fractional diffusion.
 
 ???
 Source: main.tex, eq:maineq, eq:Kcond, and Notation and Preliminaries.
@@ -278,22 +261,26 @@ class: left, top
 *********
 
 
-The shifted Kirchhoff–Laplacian is positive and self-adjoint with compact inverse. Let $Le_j=\lambda_je_j$, with $\{e_j\}$ orthonormal in $L_2(\Gamma)$.
 
-.content-box-gray[
+The shifted Kirchhoff–Laplacian is positive and self-adjoint with compact inverse. It therefore has an orthonormal eigenbasis $Le_j=\lambda_je_j$ in $L_2(\Gamma)$.
+
+This decomposition defines the fractional powers and their regularity spaces. For $s\ge0$,
+
+.content-box-blue[
 \begin{equation*}
-L^{\alpha/2}v=\sum_j\lambda_j^{\alpha/2}(v,e_j)e_j,
-\qquad \|v\|_{\dot H^s(\Gamma)}^2=\sum_j\lambda_j^s|(v,e_j)|^2.
+L^{s/2}v=\sum_j\lambda_j^{s/2}(v,e_j)e_j,
+\qquad \dot H^s(\Gamma)=D(L^{s/2}),
+\end{equation*}
+
+\begin{equation*}
+\|v\|_{\dot H^s(\Gamma)}^2=\sum_j\lambda_j^s|(v,e_j)|^2.
 \end{equation*}
 ]
 
-The operator $-L^{\alpha/2}$ generates a compact analytic semigroup:
+Negative-order spaces are defined by duality. On this spectral scale, $-L^{\alpha/2}$ generates the analytic semigroup
 \begin{equation}
-T(t)v=e^{-tL^{\alpha/2}}v
-=\sum_j e^{-t\lambda_j^{\alpha/2}}(v,e_j)e_j.\tag{3}
+T(t)v=e^{-tL^{\alpha/2}}v=\sum_j e^{-t\lambda_j^{\alpha/2}}(v,e_j)e_j.\tag{3}
 \end{equation}
-
-It is a contraction in $L_2(\Gamma)$. The same spectral multipliers define its action on the full scale $\dot H^r(\Gamma)$, $r\in\mathbb R$.
 
 ???
 Source: main.tex, Notation and Preliminaries, spectral_semigroup and the spectral Sobolev norms.
@@ -313,24 +300,29 @@ class: left, top
 *********
 
 
-Interpret the evolution equation on the spectral scale:
+
+The semigroup provides the solution of the evolution equation on each space in the spectral scale:
 \begin{equation}
 \partial_tu+L^{\alpha/2}u=f\quad\text{in }\dot H^r(\Gamma),
 \qquad u(0)=u_0.\tag{4}
 \end{equation}
 
 <div class="content-box-myblue">Theorem 1</div>
-.content-box-gray[
-For $\alpha>0$ and $r\in\mathbb R$, assume
-$u_0\in\dot H^{r+\alpha/2}(\Gamma)$ and $f\in L_2(0,T;\dot H^r(\Gamma))$.
-The unique mild solution is
+
+.content-box-blue[
+For $\alpha>0$ and $r\in\mathbb R$, data satisfying
+$u_0\in\dot H^{r+\alpha/2}(\Gamma)$ and $f\in L_2(0,T;\dot H^r(\Gamma))$ give the unique mild solution
 \begin{equation}
 u(t)=T(t)u_0+\int_0^tT(t-s)f(s)\,ds,\qquad t\in[0,T].\tag{5}
 \end{equation}
-It belongs to $L_2(0,T;\dot H^{r+\alpha})\cap H^1(0,T;\dot H^r)$ and to $C([0,T];\dot H^{r+\alpha/2})$.
+Its regularity is
+\begin{equation*}
+u\in L_2(0,T;\dot H^{r+\alpha}(\Gamma))\cap H^1(0,T;\dot H^r(\Gamma))
+\cap C([0,T];\dot H^{r+\alpha/2}(\Gamma)).
+\end{equation*}
 ]
 
-The equation holds strongly in $\dot H^r$ almost everywhere. If $r\ge-\alpha/2$, this is also the unique weak solution.
+The equation holds strongly in $\dot H^r(\Gamma)$ almost everywhere. For $r\ge-\alpha/2$, this solution also satisfies the weak formulation.
 
 ???
 Source: main.tex, theorem:existenceuniquenessandregularity.
@@ -352,9 +344,12 @@ class: left, top
 
 
 
-Use a conforming, quasi-uniform graph mesh $\mathcal T_h$, with every graph vertex at a mesh node. Let $V_h\subset H^1(\Gamma)$ be the continuous P1 space.
 
-```{r spatial-basis, out.width='82%', fig.cap=captioner("Continuous P1 basis on the tadpole graph. Interior hats are blue, vertex hats are red, and the vertex neighborhoods are green.")}
+The spatial approximation uses a conforming, quasi-uniform mesh $\mathcal T_h$, with a node at every graph vertex. Continuous P1 hats $\{\psi_i\}_{i=1}^{N_h}$ span the space $V_h\subset H^1(\Gamma)$.
+
+The $L_2(\Gamma)$-orthogonal projection onto $V_h$ is denoted by $P_h$. It supplies the discrete initial value and load.
+
+```{r spatial-basis, out.width='72%', fig.cap=captioner("Continuous P1 basis on the tadpole graph. Interior hats are blue and vertex hats are red.")}
 knitr::include_graphics("data_files/tuesdaymeeting2p/tadpole_basis.png")
 ```
 
@@ -376,26 +371,27 @@ class: left, top
 *********
 
 
-Divide $[0,T]$ into $N$ equal intervals $I_{k+1}=(t_k,t_{k+1}]$, where $\tau=T/N$.
 
-For $L_2$ forcing, use its **time averages**:
-.content-box-gray[
+Backward Euler approximates the evolution on intervals $I_{k+1}=(t_k,t_{k+1}]$, where $\tau=T/N$. The forcing only needs to belong to $L_2(0,T;L_2(\Gamma))$, so its contribution is represented by a time average:
+
+.content-box-blue[
 \begin{equation*}
 f^{k+1}=\frac1\tau\int_{t_k}^{t_{k+1}}f(t)\,dt,
 \qquad \delta U^{k+1}=\frac{U^{k+1}-U^k}{\tau}.
 \end{equation*}
 ]
 
-The backward Euler reconstruction uses the new state on each interval:
+The new state represents the solution throughout its time interval:
 \begin{equation*}
 \widetilde U^\tau(t)=U^k\quad\text{for }t\in(t_{k-1},t_k],
 \qquad \widetilde U^\tau(0)=U^0.
 \end{equation*}
 
-Its continuous and discrete time norms agree:
+This reconstruction identifies the weighted discrete time norm with the continuous space–time norm:
 \begin{equation*}
-\|\widetilde U^\tau\|_{L_2(0,T;X)}^2
-=\tau\sum_{k=1}^N\|U^k\|_X^2=\|U^\tau\|_{\ell^2(X)}^2.
+\|\widetilde U^\tau\|_{L_2(0,T;L_2(\Gamma))}^2
+=\tau\sum_{k=1}^N\|U^k\|_{L_2(\Gamma)}^2
+=\|U^\tau\|_{\ell^2(L_2(\Gamma))}^2.
 \end{equation*}
 
 ???
@@ -416,25 +412,27 @@ class: left, top
 *********
 
 
+
+The finite-element approximation begins with the second-order operator $L$. Its fractional power is then defined in the discrete eigenbasis.
+
 <div class="content-box-myblue">Definition 1</div>
-.content-box-gray[
-First define $L_h:V_h\to V_h$ by
+
+.content-box-blue[
+The operator $L_h:V_h\to V_h$ is defined using $L_2(\Gamma)$ inner products:
 \begin{equation}
 (L_hv_h,w_h)=\kappa^2(v_h,w_h)+(v_h',w_h'),\qquad v_h,w_h\in V_h.\tag{6}
 \end{equation}
-Then take its spectral power, with $\beta=\alpha/2$:
+For $\beta=\alpha/2$, its spectral power is
 \begin{equation*}
 L_h^\beta v_h=\sum_{j=1}^{N_h}\lambda_{j,h}^{\beta}(v_h,e_{j,h})e_{j,h}.
 \end{equation*}
 ]
 
-For the continuous energy form $\mathfrak a_\alpha(v,w)=(L^{\alpha/4}v,L^{\alpha/4}w)$, the weak evolution is
+The continuous weak formulation uses $\mathfrak a_\alpha(v,w)=(L^{\alpha/4}v,L^{\alpha/4}w)$:
 \begin{equation}
 \langle\partial_tu,v\rangle+\mathfrak a_\alpha(u,v)=\langle f,v\rangle,
 \quad v\in\dot H^{\alpha/2}(\Gamma),\qquad u(0)=u_0.\tag{7}
 \end{equation}
-
-All inner products above are on $L_2(\Gamma)$.
 
 ???
 Source: main.tex, discrete L_h definition, its fractional spectral power, and weakformofentireequation.
@@ -455,23 +453,25 @@ class: left, top
 *********
 
 
-For $\beta=\alpha/2$, backward Euler determines $U^{k+1}\in\dot H^\beta(\Gamma)$ by
+
+Applying backward Euler to the weak problem gives the time-discrete solution $U^{k+1}\in\dot H^{\beta}(\Gamma)$, with $\beta=\alpha/2$:
 \begin{equation}
 (\delta U^{k+1},v)+\mathfrak a_\alpha(U^{k+1},v)
-=(f^{k+1},v),\qquad U^0=u_0,\quad v\in\dot H^\beta(\Gamma).\tag{8}
+=(f^{k+1},v),\qquad U^0=u_0,\quad v\in\dot H^{\beta}(\Gamma).\tag{8}
 \end{equation}
 
-The source $f^{k+1}$ is the average on $I_{k+1}$.
+The averaged source makes this scheme meaningful under the same temporal regularity as the continuous problem.
 
 <div class="content-box-myblue">Theorem 2</div>
-.content-box-gray[
-If $\alpha>0$, $u_0\in\dot H^{\alpha/2}(\Gamma)$, and $f\in L_2(0,T;L_2(\Gamma))$, then
+
+.content-box-blue[
+For $\alpha>0$, $u_0\in\dot H^{\alpha/2}(\Gamma)$ and $f\in L_2(0,T;L_2(\Gamma))$ imply
 \begin{equation*}
 \|u-\widetilde U^\tau\|_{L_2(0,T;L_2(\Gamma))}\lesssim\tau.
 \end{equation*}
 ]
 
-The hidden constant depends on the problem and data, and is independent of $\tau$.
+Thus the piecewise constant reconstruction is first-order accurate in time, with a constant independent of $\tau$.
 
 ???
 Source: main.tex, system:semidiscrete_scheme and theorem:first_part_of_main.
@@ -493,25 +493,25 @@ class: left, top
 
 
 
-Use the discrete energy form $\mathfrak a_{h,\alpha}(v_h,w_h)=(L_h^{\alpha/4}v_h,L_h^{\alpha/4}w_h)$:
+
+Spatial discretization replaces the continuous energy by $\mathfrak a_{h,\alpha}(v_h,w_h)=(L_h^{\alpha/4}v_h,L_h^{\alpha/4}w_h)$. The resulting scheme is
 \begin{equation}
 (\delta U_h^{k+1},v_h)+\mathfrak a_{h,\alpha}(U_h^{k+1},v_h)
-=(f^{k+1},v_h),\quad U_h^0=P_hu_0.\tag{9}
+=(f^{k+1},v_h),\quad U_h^0=P_hu_0,\quad v_h\in V_h.\tag{9}
 \end{equation}
-Here $v_h\in V_h$ and $P_h$ is the $L_2$-orthogonal projection.
 
 <div class="content-box-myblue">Theorem 3</div>
-.content-box-gray[
-Let $0<\alpha\le2$. Assume $u_0\in\dot H^{s_0}(\Gamma)$, $s_0\ge\alpha/2$, and $f\in L_2(0,T;\dot H^{s_f}(\Gamma))$, $s_f\ge0$.
 
-For sufficiently small $\epsilon>0$,
+.content-box-blue[
+For $0<\alpha\le2$, data with $u_0\in\dot H^{s_0}(\Gamma)$, $s_0\ge\alpha/2$, and $f\in L_2(0,T;\dot H^{s_f}(\Gamma))$, $s_f\ge0$, satisfy
 \begin{equation*}
 \|U^\tau-U_h^\tau\|_{\ell^2(L_2(\Gamma))}\lesssim h^{q-\epsilon},
-\qquad q=\min\{s_0+\alpha/2,\ s_f+\alpha,\ 2\}.
+\qquad q=\min\{s_0+\alpha/2,\ s_f+\alpha,\ 2\},
 \end{equation*}
+for sufficiently small $\epsilon>0$. At $\alpha=2$, $\epsilon=0$ is admissible.
 ]
 
-For $\alpha=2$, take $\epsilon=0$. Smooth data permit $q=2$, while minimal data regularity gives $q=\alpha$.
+The spatial rate therefore reflects the regularity of both data. It reaches $q=2$ for smooth data and gives $q=\alpha$ at minimal regularity.
 
 ???
 Source: main.tex, system:fully_discrete_scheme and theorem:theorem_second_part_of_main.
@@ -532,24 +532,25 @@ class: left, top
 *********
 
 
-Set $\beta=\alpha/2$ and $A_h=L_h/\kappa^2$. The strong FEM update is
+
+The strong form of the FEM scheme still contains a fractional matrix power:
 \begin{equation}
 (I+\tau L_h^\beta)U_h^{k+1}=U_h^k+\tau P_hf^{k+1}.\tag{10}
 \end{equation}
-Multiplication by $A_h^{-\beta}$ gives
+An equivalent form, with $A_h=L_h/\kappa^2$, exposes the inverse power that will be approximated:
 \begin{equation}
 (A_h^{-\beta}+\tau\kappa^{2\beta}I)U_h^{k+1}
 =A_h^{-\beta}(U_h^k+\tau P_hf^{k+1}).\tag{11}
 \end{equation}
 
-.content-box-gray[
-For $0<\beta<1$, the best uniform type $(m,m)$ approximation $r_m$ to $x^\beta$ on $[0,1]$ is positive.
+.content-box-blue[
+For $0<\beta<1$, the best uniform type $(m,m)$ approximation $r_m$ to $x^\beta$ on $[0,1]$ is positive. After the change of variable $y=x^{-1}$, polynomials $p_r$ and $p_\ell$ give
 \begin{equation}
 R_{h,m}=r_m(A_h^{-1})=p_\ell(A_h)^{-1}p_r(A_h).\tag{12}
 \end{equation}
 ]
 
-The scaled inverse spectrum lies in $[\delta_h,1]$, with $\delta_h=\kappa^2/\lambda_{N_h,h}$. The source approximation can be reused across meshes.
+Since $\sigma(A_h^{-1})\subset[\delta_h,1]$, where $\delta_h=\kappa^2/\lambda_{N_h,h}$, the same source approximation applies across meshes.
 
 ???
 Source: main.tex, Rational approximation, weak_form_m2 and rmdef.
@@ -570,15 +571,17 @@ class: left, top
 *********
 
 
-Replace $A_h^{-\beta}$ by $R_{h,m}$ in the backward Euler update:
+
+Replacing the inverse power in (11) by $R_{h,m}$ gives the fully discrete rational scheme:
 \begin{equation}
 (R_{h,m}+\tau\kappa^{2\beta}I)U_{h,m}^{k+1}
 =R_{h,m}(U_{h,m}^k+\tau P_hf^{k+1}),\quad U_{h,m}^0=P_hu_0.\tag{13}
 \end{equation}
 
 <div class="content-box-myblue">Theorem 4</div>
-.content-box-gray[
-Let $0<\alpha<2$, $u_0\in\dot H^{s_0}(\Gamma)$ with $s_0\ge\alpha/2$, and $f\in L_2(0,T;\dot H^{s_f}(\Gamma))$ with $s_f\ge0$. Then
+
+.content-box-blue[
+For $0<\alpha<2$, data satisfying $u_0\in\dot H^{s_0}(\Gamma)$, $s_0\ge\alpha/2$, and $f\in L_2(0,T;\dot H^{s_f}(\Gamma))$, $s_f\ge0$, yield
 \begin{equation}
 \|u-U_{h,m}^\tau\|_{L_2(0,T;L_2(\Gamma))}
 \lesssim\tau+h^{q-\epsilon}+e^{-2\pi\sqrt{(\alpha/2)m}},\tag{14}
@@ -586,7 +589,7 @@ Let $0<\alpha<2$, $u_0\in\dot H^{s_0}(\Gamma)$ with $s_0\ge\alpha/2$, and $f\in 
 where $q=\min\{s_0+\alpha/2,s_f+\alpha,2\}$ and $\epsilon>0$ is sufficiently small.
 ]
 
-At $\alpha=2$, rational approximation is exact and the bound reduces to $\tau+h^2$.
+The three terms account for time discretization, spatial approximation, and rational approximation. At $\alpha=2$, the exact representation $r_m(x)=x$ removes the rational approximation error, giving $\tau+h^2$.
 
 ???
 Source: main.tex, lastlasttheorem and finalfinalest, with weak_form_m21.
@@ -609,21 +612,23 @@ class: left, top
 
 
 
-The rational update can be written in polynomial form:
+
+The polynomial form of (13) makes the full time step a single rational function. With $s=\tau\kappa^{2\beta}$,
 \begin{equation}
 [p_r(A_h)+s p_\ell(A_h)]U_{h,m}^{k+1}
-=p_r(A_h)(U_{h,m}^k+\tau P_hf^{k+1}),\quad s=\tau\kappa^{2\beta}.\tag{15}
+=p_r(A_h)(U_{h,m}^k+\tau P_hf^{k+1}).\tag{15}
 \end{equation}
 
-Write $S_m(y)=r_m(y^{-1})=d_m+\sum_{j=1}^m\rho_j/(y-\eta_j)$. The complete time-step function has the decomposition
-.content-box-gray[
+The source approximation has poles $\eta_j<0$, residues $\rho_j>0$, and constant $d_m=r_m(0)$, so $S_m(y)=r_m(y^{-1})=d_m+\sum_j\rho_j/(y-\eta_j)$. The time-step function is therefore
+
+.content-box-blue[
 \begin{equation}
 H_m(y)=\frac{S_m(y)}{S_m(y)+s}
 =r_\tau+\sum_{n=1}^m\frac{a_n}{y-z_n},\qquad r_\tau=\frac{d_m}{d_m+s}.\tag{16}
 \end{equation}
 ]
 
-The time-step poles satisfy $z_n<0$ and their residues satisfy $a_n>0$.
+Its negative poles $z_n$ and positive residues $a_n$ give
 \begin{equation}
 U_{h,m}^{k+1}=\left[r_\tau I+\sum_{n=1}^m a_n(A_h-z_nI)^{-1}\right]
 (U_{h,m}^k+\tau P_hf^{k+1}).\tag{17}
@@ -649,19 +654,21 @@ class: left, top
 
 
 
-For the P1 basis, define
+
+The P1 basis turns the operator relation into a matrix update. Its mass and stiffness matrices give
 \begin{equation*}
-\mathbf C_{ij}=(\psi_j,\psi_i),\quad \mathbf G_{ij}=(\psi_j',\psi_i'),
-\quad \mathbf L=\kappa^2\mathbf C+\mathbf G,\quad\mathbf B=\mathbf C^{-1}\mathbf L.
+\mathbf C_{ij}=(\psi_j,\psi_i)_{L_2(\Gamma)},\quad
+\mathbf G_{ij}=(\psi_j',\psi_i')_{L_2(\Gamma)},\quad
+\mathbf L=\kappa^2\mathbf C+\mathbf G,\quad\mathbf B=\mathbf C^{-1}\mathbf L.
 \end{equation*}
 
-The fractional energy matrix is $\mathbf C\mathbf B^\beta$. With $\mathbf A=\mathbf B/\kappa^2$,
+The vector $\mathbf U_{h,m}^k$ contains the FEM coefficients, and $F_i^{k+1}=(f^{k+1},\psi_i)_{L_2(\Gamma)}$. With $\mathbf A=\mathbf B/\kappa^2$,
 \begin{equation}
 \mathbf U^{k+1}_{h,m}=H_m(\mathbf A)\mathbf C^{-1}
 (\mathbf C\mathbf U^k_{h,m}+\tau\mathbf F^{k+1}).\tag{18}
 \end{equation}
 
-.content-box-gray[
+.content-box-blue[
 \begin{equation}
 \mathbf U^{k+1}_{h,m}=\left[r_\tau\mathbf C^{-1}
 +\sum_{n=1}^m a_n(\mathbf L/\kappa^2-z_n\mathbf C)^{-1}\right]
@@ -669,7 +676,7 @@ The fractional energy matrix is $\mathbf C\mathbf B^\beta$. With $\mathbf A=\mat
 \end{equation}
 ]
 
-Here $F_i^{k+1}=(f^{k+1},\psi_i)$. Each step uses $m$ shifted sparse solves and a mass solve. Their factorizations are reusable for fixed parameters.
+This representation reduces each step to $m$ shifted sparse solves and a mass solve. Their factorizations remain the same throughout a run.
 
 ???
 Source: main.tex, eq:final_scheme2 and thenumericalscheme.
@@ -690,22 +697,24 @@ class: left, top
 *********
 
 
-The spectral representation gives an analytic reference. Choose
+
+The semigroup representation also provides analytic references for the experiments. Here the model includes a fixed diffusion coefficient $\nu>0$ in $u_t+\nu L^{\alpha/2}u=f$.
+
+For data of the form
 \begin{equation*}
 u_0=\sum_jx_je_j,\qquad f(t)=g(t)\sum_jy_je_j,
-\qquad a_j=\nu\lambda_j^{\alpha/2}.
+\qquad a_j=\nu\lambda_j^{\alpha/2},
 \end{equation*}
+each mode evolves independently. Its scalar solution gives
 
-.content-box-gray[
+.content-box-blue[
 \begin{equation*}
 u(s,t)=\sum_j\left[e^{-a_jt}x_j+
 y_j\int_0^t e^{-a_j(t-r)}g(r)\,dr\right]e_j(s).
 \end{equation*}
 ]
 
-- The experiments include $\nu>0$ in $u_t+\nu L^{\alpha/2}u=f$.
-- For smooth data, $x_j=10/\sqrt{16}$ on $\mathcal J_{16}=\{5,6,8,\ldots,21\}$, $y_7=10$, and $g(t)=\sin(\pi t)$. Other coefficients vanish.
-- All 17 active solution modes enter the smooth reference. The rough-forcing study uses a fixed truncated reference with separate tail control.
+Finite spectral sums give an exact reference for smooth data. The rough-forcing experiment instead involves an infinite series, whose omitted tail requires separate control.
 
 ???
 Sources: main.tex, eq:sol_reprentation, and the current four notebooks.
@@ -726,18 +735,21 @@ class: left, top
 ### Project 2 · Approximation estimates
 *********
 
-The analysis combines approximation on the spectral scale with stability of the projected data.
+
+The spatial analysis relies on approximation of the solution and stability of the projected data. The fractional elliptic projection $G_{h,\alpha}$ is characterized by
+$\mathfrak a_\alpha(G_{h,\alpha}v,w_h)=\mathfrak a_\alpha(v,w_h)$ for all $w_h\in V_h$.
 
 <div class="content-box-myblue">Fractional elliptic projection</div>
+
 .content-box-blue[
 \begin{equation*}
 \|v-G_{h,\alpha}v\|_{L_2(\Gamma)}
-\lesssim h^\alpha\|v\|_{\dot H^\alpha(\Gamma)},
-\qquad 0<\alpha\le2.
+\lesssim h^\alpha\|v\|_{\dot H^{\alpha}(\Gamma)},\qquad 0<\alpha\le2.
 \end{equation*}
 ]
 
-<div class="content-box-myblue">Stability of the discrete fractional operator</div>
+<div class="content-box-myblue">Stability of projected data</div>
+
 .content-box-blue[
 \begin{equation*}
 \|L_h^{\alpha/2}P_hv\|_{L_2(\Gamma)}
@@ -745,14 +757,13 @@ The analysis combines approximation on the spectral scale with stability of the 
 \end{equation*}
 ]
 
-The constants are uniform in $h$. The approximation argument also covers data for which nodal interpolation is unavailable.
+Both constants are uniform in $h$. Together, these estimates transfer the regularity of the continuous problem to the discrete evolution.
 
 ???
 Source: main.tex, Lemma lem:graph-fractional-fe-approx and Propositions
 proposition:with_elliptic_projection and prop:controlofLhbyL.
 G_{h,alpha} uses the continuous fractional energy form for the analysis.
 It is distinct from constructing the discrete evolution with powers of L_h.
-
 
 ---
 
@@ -767,31 +778,30 @@ class: left, top
 ### Project 2 · Rational approximation
 *********
 
-Set $A_h=L_h/\kappa^2$ and $\beta=\alpha/2$. Then
-$\sigma(A_h^{-1})\subset[\delta_h,1]$.
 
-.custom-box[
+Rational approximation changes the damping of each discrete eigenmode. With $x_j=\kappa^2/\lambda_{j,h}$, $q_j=x_j^\beta$, and $s=\tau\nu\kappa^{2\beta}$, the exact and approximate time-step multipliers are
 \begin{equation*}
-r_m(x)\approx x^\beta\quad\text{on }[0,1],\qquad
-\delta_m=\sup_{[0,1]}|x^\beta-r_m(x)|
-\lesssim e^{-2\pi\sqrt{\beta m}}.
+\mu_j=\frac{q_j}{q_j+s},\qquad
+\widetilde\mu_j=\frac{r_m(x_j)}{r_m(x_j)+s}.
+\end{equation*}
+
+The paper controls their accumulated effect by the power-approximation error $\delta_{h,m}=\max_j|q_j-r_m(x_j)|$:
+
+.content-box-blue[
+\begin{equation*}
+\|U_h^\tau-U_{h,m}^\tau\|_{L_2(0,T;L_2(\Gamma))}
+\lesssim\delta_{h,m}
+\left(\|u_0\|_{\dot H^{\beta}(\Gamma)}+\|f\|_{L_2(0,T;L_2(\Gamma))}\right).
 \end{equation*}
 ]
 
-With $R_{h,m}=r_m(A_h^{-1})$ and $s=\tau\nu\kappa^{2\beta}$,
-\begin{equation*}
-(R_{h,m}+sI)U_{h,m}^{k+1}
-=R_{h,m}(U_{h,m}^k+\tau P_hf^{k+1}).
-\end{equation*}
-
-The source coefficients can be reused across meshes. The complete time-step rational function depends on $s$, hence on $\tau$ and $\nu$.
+The bound is uniform in $h$ and $\tau$. For the best uniform approximation, $\delta_{h,m}\lesssim e^{-2\pi\sqrt{\beta m}}$, which explains the rational term in (14).
 
 ???
 Sources: main.tex, Rational approximation; conv_in_m_isolated.Rmd, Steps 2 and 5.
 r_m is type (m,m). BRASIL tables can interpolate coefficients in beta.
 The best-approximation rate is a benchmark for those numerical coefficients,
 not a certified bound for every interpolated approximant.
-
 
 ---
 
@@ -806,30 +816,22 @@ class: left, top
 ### Project 2 · Shifted sparse solves
 *********
 
-Write the source approximation and the time-step function as
+
+The partial fractions in (19) involve the sparse matrices
 \begin{equation*}
-S_m(y)=r_m(y^{-1})=d_m+\sum_{j=1}^m\frac{\rho_j}{y-\eta_j},
-\qquad
-H_m(y)=\frac{S_m(y)}{S_m(y)+s}
-=r_\tau+\sum_{n=1}^m\frac{a_n}{y-z_n},
+\mathbf Q_n=\mathbf L/\kappa^2-z_n\mathbf C,\qquad n=1,\ldots,m.
 \end{equation*}
-where $r_\tau=d_m/(d_m+s)$, $z_n<0$, and $a_n>0$.
+Because $z_n<0$, these matrices are positive definite. Their Cholesky factors, together with a factorization of $\mathbf C$, can be computed once for fixed discretization parameters.
+
+At each time level, the new right-hand side is
 
 .content-box-blue[
 \begin{equation*}
-\mathbf U^{k+1}_{h,m}=\left[
-r_\tau\mathbf C^{-1}+\sum_{n=1}^m a_n
-(\mathbf L/\kappa^2-z_n\mathbf C)^{-1}\right]
-(\mathbf C\mathbf U^k_{h,m}+\tau\mathbf F^{k+1}),
-\end{equation*}
-\begin{equation*}
-\mathbf C_{ij}=(\psi_j,\psi_i),\quad
-\mathbf G_{ij}=(\psi_j',\psi_i'),\quad
-\mathbf L=\kappa^2\mathbf C+\mathbf G.
+\mathbf b^{k+1}=\mathbf C\mathbf U_{h,m}^k+\tau\mathbf F^{k+1}.
 \end{equation*}
 ]
 
-**Retain the constant-term mass solve.** Factorizations of the $m$ shifted matrices and $\mathbf C$ are reusable within a run.
+The shifted solves are independent, and the mass solve supplies the constant contribution in (19). Changing $\tau$ changes the poles and residues, so a new time grid requires new factorizations.
 
 ???
 Sources: main.tex, thenumericalscheme; all four notebooks, matrix method.
@@ -837,7 +839,6 @@ The actual update contains m shifted elliptic solves plus the constant mass solv
 Source poles eta_j and time-step poles z_n are different.
 This replaces the older proposal claim that the remainder vanishes.
 No eigenpairs are required for the production rational evolution.
-
 
 ---
 
@@ -852,32 +853,25 @@ class: left, top
 ### Experiments · Common setting
 *********
 
-.pull-left[
-All four studies use the **tadpole graph** with stem length $1$ and loop length $2$.
 
+All four studies use the **tadpole graph** introduced in the spatial discretization, with stem length $1$ and loop length $2$.
+
+Its explicitly known eigenpairs make it possible to evaluate an analytic reference while the FEM solution advances through sparse solves.
+
+The common parameters are
+
+.content-box-blue[
 \begin{equation*}
-T=1,\qquad\kappa=4,
-\end{equation*}
-\begin{equation*}
+T=1,\qquad\kappa=4,\qquad
 \alpha\in\{0.9,1.0,\ldots,1.7\}.
 \end{equation*}
-
-The exact eigenfunctions define the data and reference solution. The FEM evolution uses shifted sparse solves.
 ]
 
-.pull-right[
-```{r tadpole-basis, out.width="100%"}
-knitr::include_graphics("data_files/tuesdaymeeting2p/tadpole_basis.png")
-```
-.meeting-caption[
-Continuous P1 basis functions on the tadpole graph.
-]
-]
+The smooth time and space studies use $\nu=10^{-3}$, while the isolated rational and rough spatial studies use $\nu=1$. Each study varies one approximation parameter with the others fixed.
 
 ???
 Sources: the four notebook problem statements and main.tex, Fig/basis2.png.
 The graph is the same in the rational, temporal, smooth spatial, and rough spatial studies.
-
 
 ---
 
@@ -892,32 +886,32 @@ class: left, top
 ### Experiments · Smooth data
 *********
 
-The updated initial condition contains **16 normalized modes**:
+
+The smooth experiment uses finite spectral sums, so the data have arbitrarily high spatial regularity. The initial condition contains 16 equally weighted modes and the forcing acts on a separate mode:
 \begin{equation*}
 u_0=\frac{10}{\sqrt{16}}\sum_{j\in\mathcal J_{16}}e_j,
-\qquad\mathcal J_{16}=\{5,6,8,\ldots,21\},
-\qquad f(t)=10\sin(\pi t)e_7.
+\quad\mathcal J_{16}=\{5,6,8,\ldots,21\},\qquad f(t)=10\sin(\pi t)e_7.
 \end{equation*}
 
-With $\gamma_j=\nu\lambda_j^{\alpha/2}$, the exact solution is
+The spectral formula, with $a_j=\nu\lambda_j^{\alpha/2}$, becomes
+
 .content-box-blue[
 \begin{equation*}
-u(s,t)=\frac{10}{\sqrt{16}}\sum_{j\in\mathcal J_{16}}
-e^{-\gamma_jt}e_j(s)+c_7(t)e_7(s),
+u(s,t)=\frac{10}{\sqrt{16}}\sum_{j\in\mathcal J_{16}}e^{-a_jt}e_j(s)+c_7(t)e_7(s),
 \end{equation*}
+
 \begin{equation*}
-c_7(t)=\frac{10}{\gamma_7^2+\pi^2}
-\left[\gamma_7\sin(\pi t)-\pi\cos(\pi t)+\pi e^{-\gamma_7t}\right].
+c_7(t)=\frac{10}{a_7^2+\pi^2}
+\left[a_7\sin(\pi t)-\pi\cos(\pi t)+\pi e^{-a_7t}\right].
 \end{equation*}
 ]
 
-$\|u_0\|_{L_2}=10$. All 17 active solution modes are included in the reference, and both data have arbitrarily high spectral spatial regularity.
+The normalization gives $\|u_0\|_{L_2(\Gamma)}=10$. All 17 active modes are included in the reference, with no spectral truncation error.
 
 ???
 Sources: conv_in_m_isolated.Rmd, conv_in_tau_mat.Rmd, cov_in_h_mat.Rmd;
 the saved K16 metadata agree across these studies.
 The manuscript still describes the earlier initial condition 10 e_5.
-
 
 ---
 
@@ -932,32 +926,29 @@ class: left, top
 ### Experiments · Error norms
 *********
 
-**Time and space studies:** approximate the total continuum error using exact solution values on a fixed reference grid.
+The time and space studies evaluate an analytic reference $u_{\rm ref}$ at fine-mesh nodes $s_i^\star$ and times $t_\ell^\star=\ell\tau_\star$. Here $\mathbf C^\star$ is the reference mass matrix, $\mathbf u^\star(t)=[u_{\rm ref}(s_i^\star,t)]_i$, and $\Psi_{ij}=\psi_j(s_i^\star)$.
+
+The sampled error is
 \begin{equation*}
 E_{\rm sampled}^2=\tau_\star\sum_{\ell=1}^{N_\star}
 \mathbf d_\ell^\top\mathbf C^\star\mathbf d_\ell,
-\qquad
-\mathbf d_\ell=\mathbf u^\star(t_\ell^\star)
--\boldsymbol\Psi\mathbf U^{k(\ell)}_{h,m}.
+\qquad \mathbf d_\ell=\mathbf u^\star(t_\ell^\star)-\boldsymbol\Psi\mathbf U^{k(\ell)}_{h,m},
 \end{equation*}
-Here $t_\ell^\star\in(t_{k(\ell)-1},t_{k(\ell)}]$ and
-$\Psi_{ij}=\psi_j(s_i^\star)$.
+where $t_\ell^\star\in(t_{k(\ell)-1},t_{k(\ell)}]$.
 
-**Rational study:** compare two FEM trajectories on the same mesh and time grid.
+For the rational study, the two FEM trajectories have the exact space–time mass norm
+
 .content-box-blue[
 \begin{equation*}
-E_m^2=\tau\sum_{k=1}^N
-(\mathbf U_h^k-\mathbf U_{h,m}^k)^\top\mathbf C
-(\mathbf U_h^k-\mathbf U_{h,m}^k).
+E_m^2=\tau\sum_{k=1}^N(\mathbf U_h^k-\mathbf U_{h,m}^k)^\top\mathbf C(\mathbf U_h^k-\mathbf U_{h,m}^k).
 \end{equation*}
 ]
-
-The sampled norm uses reference quadrature. The isolated rational norm integrates both right-constant FEM trajectories exactly in time.
 
 ???
 Sources: conv_in_tau_mat.Rmd and cov_in_h_mat.Rmd, Error computation;
 conv_in_m_isolated.Rmd, Step 3; cov_in_h_rough_as_in_mat.Rmd, sampled norm.
 The rough reference is a finite-series reference u_K, with separate tail control.
+
 
 
 ---
@@ -973,30 +964,29 @@ class: left, top
 ### Rational study · Independent reference
 *********
 
-Fix $h=0.02$, $\tau=0.005$, and $\nu=1$. Vary $m=2,\ldots,16$.
 
-Use the **complete numerical eigensystem** for the reference:
+The rational study keeps $h=0.02$, $\tau=0.005$, and $\nu=1$ fixed, while $m$ ranges from $2$ to $16$.
+
+Projection of the continuum data can excite additional discrete modes. The reference therefore retains the complete numerical eigensystem:
 \begin{equation*}
 \mathbf L\mathbf V=\mathbf C\mathbf V\boldsymbol\Lambda,
-\qquad \mathbf V^\top\mathbf C\mathbf V=\mathbf I,
+\qquad\mathbf V^\top\mathbf C\mathbf V=\mathbf I.
 \end{equation*}
+It gives the exact-discrete backward Euler update
 \begin{equation*}
 \mathbf U_h^{k+1}=\mathbf V\operatorname{diag}
 \left((1+\tau\nu\lambda_{j,h}^{\alpha/2})^{-1}\right)
 \mathbf V^\top(\mathbf C\mathbf U_h^k+\tau\mathbf F^{k+1}).
 \end{equation*}
 
-Both trajectories use the same projected initial value and averaged forcing.
-
-.custom-box[
-Their difference isolates the rational change to the discrete propagator. Shared FEM and backward Euler errors do not create a continuum error floor in $E_m$.
+.content-box-blue[
+Both trajectories share the mesh, time grid, projected initial value, and averaged forcing. Their difference therefore isolates the rational approximation error.
 ]
 
 ???
 Source: conv_in_m_isolated.Rmd, Steps 1–4 and saved isolated_m_results_K16.rds.
 All 150 numerical modes are retained in the reference, not only the active continuum modes.
 The sparse solve trajectory is independently checked against scalar rational propagation in this basis.
-
 
 ---
 
@@ -1044,6 +1034,7 @@ Guides average the prescribed model curves anchored at all measured points.
 The natural-log regression is against sqrt(m).
 
 
+
 ---
 
 class: left, top
@@ -1057,8 +1048,7 @@ class: left, top
 ### Smooth data · Convergence in time
 *********
 
-$h=10^{-3}$, $m=8$, $\nu=10^{-3}$.
-Vary $\tau=1/N$ for $N\in\{200,63,20,6,2\}$.
+Temporal convergence is measured at $h=10^{-3}$, $m=8$, and $\nu=10^{-3}$, with $\tau=1/N$ for $N\in\{200,63,20,6,2\}$.
 
 .meeting-figure[
 ```{r temporal-convergence, fig.height=3.4}
@@ -1077,6 +1067,7 @@ errors_projected_tau_mat_K16.RData. Actual integer-step time grids are used.
 The forcing is averaged analytically on each time step.
 
 
+
 ---
 
 class: left, top
@@ -1090,8 +1081,7 @@ class: left, top
 ### Smooth data · Convergence in space
 *********
 
-$\tau=2\cdot10^{-5}$, $m=8$, $\nu=10^{-3}$.
-Vary $h\in\{1/512,1/256,1/128,1/64,1/32\}$.
+Spatial convergence is measured at $\tau=2\cdot10^{-5}$, $m=8$, and $\nu=10^{-3}$, over meshes $h\in\{1/512,1/256,1/128,1/64,1/32\}$.
 
 .meeting-figure[
 ```{r smooth-spatial-convergence, fig.height=3.4}
@@ -1114,6 +1104,7 @@ The theorem permits h^(2-epsilon) for sufficiently small positive epsilon.
 The plotted h^2 guides are comparison curves, not certified bounds.
 
 
+
 ---
 
 class: left, top
@@ -1127,8 +1118,10 @@ class: left, top
 ### Rough forcing · Data and regularity
 *********
 
-Set $u_0=0$ and use the same infinite forcing on every mesh:
-.custom-box[
+
+The dependence of the spatial rate on $\alpha$ becomes visible when the forcing has only $L_2(\Gamma)$ regularity. Here $u_0=0$ and $f(s,t)=g(s)$, with
+
+.content-box-blue[
 \begin{equation*}
 g=\sum_{j=1}^\infty\frac{\phi_j}{j},\qquad
 \phi_j=0\text{ on the stem},\qquad
@@ -1136,22 +1129,22 @@ g=\sum_{j=1}^\infty\frac{\phi_j}{j},\qquad
 \end{equation*}
 ]
 
-These orthonormal Kirchhoff modes have $\mu_j=\kappa^2+\pi^2 2^{2j}$, so
+The modes are orthonormal, with eigenvalues $\mu_j=\kappa^2+\pi^2 2^{2j}$. Hence
 \begin{equation*}
-\|g\|_{L_2}^2=\sum_jj^{-2}<\infty,
-\qquad \|g\|_{\dot H^s}^2=\sum_jj^{-2}\mu_j^s=\infty\quad(s>0).
+\|g\|_{L_2(\Gamma)}^2=\sum_jj^{-2}<\infty,
+\qquad \|g\|_{\dot H^s(\Gamma)}^2=\sum_jj^{-2}\mu_j^s=\infty\quad(s>0).
 \end{equation*}
 
-With $a_j=\nu\mu_j^{\alpha/2}$, the exact solution is
+The constant load gives the exact solution
 \begin{equation*}
-u(t)=\sum_{j=1}^\infty b_j(t)\phi_j,\qquad b_j(t)=\frac{1-e^{-a_jt}}{ja_j}.
+u(t)=\sum_{j=1}^\infty b_j(t)\phi_j,\qquad
+b_j(t)=\frac{1-e^{-a_jt}}{ja_j},\qquad a_j=\nu\mu_j^{\alpha/2}.
 \end{equation*}
 
 ???
 Source: cov_in_h_rough_as_in_mat.Rmd, The experiment and Step 1.
 Here delta_m denotes the rational approximation-error scale.
 u_0=0 allows arbitrary s_0, while the forcing allows only s_f=0.
-
 
 ---
 
@@ -1166,32 +1159,29 @@ class: left, top
 ### Rough forcing · Unresolved modes
 *********
 
-On the aligned dyadic mesh $h_J=2^{-J}$, analytic sine–hat integrals satisfy
+
+On the dyadic mesh $h_J=2^{-J}$, modes above the cutoff are orthogonal to every P1 hat:
 \begin{equation*}
-(\phi_j,\psi_i)=0\quad\text{for every FEM hat and every }j\ge J.
+(\phi_j,\psi_i)_{L_2(\Gamma)}=0\qquad(j\ge J).
+\end{equation*}
+The infinite forcing consequently has the exact finite FEM load
+\begin{equation*}
+F_i=\sum_{j=1}^{J-1}\frac{(\phi_j,\psi_i)_{L_2(\Gamma)}}{j}.
 \end{equation*}
 
-The original infinite forcing therefore has the **exact finite load**
-\begin{equation*}
-\mathbf F_i=\sum_{j=1}^{J-1}\frac{(\phi_j,\psi_i)}{j}.
-\end{equation*}
+The solution separates into $u_{<J}=\sum_{j=1}^{J-1}b_j\phi_j$ and the orthogonal tail $u_{\ge J}$. The continuum error $E_{h_J}=\|u-U_{h_J,m}^\tau\|_{L_2(0,T;L_2(\Gamma))}$ then satisfies
 
-Split $u=u_{<J}+u_{\ge J}$. Orthogonality gives
 .content-box-blue[
-\begin{equation*}
-E_{h_J}^2=\|u_{<J}-U_{h_J,m}^\tau\|_{L_2(0,T;L_2)}^2
-+E_{\rm tail}^2,
-\qquad E_{\rm tail}^2=\sum_{j=J}^\infty\int_0^T b_j(t)^2\,dt.
-\end{equation*}
+\begin{align*}
+E_{h_J}^2&=\|u_{<J}-U_{h_J,m}^\tau\|_{L_2(0,T;L_2(\Gamma))}^2+E_{\rm tail}^2,\\[0.4em]
+E_{\rm tail}^2&=\sum_{j=J}^\infty\int_0^T b_j(t)^2\,dt.
+\end{align*}
 ]
-
-Unresolved modes remain in the continuum solution. Their orthogonality to $V_h$ gives a lower bound on the total error.
 
 ???
 Source: cov_in_h_rough_as_in_mat.Rmd, Steps 2–5.
 The tail starts at j=J, including that index. Squared norms add in this identity.
 Modes below J have nonzero projections but are not represented exactly by P1 functions.
-
 
 ---
 
@@ -1206,26 +1196,25 @@ class: left, top
 ### Rough forcing · Logarithmic correction
 *********
 
-Since $a_j\asymp2^{\alpha j}$, the unresolved tail satisfies
+
+The damping rates satisfy $a_j\asymp2^{\alpha j}$, so the unresolved tail has size
 \begin{equation*}
 E_{\rm tail}^2\asymp\sum_{j=J}^\infty\frac{2^{-2\alpha j}}{j^2},
-\qquad
-E_{\rm tail}\asymp\frac{h_J^\alpha}{J}
-=\frac{h_J^\alpha}{\log_2(1/h_J)}.
+\qquad E_{\rm tail}\asymp\frac{h_J^\alpha}{J}.
 \end{equation*}
 
-If this contribution controls the measured error, then
+When this contribution controls the measured error, the factor $1/J$ makes the raw observed order exceed $\alpha$:
 \begin{equation*}
 \log_2\frac{E_{h_J}}{E_{h_{J+1}}}
-\approx\alpha+\log_2\frac{J+1}{J}>\alpha.
+\approx\alpha+\log_2\frac{J+1}{J}.
 \end{equation*}
 
-.custom-box[
-Compare the raw errors with $C_\alpha h_J^\alpha/J$, and fit
+.content-box-blue[
+The rate comparison therefore uses $J E_{h_J}$, with $J=\log_2(1/h_J)$, and the regression
 \begin{equation*}
-\log_{10}(JE_{h_J})=s_{\rm corrected}\log_{10}h_J+b
+\log_{10}(JE_{h_J})=s_{\rm corrected}\log_{10}h_J+b.
 \end{equation*}
-to compare the corrected slope with $\alpha$.
+Its corrected slope can then be compared with $\alpha$.
 ]
 
 ???
@@ -1234,7 +1223,6 @@ The tail gives a lower bound and motivates the model; it does not prove
 a matching upper bound for every contribution to the total error.
 The logarithm is specific to this forcing's amplitudes 1/j.
 Multiplication by J changes the rate comparison, not the underlying error norm.
-
 
 ---
 
@@ -1249,8 +1237,7 @@ class: left, top
 ### Rough forcing · Raw spatial error
 *********
 
-$\nu=1$, $m=14$, $\tau=8\cdot10^{-7}$.
-Use $J=5,\ldots,9$, with $h_J=2^{-J}$.
+The rough spatial study keeps $\nu=1$, $m=14$, and $\tau=8\cdot10^{-7}$ fixed across the meshes $h_J=2^{-J}$, $J=5,\ldots,9$.
 
 .meeting-figure[
 ```{r rough-raw, fig.height=3.4}
@@ -1271,6 +1258,7 @@ generated_at 2026-11-04 17:32:27 +03. All 45 cases use the same solver time step
 The bound B_K is not added to any plotted error.
 
 
+
 ---
 
 class: left, top
@@ -1284,7 +1272,7 @@ class: left, top
 ### Rough forcing · Corrected spatial error
 *********
 
-The same sampled errors, multiplied by $J=\log_2(1/h)$.
+Multiplying the sampled errors by $J=\log_2(1/h)$ removes the leading logarithmic factor from the rate comparison.
 
 .meeting-figure[
 ```{r rough-corrected, fig.height=3.5}
@@ -1296,13 +1284,14 @@ convergence_plot(r_rough$errors*r_rough$parameters$J,
 ]
 
 .meeting-caption[
-Dashed curves: $C_\alpha h^\alpha$. This forcing-specific correction removes the leading logarithmic factor from the comparison.
+Dashed curves: $C_\alpha h^\alpha$.
 ]
 
 ???
 Source: cov_in_h_rough_as_in_mat.Rmd, corrected-figure and rates;
 rough_h_as_in_mat_results.rds. Guide constants average all measured/model ratios.
 No theoretical tail sum or bound is added to the sampled norm.
+
 
 
 ---
@@ -1319,20 +1308,22 @@ class: left, top
 *********
 
 <div class="content-box-myblue">Numerical evidence</div>
+
 .content-box-blue[
 - The isolated rational error follows the root-exponential scale across $m=2,\ldots,16$.
 - Smooth finite-mode data give spatial slopes near $2$ and temporal slopes near $1$.
-- Rough $L_2$ forcing reveals the $\alpha$-dependent spatial order after the logarithmic correction.
+- Rough $L_2(\Gamma)$ forcing reveals the $\alpha$-dependent spatial order after the logarithmic correction.
 ]
 
 **Interpretation.** Data regularity determines the spatial rate. The studies measure different error contributions and need separate reference constructions.
 
-**Next numerical check.** Complete solver-time refinement for the current rough-data grid, keeping reference quadrature and truncation checks separate.
+**Remaining numerical check.** Solver-time refinement for all nine rough-data fractional orders remains pending. Reference quadrature and truncation require separate checks.
 
 ???
 Sources: saved outputs of all four requested notebooks and their rate discussions.
 Numerical slopes support the estimates over the tested ranges; they do not prove asymptotic sharpness.
 Coefficient interpolation means the ideal rational rate remains a benchmark rather than an automatic certificate.
+
 
 
 ---
@@ -1353,6 +1344,7 @@ class: center, middle
 *********
 
 
+
 ---
 
 class: left, top
@@ -1371,19 +1363,20 @@ class: left, top
 - Complete numerical spectrum: `r r_m$diagnostics$dimension` modes.
 - Eigen-equation relative residual: `r formatC(r_m$diagnostics$relative_residual,format="e",digits=2)`.
 - Mass orthogonality error: `r formatC(r_m$diagnostics$C_orthogonality_error,format="e",digits=2)`.
-- Compare sparse rational propagation with scalar propagation in the full numerical eigenbasis.
+- Sparse rational and scalar propagation agree in the complete numerical eigenbasis.
 
 **Rough spatial study**
 
 - Fixed cutoff $K=16\ge\max J-1$ preserves the infinite forcing's FEM load.
 - $h_\star=2^{-18}$ resolves the highest retained frequency.
 - The omitted-tail bound is below the $0.2\%$ squared-error budget.
-- Earlier diagnostics for eight fractional orders include reference and solver refinements. Solver-time refinement for all nine orders remains pending.
+- Earlier reference and solver refinements cover eight fractional orders; solver-time refinement for all nine remains pending.
 
 ???
 Sources: isolated_m_results_K16.rds diagnostics and control;
 cov_in_h_rough_as_in_mat.Rmd, Error computation and final checks section.
 The empirical resolution indicator is not a rigorous floating-point certificate.
+
 
 
 ---
@@ -1404,9 +1397,9 @@ The rough-data reference is the finite series
 u_K(t)=\sum_{j=1}^K\frac{1-e^{-a_jt}}{ja_j}\phi_j.
 \end{equation*}
 
-For $K\ge\max J-1$, orthogonality gives, in the continuum norm,
+For $K\ge\max J-1$, orthogonality in the $L_2(0,T;L_2(\Gamma))$ norm gives
 \begin{equation*}
-\|u-U_h^\tau\|^2=\|u_K-U_h^\tau\|^2+\|u-u_K\|^2.
+\|u-U_{h,m}^\tau\|^2=\|u_K-U_{h,m}^\tau\|^2+\|u-u_K\|^2.
 \end{equation*}
 
 .content-box-blue[
@@ -1417,12 +1410,13 @@ For $K\ge\max J-1$, orthogonality gives, in the continuum norm,
 \end{equation*}
 ]
 
-The reported errors approximate $\|u_K-U_h^\tau\|$ through reference-mass and reference-time quadrature. **The code records $B_K$ as a diagnostic and does not add it to the measured errors.**
+The reported errors approximate $\|u_K-U_{h,m}^\tau\|$ through reference-mass and reference-time quadrature. **The code records $B_K$ as a diagnostic and does not add it to the measured errors.**
 
 ???
 Source: cov_in_h_rough_as_in_mat.Rmd, Step 6 and finite-reference discussion.
 All unlabelled norms on this slide are L2(0,T;L2(Gamma)) norms.
 The exact orthogonal identity applies to the continuum norm, not literally to its sampled approximation.
+
 
 
 ---

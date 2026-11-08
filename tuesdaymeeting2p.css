@@ -7,3 +7,15 @@
 .meeting-figure p { margin: 0; }
 .meeting-source { font-size: 0.85em; overflow-wrap: anywhere; }
 .meeting-equation { font-size: 0.95em; }
+
+/* All content and theorem boxes use the same soft-blue fill. */
+.remark-slide-content .content-box-blue,
+.remark-slide-content .content-box-gray,
+.remark-slide-content .custom-box,
+.remark-slide-content .content-box-myblue {
+  background-color: #f5f7fa;
+}
+.remark-slide-content .content-box-myblue {
+  color: #0D2244 !important;
+  font-weight: 600;
+}

@@ -243,7 +243,7 @@ The sum includes both endpoints of a loop. These vertex conditions determine the
 
 ???
 Source: main.tex, eq:maineq, eq:Kcond, and Notation and Preliminaries.
-D(L) consists of continuous, edgewise H2 functions satisfying Kirchhoff flux conservation.
+The direct sum means that each edge restriction belongs to $H^2(e)$. This ensures that the second derivative is square-integrable, so $Lv\in L_2(\Gamma)$, and that endpoint values and first derivatives are well-defined. The direct sum imposes no matching between edges; continuity and the Kirchhoff condition provide the vertex coupling.
 Pointwise derivatives are asserted for D(L), not for arbitrary low-regularity fractional-domain functions.
 
 ---
@@ -261,22 +261,23 @@ class: left, top
 
 
 
-The shifted Kirchhoff–Laplacian is positive and self-adjoint with compact inverse. It therefore has an orthonormal eigenbasis $Le_j=\lambda_je_j$ in $L_2(\Gamma)$, where $e_j\in D(L)$.
-
-This decomposition defines the fractional powers and their regularity spaces. For $s\ge0$,
+The positive, self-adjoint operator $L$ has compact inverse. Its eigenfunctions $e_j\in D(L)$ form an orthonormal basis of $L_2(\Gamma)$, with $Le_j=\lambda_je_j$.
 
 .content-box-blue[
-\begin{equation*}
-L^{s/2}v=\sum_j\lambda_j^{s/2}(v,e_j)e_j,
-\qquad \dot H^s(\Gamma)=D(L^{s/2}),
-\end{equation*}
-
-\begin{equation*}
-\|v\|_{\dot H^s(\Gamma)}^2=\sum_j\lambda_j^s|(v,e_j)|^2.
-\end{equation*}
+\begin{align*}
+L^{s/2}v&=\sum_j\lambda_j^{s/2}(v,e_j)e_j,
+\qquad \dot H^s(\Gamma)=D(L^{s/2}),\quad s\ge0,\\
+\|v\|_{\dot H^s(\Gamma)}^2&=\sum_j\lambda_j^s|(v,e_j)|^2.
+\end{align*}
 ]
 
-Negative-order spaces are defined by duality. On this spectral scale, $-L^{\alpha/2}$ generates the analytic semigroup
+Negative-order spaces are defined by duality. The spectral definition then gives, for every $r\in\mathbb R$,
+\begin{equation*}
+L^{\alpha/2}:\dot H^{r+\alpha}(\Gamma)\to\dot H^r(\Gamma),
+\qquad \|L^{\alpha/2}v\|_{\dot H^r(\Gamma)}=\|v\|_{\dot H^{r+\alpha}(\Gamma)}.
+\end{equation*}
+
+On each space in this scale, $-L^{\alpha/2}$ generates the analytic semigroup
 \begin{equation}
 T(t)v=e^{-tL^{\alpha/2}}v=\sum_j e^{-t\lambda_j^{\alpha/2}}(v,e_j)e_j.\tag{3}
 \end{equation}
@@ -284,6 +285,8 @@ T(t)v=e^{-tL^{\alpha/2}}v=\sum_j e^{-t\lambda_j^{\alpha/2}}(v,e_j)e_j.\tag{3}
 ???
 Source: main.tex, Notation and Preliminaries, spectral_semigroup and the spectral Sobolev norms.
 For negative orders, dot H^r is interpreted on the extended spectral scale.
+
+Positivity and self-adjointness pass from $L$ to $L^{\alpha/2}$. Each eigenmode decays by $e^{-t\lambda_j^{\alpha/2}}$; multiplying these factors gives the semigroup property. Differentiating at $t=0$ for $v\in\dot H^\alpha(\Gamma)$ gives $-L^{\alpha/2}v$, identifying the generator. Analyticity means that the spectral formula extends holomorphically to complex times $z$ with $\operatorname{Re}z>0$, where the exponential factors remain bounded.
 
 ---
 
@@ -327,6 +330,8 @@ The equation holds strongly in $\dot H^r(\Gamma)$ almost everywhere. For $r\ge-\
 Source: main.tex, theorem:existenceuniquenessandregularity.
 The current theorem allows arbitrary r and requires u0 in dot H^(r+alpha/2).
 In particular, r=0 requires only u0 in dot H^(alpha/2), rather than dot H^alpha.
+
+The spectral definition gives $L^{\alpha/2}:\dot H^{r+\alpha}(\Gamma)\to\dot H^r(\Gamma)$, with $\|L^{\alpha/2}v\|_{\dot H^r(\Gamma)}=\|v\|_{\dot H^{r+\alpha}(\Gamma)}$. The theorem ensures that both $\partial_tu$ and $L^{\alpha/2}u$ belong to $L_2(0,T;\dot H^r(\Gamma))$, so equation (4) holds in that space for almost every time. The case $r=0$ is $L_2(\Gamma)$; positive $r$ describes smoother data, while negative $r$ allows rougher data through the extended spectral scale. The data assumptions must match the chosen $r$.
 
 ---
 

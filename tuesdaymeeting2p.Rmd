@@ -917,70 +917,41 @@ class: left, top
 ### Experiments · Rough forcing · Unresolved modes 1/2
 *********
 
-
-On the dyadic mesh $h_J=2^{-J}$, modes above the cutoff are orthogonal to every P1 hat:
+On the dyadic mesh $h_J=2^{-J}$, cancellation against the P1 hats makes the infinite forcing's FEM load finite:
 \begin{equation*}
-(\phi_j,\psi_i)_{L_2(\Gamma)}=0\qquad(j\ge J).
-\end{equation*}
-The infinite forcing consequently has the exact finite FEM load
-\begin{equation*}
-F_i=\sum_{j=1}^{J-1}\frac{(\phi_j,\psi_i)_{L_2(\Gamma)}}{j}.
+(\phi_j,\psi_i)_{L_2(\Gamma)}=0\quad(j\ge J),
+\qquad F_i=\sum_{j=1}^{J-1}\frac{(\phi_j,\psi_i)_{L_2(\Gamma)}}{j}.
 \end{equation*}
 
-The solution separates into $u_{<J}=\sum_{j=1}^{J-1}b_j\phi_j$ and the orthogonal tail $u_{\ge J}$. The continuum error $E_{h_J}=\|u-U_{h_J,m}^\tau\|_{L_2(0,T;L_2(\Gamma))}$ then satisfies
+With $u_{<J}=\sum_{j=1}^{J-1}b_j\phi_j$ and the reference $u_K=\sum_{j=1}^K b_j\phi_j$, $K\ge J$, orthogonality gives the following decomposition. All norms are in $L_2(0,T;L_2(\Gamma))$.
 
 .content-box-blue[
 \begin{align*}
-E_{h_J}^2&=\|u_{<J}-U_{h_J,m}^\tau\|_{L_2(0,T;L_2(\Gamma))}^2+E_{\rm tail}^2,\\[0.4em]
-E_{\rm tail}^2&=\sum_{j=J}^\infty\int_0^T b_j(t)^2\,dt.
+E_{h_J}^2:=\|u-U_{h_J,m}^{\tau}\|^2
+&=\underbrace{\|u-u_K\|^2}_{\text{reference truncation}}
++\underbrace{\|u_{<J}-U_{h_J,m}^{\tau}\|^2}_{\text{resolved contribution}}
++E_{\rm tail}^2,\\[0.6em]
+E_{\rm tail}^2
+&:=\sum_{j=J}^{K}\int_0^T b_j(t)^2\,dt
+\asymp\sum_{j=J}^{K}\frac{2^{-2\alpha j}}{j^2}
+\asymp\left(\frac{h_J^\alpha}{J}\right)^2.
 \end{align*}
 ]
 
-???
-Source: cov_in_h_rough_as_in_mat.Rmd, Steps 2–5.
-The tail starts at j=J, including that index. Squared norms add in this identity.
-Modes below J have nonzero projections but are not represented exactly by P1 functions.
-
----
-
-class: left, top
-
-<div class="meeting-logos">
-  <img src="group_logo2.png">
-  <img src="statlogo.png">
-  <img src="Kaust.png">
-</div>
-
-### Experiments · Rough forcing · Unresolved modes 2/2
-*********
-
-
-The damping rates satisfy $a_j\asymp2^{\alpha j}$, so the unresolved tail has size
-\begin{equation*}
-E_{\rm tail}^2\asymp\sum_{j=J}^\infty\frac{2^{-2\alpha j}}{j^2},
-\qquad E_{\rm tail}\asymp\frac{h_J^\alpha}{J}.
-\end{equation*}
-
-When this contribution controls the measured error, the factor $1/J$ makes the raw observed order exceed $\alpha$:
-\begin{equation*}
-\log_2\frac{E_{h_J}}{E_{h_{J+1}}}
-\approx\alpha+\log_2\frac{J+1}{J}.
-\end{equation*}
-
-.content-box-blue[
-The rate comparison therefore uses $J E_{h_J}$, with $J=\log_2(1/h_J)$, and the regression
-\begin{equation*}
-\log_{10}(JE_{h_J})=s_{\rm corrected}\log_{10}h_J+b.
-\end{equation*}
-Its corrected slope can then be compared with $\alpha$.
-]
+Here $K=16$ and $J=5,\ldots,9$: the finite tail retains the unresolved modes near the mesh cutoff.
 
 ???
-Source: cov_in_h_rough_as_in_mat.Rmd, Steps 8–9.
-The tail gives a lower bound and motivates the model; it does not prove
-a matching upper bound for every contribution to the total error.
-The logarithm is specific to this forcing's amplitudes 1/j.
-Multiplication by J changes the rate comparison, not the underlying error norm.
+Source: cov_in_h_rough_as_in_mat.Rmd, Steps 2–6 and 8, with the finite-tail convention adopted for this presentation.
+The notebook's infinite unresolved tail equals the omitted reference tail plus the finite unresolved tail used here, in squared norms.
+The three contributions are mutually orthogonal; all norms on this slide are L2(0,T;L2(Gamma)).
+The finite tail starts at j=J and ends at j=K. Its exact evaluation is
+\begin{equation*}
+E_{\rm tail}^2=\sum_{j=J}^{K}\frac{1}{j^2a_j^2}
+\left[T-\frac{2(1-e^{-a_jT})}{a_j}+\frac{1-e^{-2a_jT}}{2a_j}\right].
+\end{equation*}
+The finite-tail comparison is uniform in K>=J for sufficiently large J: the first retained term gives the lower bound, and the infinite geometric tail gives the upper bound.
+A genuine J-to-infinity statement with this finite-tail convention requires K to grow with J. The experiments use fixed K=16 only over J=5,...,9.
+Modes below J have nonzero projections but are not represented exactly by P1 functions. The resolved contribution still needs a matching upper bound to establish the same rate for the total error.
 
 
 ---
@@ -1060,28 +1031,26 @@ class: left, top
 ### Appendix · Reference truncation
 *********
 
-The rough-data reference is the finite series
-\begin{equation*}
-u_K(t)=\sum_{j=1}^K\frac{1-e^{-a_jt}}{ja_j}\phi_j.
-\end{equation*}
+The reference cutoff $K=16$ exceeds every tested mesh index $J=5,\ldots,9$. The omitted reference tail starts at $j=K+1$; the finite tail $E_{\rm tail}$ on slide 24 covers $j=J,\ldots,K$.
 
-For $K\ge\max J-1$, orthogonality in the $L_2(0,T;L_2(\Gamma))$ norm gives
+All norms below are in $L_2(0,T;L_2(\Gamma))$. Orthogonality gives
 \begin{equation*}
-\|u-U_{h,m}^\tau\|^2=\|u_K-U_{h,m}^\tau\|^2+\|u-u_K\|^2.
+\|u-u_K\|^2=\sum_{j=K+1}^{\infty}\int_0^T b_j(t)^2\,dt.
 \end{equation*}
 
 .content-box-blue[
-\begin{equation*}
-\|u-u_K\|^2\le B_K:=
-\frac{T}{\nu^2\pi^{2\alpha}}
-\frac{2^{-2\alpha(K+1)}}{(K+1)^2(1-2^{-2\alpha})}.
-\end{equation*}
+\begin{align*}
+\|u-u_K\|^2&\le B_K:=\frac{T}{\nu^2\pi^{2\alpha}}
+\frac{2^{-2\alpha(K+1)}}{(K+1)^2(1-2^{-2\alpha})},\\[0.4em]
+\frac{B_K}{E_{\mathrm{sampled}}^2}&\le0.002.
+\end{align*}
 ]
 
-The reported errors approximate $\|u_K-U_{h,m}^\tau\|$ through reference-mass and reference-time quadrature. 
+$E_{\mathrm{sampled}}$ approximates $\|u_K-U_{h_J,m}^{\tau}\|$ through reference quadrature. The check limits the omitted squared tail to $0.2\%$ of the measured squared error; $B_K$ is recorded without being added to the plotted values.
 
 ???
-Source: cov_in_h_rough_as_in_mat.Rmd, Step 6 and finite-reference discussion.
+Source: cov_in_h_rough_as_in_mat.Rmd, Step 6, finite-reference discussion, and max_tail_squared_fraction.
 All unlabelled norms on this slide are L2(0,T;L2(Gamma)) norms.
-The exact orthogonal identity applies to the continuum norm, not literally to its sampled approximation.
-
+The bound uses (1-exp(-a_j t))^2<=1, a_j>=nu pi^alpha 2^(alpha j), and a geometric-series estimate.
+The budget applies only to the omitted reference tail j>=K+1. The unresolved modes J,...,K remain in the measured error through the finite E_tail defined on slide 24.
+The exact orthogonal identity applies to the continuum norm. E_sampled approximates the retained-reference error; reference-mesh and reference-time quadrature need separate checks.

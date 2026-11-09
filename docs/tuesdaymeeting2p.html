@@ -36,6 +36,46 @@ class: center, middle, inverse, title-slide
 
 
 
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="70" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="70" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Problem setting 1/4
+*********
+
+
+
+On a compact, connected graph `\(\Gamma\)`, we consider the fractional model
+
+.content-box-blue[
+`$$\begin{cases}
+\partial_tu(s,t)+L^{\alpha/2}u(s,t)=f(s,t),&amp;(s,t)\in\Gamma\times(0,T),\\
+u(s,0)=u_0(s),&amp;s\in\Gamma,
+\end{cases}\qquad L=\kappa^2-\Delta_\Gamma.\tag{1}$$`
+]
+
+Here `\(\kappa&gt;0\)` and `\(0&lt;\alpha\le2\)`. The Kirchhoff–Laplacian acts edgewise, and its domain couples the edges through continuity at each vertex and the Kirchhoff condition, which expresses conservation of flux.
+
+`$$D(L)=\left\{v\in\bigoplus_{e\in E}H^2(e):\begin{array}{l}
+v\text{ is continuous on }\Gamma,\\[2pt]
+\displaystyle\sum_{s\in w}\partial v(s)=0
+\quad\text{at every vertex }w
+\end{array}\right\}.\tag{2}$$`
+
+The sum includes both endpoints of a loop. These vertex conditions determine the operator whose spectral powers govern fractional diffusion.
+
+???
+Source: main.tex, eq:maineq, eq:Kcond, and Notation and Preliminaries.
+The direct sum means that each edge restriction belongs to `\(H^2(e)\)`. This ensures that the second derivative is square-integrable, so `\(Lv\in L_2(\Gamma)\)`, and that endpoint values and first derivatives are well-defined. The direct sum imposes no matching between edges; continuity and the Kirchhoff condition provide the vertex coupling.
+Pointwise derivatives are asserted for D(L), not for arbitrary low-regularity fractional-domain functions.
+
+---
+
 class: left, top
 
 &lt;div class="meeting-logos"&gt;
@@ -44,7 +84,7 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Project 2 · Overview
+### Problem setting 2/4
 *********
 
 ```
@@ -83,7 +123,7 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Project 2 · Fractional diffusion
+### Problem setting 3/4
 *********
 
 ```
@@ -124,46 +164,7 @@ class: left, top
   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-## Problem setting
-*********
-
-
-
-On a compact, connected graph `\(\Gamma\)`, we consider the fractional model
-
-.content-box-blue[
-`$$\begin{cases}
-\partial_tu(s,t)+L^{\alpha/2}u(s,t)=f(s,t),&amp;(s,t)\in\Gamma\times(0,T),\\
-u(s,0)=u_0(s),&amp;s\in\Gamma,
-\end{cases}\qquad L=\kappa^2-\Delta_\Gamma.\tag{1}$$`
-]
-
-Here `\(\kappa&gt;0\)` and `\(0&lt;\alpha\le2\)`. The Kirchhoff–Laplacian acts edgewise, and its domain couples the edges through continuity at each vertex and the Kirchhoff condition, which expresses conservation of flux.
-
-`$$D(L)=\left\{v\in\bigoplus_{e\in E}H^2(e):\begin{array}{l}
-v\text{ is continuous on }\Gamma,\\[2pt]
-\displaystyle\sum_{s\in w}\partial v(s)=0
-\quad\text{at every vertex }w
-\end{array}\right\}.\tag{2}$$`
-
-The sum includes both endpoints of a loop. These vertex conditions determine the operator whose spectral powers govern fractional diffusion.
-
-???
-Source: main.tex, eq:maineq, eq:Kcond, and Notation and Preliminaries.
-The direct sum means that each edge restriction belongs to `\(H^2(e)\)`. This ensures that the second derivative is square-integrable, so `\(Lv\in L_2(\Gamma)\)`, and that endpoint values and first derivatives are well-defined. The direct sum imposes no matching between edges; continuity and the Kirchhoff condition provide the vertex coupling.
-Pointwise derivatives are asserted for D(L), not for arbitrary low-regularity fractional-domain functions.
-
----
-
-class: left, top
-
-&lt;div style="position:absolute; top:40px; right:55px;"&gt;
-  &lt;img src="group_logo2.png" height="70" style="margin-left:10px;"&gt;
-  &lt;img src="statlogo.png" height="70" style="margin-left:10px;"&gt;
-  &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
-&lt;/div&gt;
-
-## Problem setting
+### Problem setting 4/4
 *********
 
 
@@ -205,12 +206,12 @@ class: left, top
   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-## Existence and uniqueness
+### Existence and uniqueness
 *********
 
 
 
-The semigroup provides the solution of the evolution equation on each space in the spectral scale:
+On the spectral scale, the evolution equation is:
 `\begin{equation}
 \partial_tu+L^{\alpha/2}u=f\quad\text{in }\dot H^r(\Gamma),
 \qquad u(0)=u_0.\tag{4}
@@ -224,19 +225,19 @@ For `\(\alpha&gt;0\)` and `\(r\in\mathbb R\)`, data satisfying
 `\begin{equation}
 u(t)=T(t)u_0+\int_0^tT(t-s)f(s)\,ds,\qquad t\in[0,T].\tag{5}
 \end{equation}`
-Its regularity is
-`\begin{equation*}
-u\in L_2(0,T;\dot H^{r+\alpha}(\Gamma))\cap H^1(0,T;\dot H^r(\Gamma))
-\cap C([0,T];\dot H^{r+\alpha/2}(\Gamma)).
-\end{equation*}`
+Its regularity is `\(u\in L_2(0,T;\dot H^{r+\alpha}(\Gamma))\cap H^1(0,T;\dot H^r(\Gamma))\cap C([0,T];\dot H^{r+\alpha/2}(\Gamma))\)`. Equation (4) holds strongly in `\(\dot H^r(\Gamma)\)` almost everywhere.
 ]
 
-The equation holds strongly in `\(\dot H^r(\Gamma)\)` almost everywhere. For `\(r\ge-\alpha/2\)`, this solution also satisfies the weak formulation.
+For `\(r\ge-\alpha/2\)`, the solution satisfies the weak formulation with `\(\mathfrak a_\alpha(v,w)=(L^{\alpha/4}v,L^{\alpha/4}w)_{L_2(\Gamma)}\)`:
+`\begin{equation}
+\langle\partial_tu,v\rangle+\mathfrak a_\alpha(u,v)=\langle f,v\rangle,
+\quad v\in\dot H^{\alpha/2}(\Gamma),\qquad u(0)=u_0.\tag{6}
+\end{equation}`
 
 ???
-Source: main.tex, theorem:existenceuniquenessandregularity.
+Source: main.tex, theorem:existenceuniquenessandregularity and weakformofentireequation.
 The current theorem allows arbitrary r and requires u0 in dot H^(r+alpha/2).
-In particular, r=0 requires only u0 in dot H^(alpha/2), rather than dot H^alpha.
+In particular, r=0 requires only u0 in dot H^(alpha/2), rather than dot H^alpha. The brackets in (6) pair `\(\dot H^{-\alpha/2}(\Gamma)\)` with `\(\dot H^{\alpha/2}(\Gamma)\)`; for `\(L_2(\Gamma)\)` data, they agree with the `\(L_2(\Gamma)\)` inner product.
 
 The spectral definition gives `\(L^{\alpha/2}:\dot H^{r+\alpha}(\Gamma)\to\dot H^r(\Gamma)\)`, with `\(\|L^{\alpha/2}v\|_{\dot H^r(\Gamma)}=\|v\|_{\dot H^{r+\alpha}(\Gamma)}\)`. The theorem ensures that both `\(\partial_tu\)` and `\(L^{\alpha/2}u\)` belong to `\(L_2(0,T;\dot H^r(\Gamma))\)`, so equation (4) holds in that space for almost every time. The case `\(r=0\)` is `\(L_2(\Gamma)\)`; positive `\(r\)` describes smoother data, while negative `\(r\)` allows rougher data through the extended spectral scale. The data assumptions must match the chosen `\(r\)`.
 
@@ -250,7 +251,7 @@ class: left, top
   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-## Discretization | Space
+### Discretization · Space 1/2
 *********
 
 
@@ -261,7 +262,7 @@ The spatial approximation uses a conforming, quasi-uniform mesh `\(\mathcal T_h\
 The `\(L_2(\Gamma)\)`-orthogonal projection onto `\(V_h\)` is denoted by `\(P_h\)`. It supplies the discrete initial value and load.
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="data_files/tuesdaymeeting2p/tadpole_basis.png" alt="Figure 1: Continuous P1 basis on the tadpole graph. Interior hats are blue and vertex hats are red." width="72%" /&gt;
+&lt;img src="data_files/tuesdaymeeting2p/tadpole_basis.png" alt="Figure 1: Continuous P1 basis on the tadpole graph. Interior hats are blue and vertex hats are red." width="50%" /&gt;
 &lt;p class="caption"&gt;Figure 1: Continuous P1 basis on the tadpole graph. Interior hats are blue and vertex hats are red.&lt;/p&gt;
 &lt;/div&gt;
 
@@ -279,7 +280,50 @@ class: left, top
   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-## Discretization | Time
+### Discretization · Space 2/2
+*********
+
+
+
+The finite-element approximation begins with the second-order operator `\(L\)`. Its fractional power is then defined in the discrete eigenbasis.
+
+&lt;div class="content-box-myblue"&gt;Definition 1&lt;/div&gt;
+
+.content-box-blue[
+The operator `\(L_h:V_h\to V_h\)` is defined using `\(L_2(\Gamma)\)` inner products:
+`\begin{equation}
+(L_hv_h,w_h)=\kappa^2(v_h,w_h)+(v_h',w_h'),\qquad v_h,w_h\in V_h.\tag{7}
+\end{equation}`
+For `\(\beta=\alpha/2\)`, its spectral power is
+`\begin{equation*}
+L_h^\beta v_h=\sum_{j=1}^{N_h}\lambda_{j,h}^{\beta}(v_h,e_{j,h})e_{j,h}.
+\end{equation*}`
+]
+
+The discrete energy form is defined by the same spectral construction:
+`\begin{equation*}
+\mathfrak a_{h,\alpha}(v_h,w_h)
+=(L_h^{\alpha/4}v_h,L_h^{\alpha/4}w_h)_{L_2(\Gamma)},
+\qquad v_h,w_h\in V_h.
+\end{equation*}`
+
+???
+Source: main.tex, discrete L_h definition, its fractional spectral power, and system:fully_discrete_scheme.
+The discrete fractional operator and energy form are defined through powers of L_h.
+The continuous fractional energy form, introduced on the existence slide, is used for the weak problem and elliptic projection.
+
+
+---
+
+class: left, top
+
+&lt;div style="position:absolute; top:40px; right:55px;"&gt;
+  &lt;img src="group_logo2.png" height="70" style="margin-left:10px;"&gt;
+  &lt;img src="statlogo.png" height="70" style="margin-left:10px;"&gt;
+  &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
+&lt;/div&gt;
+
+### Discretization · Time
 *********
 
 
@@ -310,46 +354,6 @@ This reconstruction identifies the weighted discrete time norm with the continuo
 Source: main.tex, Time discretization, def:piecewise_constant and discrete_to_continuous.
 Time averages are defined for L2 forcing without assuming nodal time values exist.
 
----
-
-class: left, top
-
-&lt;div style="position:absolute; top:40px; right:55px;"&gt;
-  &lt;img src="group_logo2.png" height="70" style="margin-left:10px;"&gt;
-  &lt;img src="statlogo.png" height="70" style="margin-left:10px;"&gt;
-  &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
-&lt;/div&gt;
-
-## Discrete Operator
-*********
-
-
-
-The finite-element approximation begins with the second-order operator `\(L\)`. Its fractional power is then defined in the discrete eigenbasis.
-
-&lt;div class="content-box-myblue"&gt;Definition 1&lt;/div&gt;
-
-.content-box-blue[
-The operator `\(L_h:V_h\to V_h\)` is defined using `\(L_2(\Gamma)\)` inner products:
-`\begin{equation}
-(L_hv_h,w_h)=\kappa^2(v_h,w_h)+(v_h',w_h'),\qquad v_h,w_h\in V_h.\tag{6}
-\end{equation}`
-For `\(\beta=\alpha/2\)`, its spectral power is
-`\begin{equation*}
-L_h^\beta v_h=\sum_{j=1}^{N_h}\lambda_{j,h}^{\beta}(v_h,e_{j,h})e_{j,h}.
-\end{equation*}`
-]
-
-The continuous weak formulation uses `\(\mathfrak a_\alpha(v,w)=(L^{\alpha/4}v,L^{\alpha/4}w)\)`:
-`\begin{equation}
-\langle\partial_tu,v\rangle+\mathfrak a_\alpha(u,v)=\langle f,v\rangle,
-\quad v\in\dot H^{\alpha/2}(\Gamma),\qquad u(0)=u_0.\tag{7}
-\end{equation}`
-
-???
-Source: main.tex, discrete L_h definition, its fractional spectral power, and weakformofentireequation.
-The discrete fractional operator is the spectral power of L_h.
-The continuous fractional energy form is used for the weak problem and elliptic projection.
 
 ---
 
@@ -361,7 +365,7 @@ class: left, top
   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-## Approximation | time-level
+### Approximation · Temporal
 *********
 
 
@@ -400,13 +404,13 @@ class: left, top
   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-## Approximation | space-level
+### Approximation · Spatial
 *********
 
 
 
 
-Spatial discretization replaces the continuous energy by `\(\mathfrak a_{h,\alpha}(v_h,w_h)=(L_h^{\alpha/4}v_h,L_h^{\alpha/4}w_h)\)`. The resulting scheme is
+Combining the discrete energy form `\(\mathfrak a_{h,\alpha}\)` with backward Euler gives the scheme
 `\begin{equation}
 (\delta U_h^{k+1},v_h)+\mathfrak a_{h,\alpha}(U_h^{k+1},v_h)
 =(f^{k+1},v_h),\quad U_h^0=P_hu_0,\quad v_h\in V_h.\tag{9}
@@ -440,7 +444,7 @@ class: left, top
   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-## Approximation | rational approx-level | 1
+### Approximation ·  Rational 1/2
 *********
 
 
@@ -479,7 +483,7 @@ class: left, top
   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-## Approximation | rational approx-level | 2
+### Approximation · Rational 2/2
 *********
 
 
@@ -519,7 +523,7 @@ class: left, top
   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-## Matrix representation | 1
+### Matrix representation 1/2
 *********
 
 
@@ -561,7 +565,7 @@ class: left, top
   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
 &lt;/div&gt;
 
-## Matrix representation | 2
+### Matrix representation 2/2
 *********
 
 
@@ -595,162 +599,162 @@ Source: main.tex, eq:final_scheme2 and thenumericalscheme.
 The constant r_tau is retained. The identity H_m(A) C^(-1) gives the coefficient update.
 The numerical studies introduce nu&gt;0 by replacing s with tau nu kappa^(2 beta).
 
----
+&lt;!-- --- --&gt;
 
-class: left, top
+&lt;!-- class: left, top --&gt;
 
-&lt;div style="position:absolute; top:40px; right:55px;"&gt;
-  &lt;img src="group_logo2.png" height="70" style="margin-left:10px;"&gt;
-  &lt;img src="statlogo.png" height="70" style="margin-left:10px;"&gt;
-  &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt;
-&lt;/div&gt;
+&lt;!-- &lt;div style="position:absolute; top:40px; right:55px;"&gt; --&gt;
+&lt;!--   &lt;img src="group_logo2.png" height="70" style="margin-left:10px;"&gt; --&gt;
+&lt;!--   &lt;img src="statlogo.png" height="70" style="margin-left:10px;"&gt; --&gt;
+&lt;!--   &lt;img src="Kaust.png" height="70" style="margin-left:10px;"&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
 
-## Numerical experiments | 1
-*********
-
-
-
-The semigroup representation also provides analytic references for the experiments. Here the model includes a fixed diffusion coefficient `\(\nu&gt;0\)` in `\(u_t+\nu L^{\alpha/2}u=f\)`.
-
-For data of the form
-`\begin{equation*}
-u_0=\sum_jx_je_j,\qquad f(t)=g(t)\sum_jy_je_j,
-\qquad a_j=\nu\lambda_j^{\alpha/2},
-\end{equation*}`
-each mode evolves independently. Its scalar solution gives
-
-.content-box-blue[
-`\begin{equation*}
-u(s,t)=\sum_j\left[e^{-a_jt}x_j+
-y_j\int_0^t e^{-a_j(t-r)}g(r)\,dr\right]e_j(s).
-\end{equation*}`
-]
-
-Finite spectral sums give an exact reference for smooth data. The rough-forcing experiment instead involves an infinite series, whose omitted tail requires separate control.
-
-???
-Sources: main.tex, eq:sol_reprentation, and the current four notebooks.
-The paper's smooth numerical subsection still states the earlier single initial mode.
-The K16 construction here and the later result plots use the updated notebook data.
-The theoretical slides use nu=1. A fixed positive nu changes constants, not the stated convergence orders.
-
----
-
-class: left, top
-
-&lt;div class="meeting-logos"&gt;
-  &lt;img src="group_logo2.png"&gt;
-  &lt;img src="statlogo.png"&gt;
-  &lt;img src="Kaust.png"&gt;
-&lt;/div&gt;
-
-### Project 2 · Approximation estimates
-*********
+&lt;!-- ### Experiments | 1 --&gt;
+&lt;!-- ********* --&gt;
 
 
-The spatial analysis relies on approximation of the solution and stability of the projected data. The fractional elliptic projection `\(G_{h,\alpha}\)` is characterized by
-`\(\mathfrak a_\alpha(G_{h,\alpha}v,w_h)=\mathfrak a_\alpha(v,w_h)\)` for all `\(w_h\in V_h\)`.
 
-&lt;div class="content-box-myblue"&gt;Fractional elliptic projection&lt;/div&gt;
+&lt;!-- The semigroup representation also provides analytic references for the experiments. Here the model includes a fixed diffusion coefficient `\(\nu&gt;0\)` in `\(u_t+\nu L^{\alpha/2}u=f\)`. --&gt;
 
-.content-box-blue[
-`\begin{equation*}
-\|v-G_{h,\alpha}v\|_{L_2(\Gamma)}
-\lesssim h^\alpha\|v\|_{\dot H^{\alpha}(\Gamma)},\qquad 0&lt;\alpha\le2.
-\end{equation*}`
-]
+&lt;!-- For data of the form --&gt;
+&lt;!-- \begin{equation*} --&gt;
+&lt;!-- u_0=\sum_jx_je_j,\qquad f(t)=g(t)\sum_jy_je_j, --&gt;
+&lt;!-- \qquad a_j=\nu\lambda_j^{\alpha/2}, --&gt;
+&lt;!-- \end{equation*} --&gt;
+&lt;!-- each mode evolves independently. Its scalar solution gives --&gt;
 
-&lt;div class="content-box-myblue"&gt;Stability of projected data&lt;/div&gt;
+&lt;!-- .content-box-blue[ --&gt;
+&lt;!-- \begin{equation*} --&gt;
+&lt;!-- u(s,t)=\sum_j\left[e^{-a_jt}x_j+ --&gt;
+&lt;!-- y_j\int_0^t e^{-a_j(t-r)}g(r)\,dr\right]e_j(s). --&gt;
+&lt;!-- \end{equation*} --&gt;
+&lt;!-- ] --&gt;
 
-.content-box-blue[
-`\begin{equation*}
-\|L_h^{\alpha/2}P_hv\|_{L_2(\Gamma)}
-\lesssim\|L^{\alpha/2}v\|_{L_2(\Gamma)}.
-\end{equation*}`
-]
+&lt;!-- Finite spectral sums give an exact reference for smooth data. The rough-forcing experiment instead involves an infinite series, whose omitted tail requires separate control. --&gt;
 
-Both constants are uniform in `\(h\)`. Together, these estimates transfer the regularity of the continuous problem to the discrete evolution.
+&lt;!-- ??? --&gt;
+&lt;!-- Sources: main.tex, eq:sol_reprentation, and the current four notebooks. --&gt;
+&lt;!-- The paper's smooth numerical subsection still states the earlier single initial mode. --&gt;
+&lt;!-- The K16 construction here and the later result plots use the updated notebook data. --&gt;
+&lt;!-- The theoretical slides use nu=1. A fixed positive nu changes constants, not the stated convergence orders. --&gt;
 
-???
-Source: main.tex, Lemma lem:graph-fractional-fe-approx and Propositions
-proposition:with_elliptic_projection and prop:controlofLhbyL.
-G_{h,alpha} uses the continuous fractional energy form for the analysis.
-It is distinct from constructing the discrete evolution with powers of L_h.
+&lt;!-- --- --&gt;
 
----
+&lt;!-- class: left, top --&gt;
 
-class: left, top
+&lt;!-- &lt;div class="meeting-logos"&gt; --&gt;
+&lt;!--   &lt;img src="group_logo2.png"&gt; --&gt;
+&lt;!--   &lt;img src="statlogo.png"&gt; --&gt;
+&lt;!--   &lt;img src="Kaust.png"&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
 
-&lt;div class="meeting-logos"&gt;
-  &lt;img src="group_logo2.png"&gt;
-  &lt;img src="statlogo.png"&gt;
-  &lt;img src="Kaust.png"&gt;
-&lt;/div&gt;
-
-### Project 2 · Rational approximation
-*********
+&lt;!-- ### Project 2 · Approximation estimates --&gt;
+&lt;!-- ********* --&gt;
 
 
-Rational approximation changes the damping of each discrete eigenmode. With `\(x_j=\kappa^2/\lambda_{j,h}\)`, `\(q_j=x_j^\beta\)`, and `\(s=\tau\nu\kappa^{2\beta}\)`, the exact and approximate time-step multipliers are
-`\begin{equation*}
-\mu_j=\frac{q_j}{q_j+s},\qquad
-\widetilde\mu_j=\frac{r_m(x_j)}{r_m(x_j)+s}.
-\end{equation*}`
+&lt;!-- The spatial analysis relies on approximation of the solution and stability of the projected data. The fractional elliptic projection `\(G_{h,\alpha}\)` is characterized by --&gt;
+&lt;!-- `\(\mathfrak a_\alpha(G_{h,\alpha}v,w_h)=\mathfrak a_\alpha(v,w_h)\)` for all `\(w_h\in V_h\)`. --&gt;
 
-The paper controls their accumulated effect by the power-approximation error `\(\delta_{h,m}=\max_j|q_j-r_m(x_j)|\)`:
+&lt;!-- &lt;div class="content-box-myblue"&gt;Fractional elliptic projection&lt;/div&gt; --&gt;
 
-.content-box-blue[
-`\begin{equation*}
-\|U_h^\tau-U_{h,m}^\tau\|_{L_2(0,T;L_2(\Gamma))}
-\lesssim\delta_{h,m}
-\left(\|u_0\|_{\dot H^{\beta}(\Gamma)}+\|f\|_{L_2(0,T;L_2(\Gamma))}\right).
-\end{equation*}`
-]
+&lt;!-- .content-box-blue[ --&gt;
+&lt;!-- \begin{equation*} --&gt;
+&lt;!-- \|v-G_{h,\alpha}v\|_{L_2(\Gamma)} --&gt;
+&lt;!-- \lesssim h^\alpha\|v\|_{\dot H^{\alpha}(\Gamma)},\qquad 0&lt;\alpha\le2. --&gt;
+&lt;!-- \end{equation*} --&gt;
+&lt;!-- ] --&gt;
 
-The bound is uniform in `\(h\)` and `\(\tau\)`. For the best uniform approximation, `\(\delta_{h,m}\lesssim e^{-2\pi\sqrt{\beta m}}\)`, which explains the rational term in (14).
+&lt;!-- &lt;div class="content-box-myblue"&gt;Stability of projected data&lt;/div&gt; --&gt;
 
-???
-Sources: main.tex, Rational approximation; conv_in_m_isolated.Rmd, Steps 2 and 5.
-r_m is type (m,m). BRASIL tables can interpolate coefficients in beta.
-The best-approximation rate is a benchmark for those numerical coefficients,
-not a certified bound for every interpolated approximant.
+&lt;!-- .content-box-blue[ --&gt;
+&lt;!-- \begin{equation*} --&gt;
+&lt;!-- \|L_h^{\alpha/2}P_hv\|_{L_2(\Gamma)} --&gt;
+&lt;!-- \lesssim\|L^{\alpha/2}v\|_{L_2(\Gamma)}. --&gt;
+&lt;!-- \end{equation*} --&gt;
+&lt;!-- ] --&gt;
 
----
+&lt;!-- Both constants are uniform in `\(h\)`. Together, these estimates transfer the regularity of the continuous problem to the discrete evolution. --&gt;
 
-class: left, top
+&lt;!-- ??? --&gt;
+&lt;!-- Source: main.tex, Lemma lem:graph-fractional-fe-approx and Propositions --&gt;
+&lt;!-- proposition:with_elliptic_projection and prop:controlofLhbyL. --&gt;
+&lt;!-- G_{h,alpha} uses the continuous fractional energy form for the analysis. --&gt;
+&lt;!-- It is distinct from constructing the discrete evolution with powers of L_h. --&gt;
 
-&lt;div class="meeting-logos"&gt;
-  &lt;img src="group_logo2.png"&gt;
-  &lt;img src="statlogo.png"&gt;
-  &lt;img src="Kaust.png"&gt;
-&lt;/div&gt;
+&lt;!-- --- --&gt;
 
-### Project 2 · Shifted sparse solves
-*********
+&lt;!-- class: left, top --&gt;
+
+&lt;!-- &lt;div class="meeting-logos"&gt; --&gt;
+&lt;!--   &lt;img src="group_logo2.png"&gt; --&gt;
+&lt;!--   &lt;img src="statlogo.png"&gt; --&gt;
+&lt;!--   &lt;img src="Kaust.png"&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
+
+&lt;!-- ### Project 2 · Rational approximation --&gt;
+&lt;!-- ********* --&gt;
 
 
-The partial fractions in (19) involve the sparse matrices
-`\begin{equation*}
-\mathbf Q_n=\mathbf L/\kappa^2-z_n\mathbf C,\qquad n=1,\ldots,m.
-\end{equation*}`
-Because `\(z_n&lt;0\)`, these matrices are positive definite. Their Cholesky factors, together with a factorization of `\(\mathbf C\)`, can be computed once for fixed discretization parameters.
+&lt;!-- Rational approximation changes the damping of each discrete eigenmode. With `\(x_j=\kappa^2/\lambda_{j,h}\)`, `\(q_j=x_j^\beta\)`, and `\(s=\tau\nu\kappa^{2\beta}\)`, the exact and approximate time-step multipliers are --&gt;
+&lt;!-- \begin{equation*} --&gt;
+&lt;!-- \mu_j=\frac{q_j}{q_j+s},\qquad --&gt;
+&lt;!-- \widetilde\mu_j=\frac{r_m(x_j)}{r_m(x_j)+s}. --&gt;
+&lt;!-- \end{equation*} --&gt;
 
-At each time level, the new right-hand side is
+&lt;!-- The paper controls their accumulated effect by the power-approximation error `\(\delta_{h,m}=\max_j|q_j-r_m(x_j)|\)`: --&gt;
 
-.content-box-blue[
-`\begin{equation*}
-\mathbf b^{k+1}=\mathbf C\mathbf U_{h,m}^k+\tau\mathbf F^{k+1}.
-\end{equation*}`
-]
+&lt;!-- .content-box-blue[ --&gt;
+&lt;!-- \begin{equation*} --&gt;
+&lt;!-- \|U_h^\tau-U_{h,m}^\tau\|_{L_2(0,T;L_2(\Gamma))} --&gt;
+&lt;!-- \lesssim\delta_{h,m} --&gt;
+&lt;!-- \left(\|u_0\|_{\dot H^{\beta}(\Gamma)}+\|f\|_{L_2(0,T;L_2(\Gamma))}\right). --&gt;
+&lt;!-- \end{equation*} --&gt;
+&lt;!-- ] --&gt;
 
-The shifted solves are independent, and the mass solve supplies the constant contribution in (19). Changing `\(\tau\)` changes the poles and residues, so a new time grid requires new factorizations.
+&lt;!-- The bound is uniform in `\(h\)` and `\(\tau\)`. For the best uniform approximation, `\(\delta_{h,m}\lesssim e^{-2\pi\sqrt{\beta m}}\)`, which explains the rational term in (14). --&gt;
 
-???
-Sources: main.tex, thenumericalscheme; all four notebooks, matrix method.
-The actual update contains m shifted elliptic solves plus the constant mass solve.
-Source poles eta_j and time-step poles z_n are different.
-This replaces the older proposal claim that the remainder vanishes.
-No eigenpairs are required for the production rational evolution.
+&lt;!-- ??? --&gt;
+&lt;!-- Sources: main.tex, Rational approximation; conv_in_m_isolated.Rmd, Steps 2 and 5. --&gt;
+&lt;!-- r_m is type (m,m). BRASIL tables can interpolate coefficients in beta. --&gt;
+&lt;!-- The best-approximation rate is a benchmark for those numerical coefficients, --&gt;
+&lt;!-- not a certified bound for every interpolated approximant. --&gt;
+
+&lt;!-- --- --&gt;
+
+&lt;!-- class: left, top --&gt;
+
+&lt;!-- &lt;div class="meeting-logos"&gt; --&gt;
+&lt;!--   &lt;img src="group_logo2.png"&gt; --&gt;
+&lt;!--   &lt;img src="statlogo.png"&gt; --&gt;
+&lt;!--   &lt;img src="Kaust.png"&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
+
+&lt;!-- ### Project 2 · Shifted sparse solves --&gt;
+&lt;!-- ********* --&gt;
+
+
+&lt;!-- The partial fractions in (19) involve the sparse matrices --&gt;
+&lt;!-- \begin{equation*} --&gt;
+&lt;!-- \mathbf Q_n=\mathbf L/\kappa^2-z_n\mathbf C,\qquad n=1,\ldots,m. --&gt;
+&lt;!-- \end{equation*} --&gt;
+&lt;!-- Because `\(z_n&lt;0\)`, these matrices are positive definite. Their Cholesky factors, together with a factorization of `\(\mathbf C\)`, can be computed once for fixed discretization parameters. --&gt;
+
+&lt;!-- At each time level, the new right-hand side is --&gt;
+
+&lt;!-- .content-box-blue[ --&gt;
+&lt;!-- \begin{equation*} --&gt;
+&lt;!-- \mathbf b^{k+1}=\mathbf C\mathbf U_{h,m}^k+\tau\mathbf F^{k+1}. --&gt;
+&lt;!-- \end{equation*} --&gt;
+&lt;!-- ] --&gt;
+
+&lt;!-- The shifted solves are independent, and the mass solve supplies the constant contribution in (19). Changing `\(\tau\)` changes the poles and residues, so a new time grid requires new factorizations. --&gt;
+
+&lt;!-- ??? --&gt;
+&lt;!-- Sources: main.tex, thenumericalscheme; all four notebooks, matrix method. --&gt;
+&lt;!-- The actual update contains m shifted elliptic solves plus the constant mass solve. --&gt;
+&lt;!-- Source poles eta_j and time-step poles z_n are different. --&gt;
+&lt;!-- This replaces the older proposal claim that the remainder vanishes. --&gt;
+&lt;!-- No eigenpairs are required for the production rational evolution. --&gt;
 
 ---
 
@@ -779,7 +783,11 @@ T=1,\qquad\kappa=4,\qquad
 \end{equation*}`
 ]
 
-The smooth time and space studies use `\(\nu=10^{-3}\)`, while the isolated rational and rough spatial studies use `\(\nu=1\)`. Each study varies one approximation parameter with the others fixed.
+The smooth time and space studies use `\(\nu=10^{-3}\)`, while the isolated rational and rough spatial studies use `\(\nu=1\)`. 
+
+.content-box-blue[
+**Each study varies one approximation parameter with the others fixed.**
+]
 
 ???
 Sources: the four notebook problem statements and main.tex, Fig/basis2.png.
@@ -835,7 +843,7 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Experiments · Error norms
+### Experiments · Smooth data · Error norms
 *********
 
 The time and space studies evaluate an analytic reference `\(u_{\rm ref}\)` at fine-mesh nodes `\(s_i^\star\)` and times `\(t_\ell^\star=\ell\tau_\star\)`. Here `\(\mathbf C^\star\)` is the reference mass matrix, `\(\mathbf u^\star(t)=[u_{\rm ref}(s_i^\star,t)]_i\)`, and `\(\Psi_{ij}=\psi_j(s_i^\star)\)`.
@@ -873,7 +881,7 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Rational study · Independent reference
+### Experiments · Smooth data · Convergence in m 1/2
 *********
 
 
@@ -910,16 +918,17 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Rational study · Convergence in m
+### Experiments · Smooth data · Convergence in m 2/2
 *********
 
 .meeting-figure[
-&lt;img src="tuesdaymeeting2p_files/figure-html/isolated-m-1.png" alt="" width="94%" style="display: block; margin: auto;" /&gt;
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="tuesdaymeeting2p_files/figure-html/isolated-m-1.png" alt="Figure 2: Dashed curves: \(C_\alpha e^{-2\pi\sqrt{(\alpha/2)m}}\)." width="94%" /&gt;
+&lt;p class="caption"&gt;Figure 2: Dashed curves: \(C_\alpha e^{-2\pi\sqrt{(\alpha/2)m}}\).&lt;/p&gt;
+&lt;/div&gt;
 ]
 
-.meeting-caption[
-Dashed curves: `\(C_\alpha e^{-2\pi\sqrt{(\alpha/2)m}}\)`. Filled markers pass the notebook's empirical resolution criterion.
-]
+
 
 ???
 Source: conv_in_m_isolated.Rmd, matrix-figure, using the saved K16 results.
@@ -938,18 +947,18 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Smooth data · Convergence in time
+### Experiments · Smooth data · Convergence in time
 *********
 
-Temporal convergence is measured at `\(h=10^{-3}\)`, `\(m=8\)`, and `\(\nu=10^{-3}\)`, with `\(\tau=1/N\)` for `\(N\in\{200,63,20,6,2\}\)`.
+Temporal convergence is measured at `\(h=10^{-3}\)`, `\(m=8\)`, and `\(\nu=10^{-3}\)`, with `\(\tau=1/N\)` for `\(N\in\{200,63,20,6,2\}\)`. Observed slopes range from 0.9874 to 0.9885.
 
 .meeting-figure[
-&lt;img src="tuesdaymeeting2p_files/figure-html/temporal-convergence-1.png" alt="" width="94%" style="display: block; margin: auto;" /&gt;
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="tuesdaymeeting2p_files/figure-html/temporal-convergence-1.png" alt="Figure 3: Dashed curves: \(C_\alpha\tau\). Reference resolutions: \(h_\star=\tau_\star=10^{-5}\)." width="94%" /&gt;
+&lt;p class="caption"&gt;Figure 3: Dashed curves: \(C_\alpha\tau\). Reference resolutions: \(h_\star=\tau_\star=10^{-5}\).&lt;/p&gt;
+&lt;/div&gt;
 ]
 
-.meeting-caption[
-Dashed curves: `\(C_\alpha\tau\)`. Observed slopes range from 0.9874 to 0.9885. Reference resolutions: `\(h_\star=\tau_\star=10^{-5}\)`.
-]
 
 ???
 Source: conv_in_tau_mat.Rmd, parameters, plot-results, rates;
@@ -968,18 +977,18 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Smooth data · Convergence in space
+### Experiments · Smooth data · Convergence in space
 *********
 
 Spatial convergence is measured at `\(\tau=2\cdot10^{-5}\)`, `\(m=8\)`, and `\(\nu=10^{-3}\)`, over meshes `\(h\in\{1/512,1/256,1/128,1/64,1/32\}\)`.
 
 .meeting-figure[
-&lt;img src="tuesdaymeeting2p_files/figure-html/smooth-spatial-convergence-1.png" alt="" width="94%" style="display: block; margin: auto;" /&gt;
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="tuesdaymeeting2p_files/figure-html/smooth-spatial-convergence-1.png" alt="Figure 4: Dashed curves: \(C_\alpha h^2\). Smooth spectral data permit the P1 spatial limit. Reference resolutions: \(h_\star=\tau_\star=10^{-5}\)." width="94%" /&gt;
+&lt;p class="caption"&gt;Figure 4: Dashed curves: \(C_\alpha h^2\). Smooth spectral data permit the P1 spatial limit. Reference resolutions: \(h_\star=\tau_\star=10^{-5}\).&lt;/p&gt;
+&lt;/div&gt;
 ]
 
-.meeting-caption[
-Dashed curves: `\(C_\alpha h^2\)`. Smooth spectral data permit the P1 spatial limit. Reference resolutions: `\(h_\star=\tau_\star=10^{-5}\)`.
-]
 
 ???
 Source: cov_in_h_mat.Rmd, parameters, plot-results, rates;
@@ -1000,7 +1009,7 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Rough forcing · Data and regularity
+### Experiments · Rough forcing
 *********
 
 
@@ -1041,7 +1050,7 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Rough forcing · Unresolved modes
+### Experiments · Rough forcing · Unresolved modes 1/2
 *********
 
 
@@ -1078,7 +1087,7 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Rough forcing · Logarithmic correction
+### Experiments · Rough forcing · Unresolved modes 2/2
 *********
 
 
@@ -1109,6 +1118,41 @@ a matching upper bound for every contribution to the total error.
 The logarithm is specific to this forcing's amplitudes 1/j.
 Multiplication by J changes the rate comparison, not the underlying error norm.
 
+&lt;!-- --- --&gt;
+
+&lt;!-- class: left, top --&gt;
+
+&lt;!-- &lt;div class="meeting-logos"&gt; --&gt;
+&lt;!--   &lt;img src="group_logo2.png"&gt; --&gt;
+&lt;!--   &lt;img src="statlogo.png"&gt; --&gt;
+&lt;!--   &lt;img src="Kaust.png"&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
+
+&lt;!-- ### Rough forcing · Raw spatial error --&gt;
+&lt;!-- ********* --&gt;
+
+&lt;!-- The rough spatial study keeps `\(\nu=1\)`, `\(m=14\)`, and `\(\tau=8\cdot10^{-7}\)` fixed across the meshes `\(h_J=2^{-J}\)`, `\(J=5,\ldots,9\)`. --&gt;
+
+&lt;!-- .meeting-figure[ --&gt;
+&lt;!-- ```{r rough-raw, fig.height=3.4} --&gt;
+&lt;!-- convergence_plot(r_rough$errors,r_rough$parameters$h,alphas, --&gt;
+&lt;!--   "h","Sampled space–time L2 error",1/r_rough$parameters$J)+ --&gt;
+&lt;!--   scale_x_log10(breaks=sort(r_rough$parameters$h), --&gt;
+&lt;!--     labels=function(x)paste0("1/",round(1/x))) --&gt;
+&lt;!-- ``` --&gt;
+&lt;!-- ] --&gt;
+
+&lt;!-- .meeting-caption[ --&gt;
+&lt;!-- Dashed curves: `\(C_\alpha h^\alpha/J\)`. The sampled reference uses cutoff `\(K=16\)`, `\(h_\star=2^{-18}\)`, and `\(\tau_\star=10^{-5}\)`. --&gt;
+&lt;!-- ] --&gt;
+
+&lt;!-- ??? --&gt;
+&lt;!-- Source: cov_in_h_rough_as_in_mat.Rmd and rough_h_as_in_mat_results.rds, --&gt;
+&lt;!-- generated_at 2026-11-04 17:32:27 +03. All 45 cases use the same solver time step. --&gt;
+&lt;!-- The bound B_K is not added to any plotted error. --&gt;
+
+
+
 ---
 
 class: left, top
@@ -1119,48 +1163,19 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Rough forcing · Raw spatial error
-*********
-
-The rough spatial study keeps `\(\nu=1\)`, `\(m=14\)`, and `\(\tau=8\cdot10^{-7}\)` fixed across the meshes `\(h_J=2^{-J}\)`, `\(J=5,\ldots,9\)`.
-
-.meeting-figure[
-&lt;img src="tuesdaymeeting2p_files/figure-html/rough-raw-1.png" alt="" width="94%" style="display: block; margin: auto;" /&gt;
-]
-
-.meeting-caption[
-Dashed curves: `\(C_\alpha h^\alpha/J\)`. The sampled reference uses cutoff `\(K=16\)`, `\(h_\star=2^{-18}\)`, and `\(\tau_\star=10^{-5}\)`.
-]
-
-???
-Source: cov_in_h_rough_as_in_mat.Rmd and rough_h_as_in_mat_results.rds,
-generated_at 2026-11-04 17:32:27 +03. All 45 cases use the same solver time step.
-The bound B_K is not added to any plotted error.
-
-
-
----
-
-class: left, top
-
-&lt;div class="meeting-logos"&gt;
-  &lt;img src="group_logo2.png"&gt;
-  &lt;img src="statlogo.png"&gt;
-  &lt;img src="Kaust.png"&gt;
-&lt;/div&gt;
-
-### Rough forcing · Corrected spatial error
+### Experiments · Rough forcing · Convergence in space
 *********
 
 Multiplying the sampled errors by `\(J=\log_2(1/h)\)` removes the leading logarithmic factor from the rate comparison.
 
 .meeting-figure[
-&lt;img src="tuesdaymeeting2p_files/figure-html/rough-corrected-1.png" alt="" width="94%" style="display: block; margin: auto;" /&gt;
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="tuesdaymeeting2p_files/figure-html/rough-corrected-1.png" alt="Figure 5: Dashed curves: \(C_\alpha h^\alpha\)." width="94%" /&gt;
+&lt;p class="caption"&gt;Figure 5: Dashed curves: \(C_\alpha h^\alpha\).&lt;/p&gt;
+&lt;/div&gt;
 ]
 
-.meeting-caption[
-Dashed curves: `\(C_\alpha h^\alpha\)`.
-]
+
 
 ???
 Source: cov_in_h_rough_as_in_mat.Rmd, corrected-figure and rates;
@@ -1169,6 +1184,90 @@ No theoretical tail sum or bound is added to the sampled norm.
 
 
 
+&lt;!-- --- --&gt;
+
+&lt;!-- class: left, top --&gt;
+
+&lt;!-- &lt;div class="meeting-logos"&gt; --&gt;
+&lt;!--   &lt;img src="group_logo2.png"&gt; --&gt;
+&lt;!--   &lt;img src="statlogo.png"&gt; --&gt;
+&lt;!--   &lt;img src="Kaust.png"&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
+
+&lt;!-- ### Project 2 · Discussion --&gt;
+&lt;!-- ********* --&gt;
+
+&lt;!-- &lt;div class="content-box-myblue"&gt;Numerical evidence&lt;/div&gt; --&gt;
+
+&lt;!-- .content-box-blue[ --&gt;
+&lt;!-- - The isolated rational error follows the root-exponential scale across `\(m=2,\ldots,16\)`. --&gt;
+&lt;!-- - Smooth finite-mode data give spatial slopes near `\(2\)` and temporal slopes near `\(1\)`. --&gt;
+&lt;!-- - Rough `\(L_2(\Gamma)\)` forcing reveals the `\(\alpha\)`-dependent spatial order after the logarithmic correction. --&gt;
+&lt;!-- ] --&gt;
+
+&lt;!-- **Interpretation.** Data regularity determines the spatial rate. The studies measure different error contributions and need separate reference constructions. --&gt;
+
+&lt;!-- **Remaining numerical check.** Solver-time refinement for all nine rough-data fractional orders remains pending. Reference quadrature and truncation require separate checks. --&gt;
+
+&lt;!-- ??? --&gt;
+&lt;!-- Sources: saved outputs of all four requested notebooks and their rate discussions. --&gt;
+&lt;!-- Numerical slopes support the estimates over the tested ranges; they do not prove asymptotic sharpness. --&gt;
+&lt;!-- Coefficient interpolation means the ideal rational rate remains a benchmark rather than an automatic certificate. --&gt;
+
+
+
+&lt;!-- --- --&gt;
+
+&lt;!-- class: center, middle --&gt;
+
+&lt;!-- &lt;div class="meeting-logos"&gt; --&gt;
+&lt;!--   &lt;img src="group_logo2.png"&gt; --&gt;
+&lt;!--   &lt;img src="statlogo.png"&gt; --&gt;
+&lt;!--   &lt;img src="Kaust.png"&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
+
+&lt;!-- ### Additional details --&gt;
+&lt;!-- ********* --&gt;
+
+&lt;!-- # Experiment updates and accuracy checks --&gt;
+
+&lt;!-- ********* --&gt;
+
+
+
+&lt;!-- --- --&gt;
+
+&lt;!-- class: left, top --&gt;
+
+&lt;!-- &lt;div class="meeting-logos"&gt; --&gt;
+&lt;!--   &lt;img src="group_logo2.png"&gt; --&gt;
+&lt;!--   &lt;img src="statlogo.png"&gt; --&gt;
+&lt;!--   &lt;img src="Kaust.png"&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
+
+&lt;!-- ### Appendix · Accuracy diagnostics --&gt;
+&lt;!-- ********* --&gt;
+
+&lt;!-- **Isolated rational study** --&gt;
+
+&lt;!-- - Complete numerical spectrum: 150 modes. --&gt;
+&lt;!-- - Eigen-equation relative residual: 5.54e-13. --&gt;
+&lt;!-- - Mass orthogonality error: 9.21e-15. --&gt;
+&lt;!-- - Sparse rational and scalar propagation agree in the complete numerical eigenbasis. --&gt;
+
+&lt;!-- **Rough spatial study** --&gt;
+
+&lt;!-- - Fixed cutoff `\(K=16\ge\max J-1\)` preserves the infinite forcing's FEM load. --&gt;
+&lt;!-- - `\(h_\star=2^{-18}\)` resolves the highest retained frequency. --&gt;
+&lt;!-- - The omitted-tail bound is below the `\(0.2\%\)` squared-error budget. --&gt;
+&lt;!-- - Earlier reference and solver refinements cover eight fractional orders; solver-time refinement for all nine remains pending. --&gt;
+
+&lt;!-- ??? --&gt;
+&lt;!-- Sources: isolated_m_results_K16.rds diagnostics and control; --&gt;
+&lt;!-- cov_in_h_rough_as_in_mat.Rmd, Error computation and final checks section. --&gt;
+&lt;!-- The empirical resolution indicator is not a rigorous floating-point certificate. --&gt;
+
+
 ---
 
 class: left, top
@@ -1179,25 +1278,14 @@ class: left, top
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-### Project 2 · Discussion
+### Thanks
 *********
 
-&lt;div class="content-box-myblue"&gt;Numerical evidence&lt;/div&gt;
 
-.content-box-blue[
-- The isolated rational error follows the root-exponential scale across `\(m=2,\ldots,16\)`.
-- Smooth finite-mode data give spatial slopes near `\(2\)` and temporal slopes near `\(1\)`.
-- Rough `\(L_2(\Gamma)\)` forcing reveals the `\(\alpha\)`-dependent spatial order after the logarithmic correction.
-]
-
-**Interpretation.** Data regularity determines the spatial rate. The studies measure different error contributions and need separate reference constructions.
-
-**Remaining numerical check.** Solver-time refinement for all nine rough-data fractional orders remains pending. Reference quadrature and truncation require separate checks.
-
-???
-Sources: saved outputs of all four requested notebooks and their rate discussions.
-Numerical slopes support the estimates over the tested ranges; they do not prove asymptotic sharpness.
-Coefficient interpolation means the ideal rational rate remains a benchmark rather than an automatic certificate.
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="data_files/thanksall3d.png" alt="Figure 6: THANK-YOU-FOR-YOUR-ATTENTION graph." width="45%" /&gt;
+&lt;p class="caption"&gt;Figure 6: THANK-YOU-FOR-YOUR-ATTENTION graph.&lt;/p&gt;
+&lt;/div&gt;
 
 
 
@@ -1211,47 +1299,7 @@ class: center, middle
   &lt;img src="Kaust.png"&gt;
 &lt;/div&gt;
 
-## Additional details
-*********
-
-# Experiment updates and accuracy checks
-
-*********
-
-
-
----
-
-class: left, top
-
-&lt;div class="meeting-logos"&gt;
-  &lt;img src="group_logo2.png"&gt;
-  &lt;img src="statlogo.png"&gt;
-  &lt;img src="Kaust.png"&gt;
-&lt;/div&gt;
-
-### Appendix · Accuracy diagnostics
-*********
-
-**Isolated rational study**
-
-- Complete numerical spectrum: 150 modes.
-- Eigen-equation relative residual: 5.54e-13.
-- Mass orthogonality error: 9.21e-15.
-- Sparse rational and scalar propagation agree in the complete numerical eigenbasis.
-
-**Rough spatial study**
-
-- Fixed cutoff `\(K=16\ge\max J-1\)` preserves the infinite forcing's FEM load.
-- `\(h_\star=2^{-18}\)` resolves the highest retained frequency.
-- The omitted-tail bound is below the `\(0.2\%\)` squared-error budget.
-- Earlier reference and solver refinements cover eight fractional orders; solver-time refinement for all nine remains pending.
-
-???
-Sources: isolated_m_results_K16.rds diagnostics and control;
-cov_in_h_rough_as_in_mat.Rmd, Error computation and final checks section.
-The empirical resolution indicator is not a rigorous floating-point certificate.
-
+#### THE END
 
 
 ---
@@ -1285,7 +1333,7 @@ For `\(K\ge\max J-1\)`, orthogonality in the `\(L_2(0,T;L_2(\Gamma))\)` norm giv
 \end{equation*}`
 ]
 
-The reported errors approximate `\(\|u_K-U_{h,m}^\tau\|\)` through reference-mass and reference-time quadrature. **The code records `\(B_K\)` as a diagnostic and does not add it to the measured errors.**
+The reported errors approximate `\(\|u_K-U_{h,m}^\tau\|\)` through reference-mass and reference-time quadrature. 
 
 ???
 Source: cov_in_h_rough_as_in_mat.Rmd, Step 6 and finite-reference discussion.
@@ -1294,39 +1342,39 @@ The exact orthogonal identity applies to the continuum norm, not literally to it
 
 
 
----
+&lt;!-- --- --&gt;
 
-class: left, top
+&lt;!-- class: left, top --&gt;
 
-&lt;div class="meeting-logos"&gt;
-  &lt;img src="group_logo2.png"&gt;
-  &lt;img src="statlogo.png"&gt;
-  &lt;img src="Kaust.png"&gt;
-&lt;/div&gt;
+&lt;!-- &lt;div class="meeting-logos"&gt; --&gt;
+&lt;!--   &lt;img src="group_logo2.png"&gt; --&gt;
+&lt;!--   &lt;img src="statlogo.png"&gt; --&gt;
+&lt;!--   &lt;img src="Kaust.png"&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
 
-### Appendix · Sources
-*********
+&lt;!-- ### Appendix · Sources --&gt;
+&lt;!-- ********* --&gt;
 
-.meeting-source[
-**Paper and reference style**
+&lt;!-- .meeting-source[ --&gt;
+&lt;!-- **Paper and reference style** --&gt;
 
-- `/home/rierasl/Desktop/6ac76d140751a76e98ae4d0b/main.tex`
-- `tuesdaymeeting1p.Rmd`, Part I organization and shared theme assets
+&lt;!-- - `/home/rierasl/Desktop/6ac76d140751a76e98ae4d0b/main.tex` --&gt;
+&lt;!-- - `tuesdaymeeting1p.Rmd`, Part I organization and shared theme assets --&gt;
 
-**Updated experiments in `/home/rierasl/Desktop/NAP/`**
+&lt;!-- **Updated experiments in `/home/rierasl/Desktop/NAP/`** --&gt;
 
-- `conv_in_m_isolated.Rmd` — isolated rational error, K16 data
-- `conv_in_tau_mat.Rmd` — smooth temporal convergence, K16 data
-- `cov_in_h_mat.Rmd` — smooth spatial convergence, K16 data
-- `cov_in_h_rough_as_in_mat.Rmd` — rough spatial convergence and correction
+&lt;!-- - `conv_in_m_isolated.Rmd` — isolated rational error, K16 data --&gt;
+&lt;!-- - `conv_in_tau_mat.Rmd` — smooth temporal convergence, K16 data --&gt;
+&lt;!-- - `cov_in_h_mat.Rmd` — smooth spatial convergence, K16 data --&gt;
+&lt;!-- - `cov_in_h_rough_as_in_mat.Rmd` — rough spatial convergence and correction --&gt;
 
-Saved result snapshots and source hashes: `data_files/tuesdaymeeting2p/`.
-]
+&lt;!-- Saved result snapshots and source hashes: `data_files/tuesdaymeeting2p/`. --&gt;
+&lt;!-- ] --&gt;
 
-???
-The four local snapshots preserve the notebook output as inspected for this presentation.
-All numerical slopes in the slides are calculated from those saved errors at knit time.
-The R Markdown uses local snapshots and shared reference assets without sourcing or modifying the original notebooks.
+&lt;!-- ??? --&gt;
+&lt;!-- The four local snapshots preserve the notebook output as inspected for this presentation. --&gt;
+&lt;!-- All numerical slopes in the slides are calculated from those saved errors at knit time. --&gt;
+&lt;!-- The R Markdown uses local snapshots and shared reference assets without sourcing or modifying the original notebooks. --&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

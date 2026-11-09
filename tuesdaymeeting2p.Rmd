@@ -30,84 +30,13 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE,
   error=FALSE, cache=FALSE, fig.align="center", dpi=180,
   fig.width=9, fig.height=3.7, out.width="94%")
 options(htmltools.dir.version=FALSE)
-library(ggplot2)
 
-# Small snapshots of the four saved experiments. No PDE runs at knit time.
-results_dir <- "data_files/tuesdaymeeting2p"
-r_m <- readRDS(file.path(results_dir, "isolated_m_results_K16.rds"))
-read_error_snapshot <- function(file) {
-  env <- new.env(parent=emptyenv())
-  load(file.path(results_dir, file), envir=env)
-  value <- env$errors_projected
-  list(errors=value, parameters=attr(value, "parameters"))
-}
-r_tau <- read_error_snapshot("errors_projected_tau_mat_K16.RData")
-r_h <- read_error_snapshot("errors_projected_h_mat_K16.RData")
-r_rough <- readRDS(file.path(results_dir, "rough_h_as_in_mat_results.rds"))
-alphas <- r_m$parameters$alpha_vector
-initial_modes <- c(5L, 6L, 8:21)
-stopifnot(length(alphas)==9L,
-  isTRUE(all.equal(alphas, seq(0.9,1.7,0.1))),
-  identical(r_m$parameters$initial_modes, initial_modes),
-  identical(r_tau$parameters$initial_modes, initial_modes),
-  identical(r_h$parameters$initial_modes, initial_modes),
-  isTRUE(all.equal(r_tau$parameters$alpha, alphas)),
-  isTRUE(all.equal(r_h$parameters$alpha, alphas)),
-  isTRUE(all.equal(r_rough$parameters$alpha, alphas)),
-  identical(dim(r_h$errors), c(5L,9L)),
-  identical(dim(r_tau$errors), c(5L,9L)),
-  identical(dim(r_rough$errors), c(5L,9L)),
-  all(is.finite(r_m$results$error)), all(r_m$results$error>0),
-  all(is.finite(r_tau$errors)), all(r_tau$errors>0),
-  all(is.finite(r_h$errors)), all(r_h$errors>0),
-  all(is.finite(r_rough$errors)), all(r_rough$errors>0))
-
-fit_loglog <- function(errors, axis) apply(errors,2,function(e)
-  unname(coef(lm(log10(e)~log10(axis)))[2]))
-tau_rates <- fit_loglog(r_tau$errors,r_tau$parameters$axis)
-h_rates <- fit_loglog(r_h$errors,r_h$parameters$axis)
-rough_raw <- fit_loglog(r_rough$errors,r_rough$parameters$h)
-rough_corrected <- fit_loglog(r_rough$errors*r_rough$parameters$J,
-  r_rough$parameters$h)
-fit_m <- function(d) {
-  if(nrow(d)<2L) return(NA_real_)
-  unname(coef(lm(log(error)~sqrt(m),data=d))[2])
-}
-m_rates <- do.call(rbind,lapply(alphas,function(a) {
-  d <- r_m$results[abs(r_m$results$alpha-a)<1e-8,]
-  data.frame(alpha=a, benchmark=-2*pi*sqrt(a/2),
-    all=fit_m(d), resolved=fit_m(d[d$resolved,]), n=sum(d$resolved))
-}))
-alpha_colors <- setNames(scales::hue_pal()(length(alphas)),as.character(alphas))
-plot_theme <- theme_bw(base_size=14) + theme(
-  legend.position="bottom", legend.title=element_text(face="bold"),
-  legend.margin=margin(0,0,0,0), legend.box.margin=margin(-3,0,0,0),
-  plot.margin=margin(5,10,5,5), panel.grid.minor=element_blank(),
-  text=element_text(colour="#272822"),
-  axis.title=element_text(colour="#0D2244"))
-alpha_scale <- function() scale_color_manual(values=alpha_colors,drop=FALSE,
-  guide=guide_legend(nrow=1,byrow=TRUE))
-convergence_plot <- function(errors,axis,powers,x_label,y_label,
-                             model_factor=rep(1,length(axis))) {
-  d <- expand.grid(row=seq_along(axis),column=seq_along(alphas))
-  d$x <- axis[d$row]
-  d$error <- as.vector(errors)
-  d$alpha <- factor(alphas[d$column],levels=alphas)
-  guide <- d
-  for(j in seq_along(alphas)) {
-    ids <- d$column==j
-    model <- axis^rep(powers,length.out=length(alphas))[j]*model_factor
-    guide$error[ids] <- mean(errors[,j]/model)*model
-  }
-  ggplot(d,aes(x,error,color=alpha,group=alpha)) +
-    geom_line(data=guide,linetype="dashed",linewidth=0.5) +
-    geom_line(linewidth=0.55)+geom_point(size=1.8)+
-    scale_x_log10(breaks=sort(unique(axis)),
-      labels=scales::label_number(accuracy=NULL))+
-    scale_y_log10(labels=scales::label_scientific())+
-    alpha_scale()+labs(x=x_label,y=y_label,color=expression(alpha))+
-    plot_theme
-}
+# Figures are generated manually by scripts/generate_tuesdaymeeting2p_plots.R.
+# Knitting loads the saved images and slope summaries without rebuilding plots.
+plot_dir <- "data_files/tuesdaymeeting2p/convergence-plots"
+plot_summary <- readRDS(file.path(plot_dir,"plot-summary.rds"))
+tau_rates <- plot_summary$temporal_rates
+h_rates <- plot_summary$spatial_rates
 ```
 
 ```{r, load_refs, include=FALSE, cache=FALSE}
@@ -181,7 +110,7 @@ class: left, top
 *********
 
 ```
-{r p5plotly, eval = TRUE, fig.height = 4.5, out.width = "100%"}
+{r p5plotly, eval = TRUE, fig.height = 5, out.width = "100%"}
 load(here::here("data_files/logo_five_diffusion_animation.RData"))
 # Keep animation frames outside remark's slide source so the deck opens quickly.
 widget_file <- here::here("data_files/logo_five_diffusion_animation.html")
@@ -220,7 +149,7 @@ class: left, top
 *********
 
 ```
-{r fractional-diffusion-animation, eval = TRUE, fig.height = 4.5, out.width = "100%"}
+{r fractional-diffusion-animation, eval = TRUE, fig.height = 5, out.width = "100%"}
 load(here::here("data_files/logo_five_fractional_diffusion_animation.RData"))
 # Keep animation frames outside remark's slide source so the deck opens quickly.
 fractional_widget_file <- here::here("data_files/logo_five_fractional_diffusion_animation.html")
@@ -691,162 +620,6 @@ Source: main.tex, eq:final_scheme2 and thenumericalscheme.
 The constant r_tau is retained. The identity H_m(A) C^(-1) gives the coefficient update.
 The numerical studies introduce nu>0 by replacing s with tau nu kappa^(2 beta).
 
-<!-- --- -->
-
-<!-- class: left, top -->
-
-<!-- <div style="position:absolute; top:40px; right:55px;"> -->
-<!--   <img src="group_logo2.png" height="70" style="margin-left:10px;"> -->
-<!--   <img src="statlogo.png" height="70" style="margin-left:10px;"> -->
-<!--   <img src="Kaust.png" height="70" style="margin-left:10px;"> -->
-<!-- </div> -->
-
-<!-- ### Experiments | 1 -->
-<!-- ********* -->
-
-
-
-<!-- The semigroup representation also provides analytic references for the experiments. Here the model includes a fixed diffusion coefficient $\nu>0$ in $u_t+\nu L^{\alpha/2}u=f$. -->
-
-<!-- For data of the form -->
-<!-- \begin{equation*} -->
-<!-- u_0=\sum_jx_je_j,\qquad f(t)=g(t)\sum_jy_je_j, -->
-<!-- \qquad a_j=\nu\lambda_j^{\alpha/2}, -->
-<!-- \end{equation*} -->
-<!-- each mode evolves independently. Its scalar solution gives -->
-
-<!-- .content-box-blue[ -->
-<!-- \begin{equation*} -->
-<!-- u(s,t)=\sum_j\left[e^{-a_jt}x_j+ -->
-<!-- y_j\int_0^t e^{-a_j(t-r)}g(r)\,dr\right]e_j(s). -->
-<!-- \end{equation*} -->
-<!-- ] -->
-
-<!-- Finite spectral sums give an exact reference for smooth data. The rough-forcing experiment instead involves an infinite series, whose omitted tail requires separate control. -->
-
-<!-- ??? -->
-<!-- Sources: main.tex, eq:sol_reprentation, and the current four notebooks. -->
-<!-- The paper's smooth numerical subsection still states the earlier single initial mode. -->
-<!-- The K16 construction here and the later result plots use the updated notebook data. -->
-<!-- The theoretical slides use nu=1. A fixed positive nu changes constants, not the stated convergence orders. -->
-
-<!-- --- -->
-
-<!-- class: left, top -->
-
-<!-- <div class="meeting-logos"> -->
-<!--   <img src="group_logo2.png"> -->
-<!--   <img src="statlogo.png"> -->
-<!--   <img src="Kaust.png"> -->
-<!-- </div> -->
-
-<!-- ### Project 2 · Approximation estimates -->
-<!-- ********* -->
-
-
-<!-- The spatial analysis relies on approximation of the solution and stability of the projected data. The fractional elliptic projection $G_{h,\alpha}$ is characterized by -->
-<!-- $\mathfrak a_\alpha(G_{h,\alpha}v,w_h)=\mathfrak a_\alpha(v,w_h)$ for all $w_h\in V_h$. -->
-
-<!-- <div class="content-box-myblue">Fractional elliptic projection</div> -->
-
-<!-- .content-box-blue[ -->
-<!-- \begin{equation*} -->
-<!-- \|v-G_{h,\alpha}v\|_{L_2(\Gamma)} -->
-<!-- \lesssim h^\alpha\|v\|_{\dot H^{\alpha}(\Gamma)},\qquad 0<\alpha\le2. -->
-<!-- \end{equation*} -->
-<!-- ] -->
-
-<!-- <div class="content-box-myblue">Stability of projected data</div> -->
-
-<!-- .content-box-blue[ -->
-<!-- \begin{equation*} -->
-<!-- \|L_h^{\alpha/2}P_hv\|_{L_2(\Gamma)} -->
-<!-- \lesssim\|L^{\alpha/2}v\|_{L_2(\Gamma)}. -->
-<!-- \end{equation*} -->
-<!-- ] -->
-
-<!-- Both constants are uniform in $h$. Together, these estimates transfer the regularity of the continuous problem to the discrete evolution. -->
-
-<!-- ??? -->
-<!-- Source: main.tex, Lemma lem:graph-fractional-fe-approx and Propositions -->
-<!-- proposition:with_elliptic_projection and prop:controlofLhbyL. -->
-<!-- G_{h,alpha} uses the continuous fractional energy form for the analysis. -->
-<!-- It is distinct from constructing the discrete evolution with powers of L_h. -->
-
-<!-- --- -->
-
-<!-- class: left, top -->
-
-<!-- <div class="meeting-logos"> -->
-<!--   <img src="group_logo2.png"> -->
-<!--   <img src="statlogo.png"> -->
-<!--   <img src="Kaust.png"> -->
-<!-- </div> -->
-
-<!-- ### Project 2 · Rational approximation -->
-<!-- ********* -->
-
-
-<!-- Rational approximation changes the damping of each discrete eigenmode. With $x_j=\kappa^2/\lambda_{j,h}$, $q_j=x_j^\beta$, and $s=\tau\nu\kappa^{2\beta}$, the exact and approximate time-step multipliers are -->
-<!-- \begin{equation*} -->
-<!-- \mu_j=\frac{q_j}{q_j+s},\qquad -->
-<!-- \widetilde\mu_j=\frac{r_m(x_j)}{r_m(x_j)+s}. -->
-<!-- \end{equation*} -->
-
-<!-- The paper controls their accumulated effect by the power-approximation error $\delta_{h,m}=\max_j|q_j-r_m(x_j)|$: -->
-
-<!-- .content-box-blue[ -->
-<!-- \begin{equation*} -->
-<!-- \|U_h^\tau-U_{h,m}^\tau\|_{L_2(0,T;L_2(\Gamma))} -->
-<!-- \lesssim\delta_{h,m} -->
-<!-- \left(\|u_0\|_{\dot H^{\beta}(\Gamma)}+\|f\|_{L_2(0,T;L_2(\Gamma))}\right). -->
-<!-- \end{equation*} -->
-<!-- ] -->
-
-<!-- The bound is uniform in $h$ and $\tau$. For the best uniform approximation, $\delta_{h,m}\lesssim e^{-2\pi\sqrt{\beta m}}$, which explains the rational term in (14). -->
-
-<!-- ??? -->
-<!-- Sources: main.tex, Rational approximation; conv_in_m_isolated.Rmd, Steps 2 and 5. -->
-<!-- r_m is type (m,m). BRASIL tables can interpolate coefficients in beta. -->
-<!-- The best-approximation rate is a benchmark for those numerical coefficients, -->
-<!-- not a certified bound for every interpolated approximant. -->
-
-<!-- --- -->
-
-<!-- class: left, top -->
-
-<!-- <div class="meeting-logos"> -->
-<!--   <img src="group_logo2.png"> -->
-<!--   <img src="statlogo.png"> -->
-<!--   <img src="Kaust.png"> -->
-<!-- </div> -->
-
-<!-- ### Project 2 · Shifted sparse solves -->
-<!-- ********* -->
-
-
-<!-- The partial fractions in (19) involve the sparse matrices -->
-<!-- \begin{equation*} -->
-<!-- \mathbf Q_n=\mathbf L/\kappa^2-z_n\mathbf C,\qquad n=1,\ldots,m. -->
-<!-- \end{equation*} -->
-<!-- Because $z_n<0$, these matrices are positive definite. Their Cholesky factors, together with a factorization of $\mathbf C$, can be computed once for fixed discretization parameters. -->
-
-<!-- At each time level, the new right-hand side is -->
-
-<!-- .content-box-blue[ -->
-<!-- \begin{equation*} -->
-<!-- \mathbf b^{k+1}=\mathbf C\mathbf U_{h,m}^k+\tau\mathbf F^{k+1}. -->
-<!-- \end{equation*} -->
-<!-- ] -->
-
-<!-- The shifted solves are independent, and the mass solve supplies the constant contribution in (19). Changing $\tau$ changes the poles and residues, so a new time grid requires new factorizations. -->
-
-<!-- ??? -->
-<!-- Sources: main.tex, thenumericalscheme; all four notebooks, matrix method. -->
-<!-- The actual update contains m shifted elliptic solves plus the constant mass solve. -->
-<!-- Source poles eta_j and time-step poles z_n are different. -->
-<!-- This replaces the older proposal claim that the remainder vanishes. -->
-<!-- No eigenpairs are required for the production rational evolution. -->
 
 ---
 
@@ -1013,26 +786,11 @@ class: left, top
 ### Experiments · Smooth data · Convergence in m 2/2
 *********
 
+Rational convergence is measured at $h=0.02$, $\tau=0.005$, and $\nu=1$, for $m=2,\ldots,16$.
+
 .meeting-figure[
-```{r isolated-m, fig.height=3.7, fig.cap = captioner("Dashed curves: \\(C_\\alpha e^{-2\\pi\\sqrt{(\\alpha/2)m}}\\).")}
-d <- r_m$results
-d$alpha_label <- factor(d$alpha,levels=alphas)
-guide <- d
-for(a in alphas) {
-  ids <- abs(d$alpha-a)<1e-8
-  model <- exp(-2*pi*sqrt(a/2)*sqrt(d$m[ids]))
-  guide$error[ids] <- mean(d$error[ids]/model)*model
-}
-ggplot(d,aes(sqrt(m),error,color=alpha_label,group=alpha_label))+
-  geom_line(data=guide,linetype="dashed",linewidth=0.5)+
-  geom_line(linewidth=0.6)+geom_point(aes(shape=resolved),size=1.8)+
-  scale_shape_manual(values=c(`FALSE`=1,`TRUE`=16),guide="none")+
-  scale_x_continuous(breaks=sqrt(2:16),labels=2:16)+
-  scale_y_continuous(trans=scales::log_trans(base=exp(1)),
-    breaks=10^seq(-12,0,2),labels=scales::label_scientific())+
-  alpha_scale()+labs(x="m (square-root positions)",
-    y="Isolated space–time L2 error",color=expression(alpha))+
-  plot_theme
+```{r isolated-m, fig.width=10, fig.height=4.1, out.width="94%", fig.cap = captioner("Dashed curves: \\(C_\\alpha e^{-2\\pi\\sqrt{(\\alpha/2)m}}\\).")}
+knitr::include_graphics(file.path(plot_dir,"isolated-m.png"))
 ```
 ]
 
@@ -1061,9 +819,8 @@ class: left, top
 Temporal convergence is measured at $h=10^{-3}$, $m=8$, and $\nu=10^{-3}$, with $\tau=1/N$ for $N\in\{200,63,20,6,2\}$. Observed slopes range from `r sprintf("%.4f",min(tau_rates))` to `r sprintf("%.4f",max(tau_rates))`.
 
 .meeting-figure[
-```{r temporal-convergence, fig.height=3.4, fig.cap = captioner("Dashed curves: \\(C_\\alpha\\tau\\). Reference resolutions: \\(h_\\star=\\tau_\\star=10^{-5}\\).")}
-convergence_plot(r_tau$errors,r_tau$parameters$axis,1,
-  expression(tau),"Sampled space–time L2 error")
+```{r temporal-convergence, fig.width=10, fig.height=3.6, out.width="100%", fig.cap = captioner("Dashed curves: \\(C_\\alpha\\tau\\). Reference resolutions: \\(h_\\star=\\tau_\\star=10^{-5}\\).")}
+knitr::include_graphics(file.path(plot_dir,"temporal-convergence.png"))
 ```
 ]
 
@@ -1088,14 +845,11 @@ class: left, top
 ### Experiments · Smooth data · Convergence in space
 *********
 
-Spatial convergence is measured at $\tau=2\cdot10^{-5}$, $m=8$, and $\nu=10^{-3}$, over meshes $h\in\{1/512,1/256,1/128,1/64,1/32\}$.
+Spatial convergence is measured at $\tau=2\cdot10^{-5}$, $m=8$, and $\nu=10^{-3}$, over meshes $h\in\{1/512,1/256,1/128,1/64,1/32\}$. Observed slopes range from `r sprintf("%.4f",min(h_rates))` to `r sprintf("%.4f",max(h_rates))`.
 
 .meeting-figure[
-```{r smooth-spatial-convergence, fig.height=3.4, fig.cap = captioner("Dashed curves: \\(C_\\alpha h^2\\). Smooth spectral data permit the P1 spatial limit. Reference resolutions: \\(h_\\star=\\tau_\\star=10^{-5}\\).")}
-convergence_plot(r_h$errors,r_h$parameters$axis,2,
-  "h","Sampled space–time L2 error")+
-  scale_x_log10(breaks=r_h$parameters$axis,
-    labels=paste0("1/",round(1/r_h$parameters$axis)))
+```{r smooth-spatial-convergence, fig.width=10, fig.height=3.6, out.width="100%", fig.cap = captioner("Dashed curves: \\(C_\\alpha h^2\\). Reference resolutions: \\(h_\\star=\\tau_\\star=10^{-5}\\).")}
+knitr::include_graphics(file.path(plot_dir,"smooth-spatial-convergence.png"))
 ```
 ]
 
@@ -1105,7 +859,7 @@ Source: cov_in_h_mat.Rmd, parameters, plot-results, rates;
 errors_projected_h_mat_K16.RData.
 The current saved mesh range differs from the range still stated in the paper.
 The theorem permits h^(2-epsilon) for sufficiently small positive epsilon.
-The plotted h^2 guides are comparison curves, not certified bounds.
+The plotted h^2 guides are comparison curves, not certified bounds. Smooth spectral data permit the P1 spatial limit.
 
 
 
@@ -1228,40 +982,6 @@ a matching upper bound for every contribution to the total error.
 The logarithm is specific to this forcing's amplitudes 1/j.
 Multiplication by J changes the rate comparison, not the underlying error norm.
 
-<!-- --- -->
-
-<!-- class: left, top -->
-
-<!-- <div class="meeting-logos"> -->
-<!--   <img src="group_logo2.png"> -->
-<!--   <img src="statlogo.png"> -->
-<!--   <img src="Kaust.png"> -->
-<!-- </div> -->
-
-<!-- ### Rough forcing · Raw spatial error -->
-<!-- ********* -->
-
-<!-- The rough spatial study keeps $\nu=1$, $m=14$, and $\tau=8\cdot10^{-7}$ fixed across the meshes $h_J=2^{-J}$, $J=5,\ldots,9$. -->
-
-<!-- .meeting-figure[ -->
-<!-- ```{r rough-raw, fig.height=3.4} -->
-<!-- convergence_plot(r_rough$errors,r_rough$parameters$h,alphas, -->
-<!--   "h","Sampled space–time L2 error",1/r_rough$parameters$J)+ -->
-<!--   scale_x_log10(breaks=sort(r_rough$parameters$h), -->
-<!--     labels=function(x)paste0("1/",round(1/x))) -->
-<!-- ``` -->
-<!-- ] -->
-
-<!-- .meeting-caption[ -->
-<!-- Dashed curves: $C_\alpha h^\alpha/J$. The sampled reference uses cutoff $K=16$, $h_\star=2^{-18}$, and $\tau_\star=10^{-5}$. -->
-<!-- ] -->
-
-<!-- ??? -->
-<!-- Source: cov_in_h_rough_as_in_mat.Rmd and rough_h_as_in_mat_results.rds, -->
-<!-- generated_at 2026-11-04 17:32:27 +03. All 45 cases use the same solver time step. -->
-<!-- The bound B_K is not added to any plotted error. -->
-
-
 
 ---
 
@@ -1276,14 +996,11 @@ class: left, top
 ### Experiments · Rough forcing · Convergence in space
 *********
 
-Multiplying the sampled errors by $J=\log_2(1/h)$ removes the leading logarithmic factor from the rate comparison.
+Rough spatial convergence uses $\tau=8\cdot10^{-7}$, $m=14$, and $\nu=1$, with $h_J=2^{-J}$, $J=5,\ldots,9$. The plotted errors are multiplied by $J$.
 
 .meeting-figure[
-```{r rough-corrected, fig.height=3.5, fig.cap = captioner("Dashed curves: \\(C_\\alpha h^\\alpha\\).")}
-convergence_plot(r_rough$errors*r_rough$parameters$J,
-  r_rough$parameters$h,alphas,"h","J × sampled L2 error")+
-  scale_x_log10(breaks=sort(r_rough$parameters$h),
-    labels=function(x)paste0("1/",round(1/x)))
+```{r rough-corrected, fig.width=10, fig.height=3.6, out.width="100%", fig.cap = captioner("Dashed curves: \\(C_\\alpha h^\\alpha\\).")}
+knitr::include_graphics(file.path(plot_dir,"rough-corrected.png"))
 ```
 ]
 
@@ -1294,90 +1011,6 @@ Source: cov_in_h_rough_as_in_mat.Rmd, corrected-figure and rates;
 rough_h_as_in_mat_results.rds. Guide constants average all measured/model ratios.
 No theoretical tail sum or bound is added to the sampled norm.
 
-
-
-<!-- --- -->
-
-<!-- class: left, top -->
-
-<!-- <div class="meeting-logos"> -->
-<!--   <img src="group_logo2.png"> -->
-<!--   <img src="statlogo.png"> -->
-<!--   <img src="Kaust.png"> -->
-<!-- </div> -->
-
-<!-- ### Project 2 · Discussion -->
-<!-- ********* -->
-
-<!-- <div class="content-box-myblue">Numerical evidence</div> -->
-
-<!-- .content-box-blue[ -->
-<!-- - The isolated rational error follows the root-exponential scale across $m=2,\ldots,16$. -->
-<!-- - Smooth finite-mode data give spatial slopes near $2$ and temporal slopes near $1$. -->
-<!-- - Rough $L_2(\Gamma)$ forcing reveals the $\alpha$-dependent spatial order after the logarithmic correction. -->
-<!-- ] -->
-
-<!-- **Interpretation.** Data regularity determines the spatial rate. The studies measure different error contributions and need separate reference constructions. -->
-
-<!-- **Remaining numerical check.** Solver-time refinement for all nine rough-data fractional orders remains pending. Reference quadrature and truncation require separate checks. -->
-
-<!-- ??? -->
-<!-- Sources: saved outputs of all four requested notebooks and their rate discussions. -->
-<!-- Numerical slopes support the estimates over the tested ranges; they do not prove asymptotic sharpness. -->
-<!-- Coefficient interpolation means the ideal rational rate remains a benchmark rather than an automatic certificate. -->
-
-
-
-<!-- --- -->
-
-<!-- class: center, middle -->
-
-<!-- <div class="meeting-logos"> -->
-<!--   <img src="group_logo2.png"> -->
-<!--   <img src="statlogo.png"> -->
-<!--   <img src="Kaust.png"> -->
-<!-- </div> -->
-
-<!-- ### Additional details -->
-<!-- ********* -->
-
-<!-- # Experiment updates and accuracy checks -->
-
-<!-- ********* -->
-
-
-
-<!-- --- -->
-
-<!-- class: left, top -->
-
-<!-- <div class="meeting-logos"> -->
-<!--   <img src="group_logo2.png"> -->
-<!--   <img src="statlogo.png"> -->
-<!--   <img src="Kaust.png"> -->
-<!-- </div> -->
-
-<!-- ### Appendix · Accuracy diagnostics -->
-<!-- ********* -->
-
-<!-- **Isolated rational study** -->
-
-<!-- - Complete numerical spectrum: `r r_m$diagnostics$dimension` modes. -->
-<!-- - Eigen-equation relative residual: `r formatC(r_m$diagnostics$relative_residual,format="e",digits=2)`. -->
-<!-- - Mass orthogonality error: `r formatC(r_m$diagnostics$C_orthogonality_error,format="e",digits=2)`. -->
-<!-- - Sparse rational and scalar propagation agree in the complete numerical eigenbasis. -->
-
-<!-- **Rough spatial study** -->
-
-<!-- - Fixed cutoff $K=16\ge\max J-1$ preserves the infinite forcing's FEM load. -->
-<!-- - $h_\star=2^{-18}$ resolves the highest retained frequency. -->
-<!-- - The omitted-tail bound is below the $0.2\%$ squared-error budget. -->
-<!-- - Earlier reference and solver refinements cover eight fractional orders; solver-time refinement for all nine remains pending. -->
-
-<!-- ??? -->
-<!-- Sources: isolated_m_results_K16.rds diagnostics and control; -->
-<!-- cov_in_h_rough_as_in_mat.Rmd, Error computation and final checks section. -->
-<!-- The empirical resolution indicator is not a rigorous floating-point certificate. -->
 
 
 ---
@@ -1452,38 +1085,3 @@ Source: cov_in_h_rough_as_in_mat.Rmd, Step 6 and finite-reference discussion.
 All unlabelled norms on this slide are L2(0,T;L2(Gamma)) norms.
 The exact orthogonal identity applies to the continuum norm, not literally to its sampled approximation.
 
-
-
-<!-- --- -->
-
-<!-- class: left, top -->
-
-<!-- <div class="meeting-logos"> -->
-<!--   <img src="group_logo2.png"> -->
-<!--   <img src="statlogo.png"> -->
-<!--   <img src="Kaust.png"> -->
-<!-- </div> -->
-
-<!-- ### Appendix · Sources -->
-<!-- ********* -->
-
-<!-- .meeting-source[ -->
-<!-- **Paper and reference style** -->
-
-<!-- - `/home/rierasl/Desktop/6ac76d140751a76e98ae4d0b/main.tex` -->
-<!-- - `tuesdaymeeting1p.Rmd`, Part I organization and shared theme assets -->
-
-<!-- **Updated experiments in `/home/rierasl/Desktop/NAP/`** -->
-
-<!-- - `conv_in_m_isolated.Rmd` — isolated rational error, K16 data -->
-<!-- - `conv_in_tau_mat.Rmd` — smooth temporal convergence, K16 data -->
-<!-- - `cov_in_h_mat.Rmd` — smooth spatial convergence, K16 data -->
-<!-- - `cov_in_h_rough_as_in_mat.Rmd` — rough spatial convergence and correction -->
-
-<!-- Saved result snapshots and source hashes: `data_files/tuesdaymeeting2p/`. -->
-<!-- ] -->
-
-<!-- ??? -->
-<!-- The four local snapshots preserve the notebook output as inspected for this presentation. -->
-<!-- All numerical slopes in the slides are calculated from those saved errors at knit time. -->
-<!-- The R Markdown uses local snapshots and shared reference assets without sourcing or modifying the original notebooks. -->

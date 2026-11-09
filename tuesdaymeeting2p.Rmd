@@ -222,7 +222,7 @@ class: left, top
 
 
 
-Diffusion on a metric graph couples the evolution along its edges through conditions at the vertices. On a compact, connected graph $\Gamma$, the fractional model is
+On a compact, connected graph $\Gamma$, we consider the fractional model
 
 .content-box-blue[
 $$\begin{cases}

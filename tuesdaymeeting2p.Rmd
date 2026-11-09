@@ -225,20 +225,19 @@ class: left, top
 Diffusion on a metric graph couples the evolution along its edges through conditions at the vertices. On a compact, connected graph $\Gamma$, the fractional model is
 
 .content-box-blue[
-$$
-\begin{cases}
+$$\begin{cases}
 \partial_tu(s,t)+L^{\alpha/2}u(s,t)=f(s,t),&(s,t)\in\Gamma\times(0,T),\\
 u(s,0)=u_0(s),&s\in\Gamma,
-\end{cases}
-\qquad L=\kappa^2-\Delta_\Gamma.\tag{1}
-$$
+\end{cases}\qquad L=\kappa^2-\Delta_\Gamma.\tag{1}$$
 ]
 
-Here $\kappa>0$ and $0<\alpha\le2$. The Kirchhoff–Laplacian acts edgewise, while its domain incorporates continuity and conservation of flux:
-\begin{equation}
-v\in C(\Gamma),\qquad \sum_{s\in w}\partial v(s)=0
-\quad\text{at each vertex }w,\quad v\in D(L).\tag{2}
-\end{equation}
+Here $\kappa>0$ and $0<\alpha\le2$. The Kirchhoff–Laplacian acts edgewise, and its domain couples the edges through continuity at each vertex and the Kirchhoff condition, which expresses conservation of flux.
+
+$$D(L)=\left\{v\in\bigoplus_{e\in E}H^2(e):\begin{array}{l}
+v\text{ is continuous on }\Gamma,\\[2pt]
+\displaystyle\sum_{s\in w}\partial v(s)=0
+\quad\text{at every vertex }w
+\end{array}\right\}.\tag{2}$$
 
 The sum includes both endpoints of a loop. These vertex conditions determine the operator whose spectral powers govern fractional diffusion.
 
@@ -262,7 +261,7 @@ class: left, top
 
 
 
-The shifted Kirchhoff–Laplacian is positive and self-adjoint with compact inverse. It therefore has an orthonormal eigenbasis $Le_j=\lambda_je_j$ in $L_2(\Gamma)$.
+The shifted Kirchhoff–Laplacian is positive and self-adjoint with compact inverse. It therefore has an orthonormal eigenbasis $Le_j=\lambda_je_j$ in $L_2(\Gamma)$, where $e_j\in D(L)$.
 
 This decomposition defines the fractional powers and their regularity spaces. For $s\ge0$,
 

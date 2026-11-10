@@ -702,7 +702,7 @@ For the rational study, the two FEM trajectories have the exact space–time mas
 
 .content-box-blue[
 \begin{equation*}
-E_m^2=\tau\sum_{k=1}^N(\mathbf U_h^k-\mathbf U_{h,m}^k)^\top\mathbf C(\mathbf U_h^k-\mathbf U_{h,m}^k).
+E_m^2=\|U_h^\tau-U_{h,m}^\tau\|^2_{\ell^2(L_2(\Gamma))}=\tau\sum_{k=1}^N(\mathbf U_h^k-\mathbf U_{h,m}^k)^\top\mathbf C(\mathbf U_h^k-\mathbf U_{h,m}^k).
 \end{equation*}
 ]
 

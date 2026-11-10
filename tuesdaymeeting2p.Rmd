@@ -3,11 +3,14 @@ title: "Rational approximation for fractional diffusion on metric graphs"
 subtitle: "Lenin Rafael Riera Segura"
 author: "Joint work with David Bolin and Alexandre B. Simas"
 institute: "KAUST `r format(Sys.time(), '%d-%m-%Y')`"
+title-notes: |
+  Today I’ll present our work with David Bolin and Alexandre Simas on fractional diffusion on metric graphs. We combine finite elements with backward Euler and rational approximation to obtain a practical solver. I’ll begin with the model, explain how the approximation works, and then use the experiments to connect the observed errors with the theory.
 output:
   xaringan::moon_reader:
     # Keep widget dependencies inside the website output directory.
     lib_dir: docs/libs/tuesdaymeeting2p
     nature:
+      beforeInit: data_files/tuesdaymeeting2p/title-notes.js
       ratio: '16:9'
       slideNumberFormat: '%current%'
       highlightStyle: github
@@ -30,6 +33,20 @@ knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE,
   error=FALSE, cache=FALSE, fig.align="center", dpi=180,
   fig.width=9, fig.height=3.7, out.width="94%")
 options(htmltools.dir.version=FALSE)
+
+# Give the automatically generated cover its presenter script before remark starts.
+# The script comes from title-notes in the YAML header and changes notes only.
+cover_notes <- trimws(rmarkdown::metadata[["title-notes"]])
+notes_script <- "data_files/tuesdaymeeting2p/title-notes.js"
+notes_js <- paste0(
+  "(function(){var source=document.getElementById('source');",
+  "source.value=source.value.replace(/^---$/m,function(){return ",
+  jsonlite::toJSON(paste0("???\n",cover_notes,"\n\n---"),auto_unbox=TRUE),
+  ";});source.textContent=source.value;})();")
+writeLines(notes_js,notes_script)
+notes_docs_script <- file.path("docs",notes_script)
+dir.create(dirname(notes_docs_script),recursive=TRUE,showWarnings=FALSE)
+stopifnot(file.copy(notes_script,notes_docs_script,overwrite=TRUE))
 
 # Figures are generated manually by scripts/generate_tuesdaymeeting2p_plots.R.
 # Knitting loads the saved images and slope summaries without rebuilding plots.
@@ -92,9 +109,7 @@ v\text{ is continuous on }\Gamma,\\[2pt]
 The sum includes both endpoints of a loop. These vertex conditions determine the operator whose spectral powers govern fractional diffusion.
 
 ???
-Source: main.tex, eq:maineq, eq:Kcond, and Notation and Preliminaries.
-The direct sum means that each edge restriction belongs to $H^2(e)$. This ensures that the second derivative is square-integrable, so $Lv\in L_2(\Gamma)$, and that endpoint values and first derivatives are well-defined. The direct sum imposes no matching between edges; continuity and the Kirchhoff condition provide the vertex coupling.
-Pointwise derivatives are asserted for D(L), not for arbitrary low-regularity fractional-domain functions.
+We consider diffusion along the edges of a metric graph, with conditions at the vertices connecting those edges. The operator domain requires edgewise $H^2$ regularity so that the second derivative and endpoint derivatives make sense. Continuity joins the edge values, while the Kirchhoff condition expresses conservation of flux. These conditions determine $L$ and, through its spectrum, its fractional powers. Before defining those powers, the next two animations give a picture of how temperature evolves on a graph.
 
 ---
 
@@ -130,8 +145,7 @@ htmltools::tags$iframe(
 ```
 
 ???
-Think of this graph as a network of thin wires heated at five locations. After the heating stops, the temperature spreads along the wires and through their junctions. This illustrates ordinary diffusion on a graph. We then extend the mathematical model to fractional diffusion, which allows nonlocal transport across the network.
-
+For an introductory example, this animation uses ordinary diffusion with $\alpha=2$ and $\kappa=0$. Five Gaussian hot spots spread along the graph and through its junctions. The peaks flatten as temperature becomes more uniform within each connected component, while total heat stays constant. Height and colour both represent temperature. The two curves compare independently computed solutions on meshes with $h=0.1$ and $h=1$, and the markers identify the coarse nodes. Next, we change the operator to a fractional one.
 
 ---
 
@@ -167,11 +181,7 @@ htmltools::tags$iframe(
 ```
 
 ???
-The same five Gaussian hot spots now evolve with alpha=1 and kappa=1: spatial fractional diffusion with decay. The temperature colors use a fixed scale, and kappa and alpha are displayed in the animation. Compare the h=0.1 solution with the independently computed h=1 solution; the coarse mesh nodes are marked.
-
-
-
-
+The second animation starts from the same five hot spots, now with $\alpha=1$ and $\kappa=1$. The fractional power gives a nonlocal operator within each connected component, while the positive shift also makes the heat decay. That decay is the clearest visible effect here. Since both parameters change, this animation does not isolate nonlocal transport. The fine and coarse solutions again illustrate spatial resolution. We now return to the mathematical definition of the fractional operator.
 
 ---
 
@@ -210,10 +220,7 @@ T(t)v=e^{-tL^{\alpha/2}}v=\sum_j e^{-t\lambda_j^{\alpha/2}}(v,e_j)e_j.\tag{3}
 \end{equation}
 
 ???
-Source: main.tex, Notation and Preliminaries, spectral_semigroup and the spectral Sobolev norms.
-For negative orders, dot H^r is interpreted on the extended spectral scale.
-
-Positivity and self-adjointness pass from $L$ to $L^{\alpha/2}$. Each eigenmode decays by $e^{-t\lambda_j^{\alpha/2}}$; multiplying these factors gives the semigroup property. Differentiating at $t=0$ for $v\in\dot H^\alpha(\Gamma)$ gives $-L^{\alpha/2}v$, identifying the generator. Analyticity means that the spectral formula extends holomorphically to complex times $z$ with $\operatorname{Re}z>0$, where the exponential factors remain bounded.
+With the vertex conditions fixed, the spectrum gives meaning to fractional powers of $L$. Each eigenfunction satisfies those conditions, and applying a fractional power multiplies its coefficient by the corresponding power of its eigenvalue. The required weighted summability defines $\dot H^s(\Gamma)$. Higher indices demand greater regularity, while duality gives negative indices. Applying $L^{\alpha/2}$ lowers the index by $\alpha$. Finally, exponential decay of the eigenmodes defines the analytic semigroup, which we use next to construct the evolving solution.
 
 ---
 
@@ -254,11 +261,7 @@ For $r\ge-\alpha/2$, the solution satisfies the weak formulation with $\mathfrak
 \end{equation}
 
 ???
-Source: main.tex, theorem:existenceuniquenessandregularity and weakformofentireequation.
-The current theorem allows arbitrary r and requires u0 in dot H^(r+alpha/2).
-In particular, r=0 requires only u0 in dot H^(alpha/2), rather than dot H^alpha. The brackets in (6) pair $\dot H^{-\alpha/2}(\Gamma)$ with $\dot H^{\alpha/2}(\Gamma)$; for $L_2(\Gamma)$ data, they agree with the $L_2(\Gamma)$ inner product.
-
-The spectral definition gives $L^{\alpha/2}:\dot H^{r+\alpha}(\Gamma)\to\dot H^r(\Gamma)$, with $\|L^{\alpha/2}v\|_{\dot H^r(\Gamma)}=\|v\|_{\dot H^{r+\alpha}(\Gamma)}$. The theorem ensures that both $\partial_tu$ and $L^{\alpha/2}u$ belong to $L_2(0,T;\dot H^r(\Gamma))$, so equation (4) holds in that space for almost every time. The case $r=0$ is $L_2(\Gamma)$; positive $r$ describes smoother data, while negative $r$ allows rougher data through the extended spectral scale. The data assumptions must match the chosen $r$.
+The semigroup now gives a solution for the initial condition, and the integral accounts for the forcing accumulated over time. The theorem guarantees uniqueness and states the regularity available from the data. We can formulate the equation in $\dot H^r(\Gamma)$ because the operator maps $\dot H^{r+\alpha}(\Gamma)$ into that space. When $r\ge-\alpha/2$, the solution also satisfies the weak formulation below. Its energy form provides the connection between the continuous problem and the numerical discretization.
 
 ---
 
@@ -285,8 +288,7 @@ knitr::include_graphics("data_files/tuesdaymeeting2p/tadpole_basis.png")
 ```
 
 ???
-Source: main.tex, Spatial discretization, and its original Fig/basis2.png.
-The mesh parameter is the largest interval length, with a uniform ratio bound across intervals.
+We approximate the graph with a mesh that includes every graph vertex. Continuous piecewise linear hats then span the finite element space. The figure shows how ordinary interior hats and hats at graph vertices fit together while preserving continuity across junctions. The projection $P_h$ transfers the initial condition and source into this space using the $L_2(\Gamma)$ inner product. With the approximation space defined, we can construct the discrete operator and then take its fractional powers.
 
 ---
 
@@ -326,10 +328,7 @@ The discrete energy form is defined by the same spectral construction:
 \end{equation*}
 
 ???
-Source: main.tex, discrete L_h definition, its fractional spectral power, and system:fully_discrete_scheme.
-The discrete fractional operator and energy form are defined through powers of L_h.
-The continuous fractional energy form, introduced on the existence slide, is used for the weak problem and elliptic projection.
-
+We first approximate the second-order operator $L$ through its usual finite element bilinear form. This defines $L_h$ entirely inside the finite-dimensional space. We then use the discrete eigenpairs to define its fractional powers, following the same construction as for the continuous operator. These powers also define the discrete energy form at the bottom. The order of construction matters because the spatial scheme uses the fractional power of $L_h$. Next, we discretize the evolution in time.
 
 ---
 
@@ -369,9 +368,7 @@ This reconstruction identifies the weighted discrete time norm with the continuo
 \end{equation*}
 
 ???
-Source: main.tex, Time discretization, def:piecewise_constant and discrete_to_continuous.
-Time averages are defined for L2 forcing without assuming nodal time values exist.
-
+Backward Euler advances the solution one time interval at a time. Since the source only needs square-integrability in time, we use its average over each interval. We then interpret each computed state as constant throughout that interval. This reconstruction lets us compare the numerical trajectory with the continuous solution in a common space-time norm. The final identity shows that integrating this reconstruction gives exactly the weighted discrete time norm. That connection allows the error estimates to describe the quantity used in the experiments.
 
 ---
 
@@ -408,9 +405,7 @@ For $\alpha>0$, $u_0\in\dot H^{\alpha/2}(\Gamma)$ and $f\in L_2(0,T;L_2(\Gamma))
 Thus the piecewise constant reconstruction is first-order accurate in time, with a constant independent of $\tau$.
 
 ???
-Source: main.tex, system:semidiscrete_scheme and theorem:first_part_of_main.
-The current temporal theorem assumes L2 forcing, rather than an L-infinity time norm.
-For these data, the strong equation and maximal regularity give delta U in L2.
+We first examine time discretization while leaving space continuous. Backward Euler replaces the time derivative by a difference quotient and uses the averaged source introduced earlier. Under the stated regularity of the initial condition and forcing, the theorem bounds the space-time error by a constant times $\tau$. This gives first-order convergence in time, with a constant independent of the time step. We can now hold this time-discrete problem fixed and examine what changes when we introduce the finite element space.
 
 ---
 
@@ -448,9 +443,7 @@ for sufficiently small $\epsilon>0$. At $\alpha=2$, $\epsilon=0$ is admissible.
 The spatial rate therefore reflects the regularity of both data. It reaches $q=2$ for smooth data and gives $q=\alpha$ at minimal regularity.
 
 ???
-Source: main.tex, system:fully_discrete_scheme and theorem:theorem_second_part_of_main.
-The spatial scheme uses a_(h,alpha), defined through powers of L_h, rather than restricting a_alpha.
-All spectral spaces in the assumptions are on Gamma.
+Replacing the continuous energy form by its discrete counterpart gives the space-time scheme. The theorem explains how the spatial rate depends on both the initial condition and the forcing. Greater regularity improves the rate until the piecewise linear approximation reaches its second-order limit. With minimally regular data, the fractional order determines the rate. For $\alpha<2$, the estimate includes an arbitrarily small loss, while $\alpha=2$ allows the exact second-order estimate. A fractional matrix power still remains to be evaluated.
 
 ---
 
@@ -487,9 +480,7 @@ R_{h,m}=r_m(A_h^{-1})=p_\ell(A_h)^{-1}p_r(A_h).\tag{12}
 Since $\sigma(A_h^{-1})\subset[\delta_h,1]$, where $\delta_h=\kappa^2/\lambda_{N_h,h}$, the same source approximation applies across meshes.
 
 ???
-Source: main.tex, Rational approximation, weak_form_m2 and rmdef.
-The factor P_h on the source is required in the strong FEM scheme.
-For alpha=2, use the exact representation r_m(x)=x.
+The finite element scheme still requires a fractional matrix power, which is expensive to evaluate directly on large problems. We rewrite the step using an inverse power and rescale the operator so that the relevant inverse spectrum lies inside $[0,1]$. A rational approximation to $x^\beta$ on this fixed interval then replaces that inverse power. The same source approximation therefore applies across meshes. Its polynomial representation prepares the scheme for the sparse linear solves introduced in the matrix formulation.
 
 ---
 
@@ -526,10 +517,7 @@ where $q=\min\{s_0+\alpha/2,s_f+\alpha,2\}$ and $\epsilon>0$ is sufficiently sma
 The three terms account for time discretization, spatial approximation, and rational approximation. At $\alpha=2$, the exact representation $r_m(x)=x$ removes the rational approximation error, giving $\tau+h^2$.
 
 ???
-Source: main.tex, lastlasttheorem and finalfinalest, with weak_form_m21.
-The rational contribution is bounded uniformly in h and tau at the best-approximation scale.
-The h^(alpha-2) factor and sqrt((1-alpha/2)m) exponent of the older draft do not apply here.
-For numerical BRASIL coefficient interpolation, the ideal rate remains a benchmark, as discussed later.
+Substituting the rational approximation gives the fully discrete scheme. The estimate separates the error into a temporal contribution, a spatial contribution determined by data regularity, and a rational contribution that decays root-exponentially with $m$. This shows how the approximation parameters should be balanced so that one error does not hide the others. The root-exponential term describes the ideal best approximation and provides a benchmark for the numerical coefficients. At $\alpha=2$, the rational representation is exact and this contribution disappears.
 
 ---
 
@@ -569,9 +557,7 @@ U_{h,m}^{k+1}=\left[r_\tau I+\sum_{n=1}^m a_n(A_h-z_nI)^{-1}\right]
 \end{equation}
 
 ???
-Source: main.tex, weak_form_m3, eq:brasil_residues, and weak_form_m4.
-There are m time-step poles and a nonzero constant remainder.
-The source poles eta_j and time-step poles z_n belong to different rational functions.
+To implement the method, we combine the rational source approximation with the backward Euler step into one rational function, $H_m$. Its partial fraction expansion has negative poles and positive residues, together with a constant term. Applying this expansion to the operator replaces the fractional step by a weighted sum of shifted inverse operators. Each inverse will become a sparse solve. The constant term remains part of the update and will produce an additional mass solve in the matrix representation.
 
 ---
 
@@ -613,10 +599,7 @@ The vector $\mathbf U_{h,m}^k$ contains the FEM coefficients, and $F_i^{k+1}=(f^
 This representation reduces each step to $m$ shifted sparse solves and a mass solve. Their factorizations remain the same throughout a run.
 
 ???
-Source: main.tex, eq:final_scheme2 and thenumericalscheme.
-The constant r_tau is retained. The identity H_m(A) C^(-1) gives the coefficient update.
-The numerical studies introduce nu>0 by replacing s with tau nu kappa^(2 beta).
-
+The finite element basis converts the operator relations into mass and stiffness matrices. Substituting these matrices into the partial fraction formula gives the update in the highlighted box. Each time step requires $m$ shifted sparse solves and a mass solve for the constant contribution. With fixed discretization parameters, their matrices stay the same throughout the simulation, so we compute the factorizations once and reuse them. This is the practical advantage of the rational representation, which we now examine through the numerical experiments.
 
 ---
 
@@ -652,8 +635,7 @@ The smooth time and space studies use $\nu=10^{-3}$, while the isolated rational
 ]
 
 ???
-Sources: the four notebook problem statements and main.tex, Fig/basis2.png.
-The graph is the same in the rational, temporal, smooth spatial, and rough spatial studies.
+All four studies use the same tadpole graph, whose known eigenpairs provide analytic reference solutions. We fix the final time and shift parameter, and test nine fractional orders. The diffusion coefficient differs between the studies, as indicated here. In each experiment, one approximation parameter varies while the others remain fixed. The rational study isolates its own error contribution, while the time and space studies compare with an analytic reference. We begin by specifying the smooth data shared by those studies.
 
 ---
 
@@ -691,9 +673,7 @@ c_7(t)=\frac{10}{a_7^2+\pi^2}
 The normalization gives $\|u_0\|_{L_2(\Gamma)}=10$. All 17 active modes are included in the reference, with no spectral truncation error.
 
 ???
-Sources: conv_in_m_isolated.Rmd, conv_in_tau_mat.Rmd, cov_in_h_mat.Rmd;
-the saved K16 metadata agree across these studies.
-The manuscript still describes the earlier initial condition 10 e_5.
+For the smooth studies, the initial condition contains sixteen equally weighted eigenmodes, and the source acts on a separate mode. The normalization fixes the initial $L_2(\Gamma)$ norm at ten. Because each coefficient satisfies a scalar evolution equation, we can write the exact solution explicitly, including the forced mode. All seventeen active modes appear in the reference, so this reference has no spectral truncation error. These smooth data allow us to examine the time rate and the second-order spatial behaviour before introducing rough forcing.
 
 ---
 
@@ -727,11 +707,7 @@ E_m^2=\tau\sum_{k=1}^N(\mathbf U_h^k-\mathbf U_{h,m}^k)^\top\mathbf C(\mathbf U_
 ]
 
 ???
-Sources: conv_in_tau_mat.Rmd and cov_in_h_mat.Rmd, Error computation;
-conv_in_m_isolated.Rmd, Step 3; cov_in_h_rough_as_in_mat.Rmd, sampled norm.
-The rough reference is a finite-series reference u_K, with separate tail control.
-
-
+The time and space experiments evaluate the analytic solution on a fine reference mesh and time grid. We compare these values with the reconstructed numerical solution using the reference mass matrix, giving the sampled space-time error above. The rational study has a different reference: both trajectories belong to the same finite element space and use the same time grid. Their difference therefore has the exact mass norm below. This distinction explains why the rational experiment can isolate its approximation error independently of reference quadrature.
 
 ---
 
@@ -766,9 +742,7 @@ Both trajectories share the mesh, time grid, projected initial value, and averag
 ]
 
 ???
-Source: conv_in_m_isolated.Rmd, Steps 1–4 and saved isolated_m_results_K16.rds.
-All 150 numerical modes are retained in the reference, not only the active continuum modes.
-The sparse solve trajectory is independently checked against scalar rational propagation in this basis.
+To isolate rational error, we keep the mesh and time step fixed and vary only $m$. The comparison trajectory uses backward Euler with exact fractional powers of the discrete eigenvalues. We retain the complete numerical eigensystem because projecting the continuum data can activate additional discrete modes. Both trajectories use the same projected initial value and averaged source, so their difference measures the rational approximation error. The eigendecomposition supplies a validation reference, while the method under study still advances through sparse solves.
 
 ---
 
@@ -794,11 +768,7 @@ knitr::include_graphics(file.path(plot_dir,"isolated-m.png"))
 
 
 ???
-Source: conv_in_m_isolated.Rmd, matrix-figure, using the saved K16 results.
-Guides average the prescribed model curves anchored at all measured points.
-The natural-log regression is against sqrt(m).
-
-
+Here the isolated rational error decreases as we increase $m$, with the spatial mesh and time grid fixed. Each colour represents a fractional order, and the dashed curves show the theoretical root-exponential comparison rate. The horizontal positions follow the square root of $m$, so this decay appears approximately linear on the logarithmic vertical scale. The measured curves broadly follow that pattern over the tested range. We next turn to time convergence, using the analytic solution as the reference.
 
 ---
 
@@ -823,11 +793,7 @@ knitr::include_graphics(file.path(plot_dir,"temporal-convergence.png"))
 
 
 ???
-Source: conv_in_tau_mat.Rmd, parameters, plot-results, rates;
-errors_projected_tau_mat_K16.RData. Actual integer-step time grids are used.
-The forcing is averaged analytically on each time step.
-
-
+For the time study, we keep a fine spatial mesh and a fixed rational order while varying the number of backward Euler steps. The dashed curves represent first-order decay in $\tau$. Across the fractional orders, the observed slopes are very close to one, as the values above the plot show. This supports the temporal estimate over the tested range. The source uses the same interval averages as in the analysis, and the sampled error uses the fine reference resolutions stated below the plot.
 
 ---
 
@@ -852,13 +818,7 @@ knitr::include_graphics(file.path(plot_dir,"smooth-spatial-convergence.png"))
 
 
 ???
-Source: cov_in_h_mat.Rmd, parameters, plot-results, rates;
-errors_projected_h_mat_K16.RData.
-The current saved mesh range differs from the range still stated in the paper.
-The theorem permits h^(2-epsilon) for sufficiently small positive epsilon.
-The plotted h^2 guides are comparison curves, not certified bounds. Smooth spectral data permit the P1 spatial limit.
-
-
+We now keep the time step small and the rational order fixed while refining the spatial mesh. With the smooth spectral data, the expected behaviour is close to the second-order limit of piecewise linear finite elements. The dashed curves show that comparison rate, and the fitted slopes are close to two across the fractional orders. This gives numerical evidence consistent with the spatial estimate, including its small theoretical loss. To expose the dependence on $\alpha$, the next experiment uses a much rougher source.
 
 ---
 
@@ -897,9 +857,7 @@ b_j(t)=\frac{1-e^{-a_jt}}{ja_j},\qquad a_j=\nu\mu_j^{\alpha/2}.
 \end{equation*}
 
 ???
-Source: cov_in_h_rough_as_in_mat.Rmd, The experiment and Step 1.
-Here delta_m denotes the rational approximation-error scale.
-u_0=0 allows arbitrary s_0, while the forcing allows only s_f=0.
+The rough experiment starts from zero and uses a time-independent source on the loop. Its frequencies grow exponentially, while its coefficients decrease only as one over the mode index. The source therefore belongs to $L_2(\Gamma)$ but to no positive-order spectral space. This places the forcing at the minimal regularity covered by the spatial estimate. The explicit mode coefficients still give an analytic solution, although its reference must now use a finite cutoff. The mesh structure explains the resulting error behaviour.
 
 ---
 
@@ -942,19 +900,7 @@ E_{\rm tail}^2
 
 
 ???
-Source: cov_in_h_rough_as_in_mat.Rmd, Steps 2–6 and 8, with the finite-tail convention adopted for this presentation.
-The notebook's infinite unresolved tail equals the omitted reference tail plus the finite unresolved tail used here, in squared norms.
-The three contributions are mutually orthogonal; all norms on this slide are L2(0,T;L2(Gamma)).
-The imposed condition K>=J_max ensures both load preservation and a nonempty finite tail on every tested mesh; the load-only condition K>=J_max-1 is weaker.
-The finite tail starts at j=J and ends at j=K. Its exact evaluation is
-\begin{equation*}
-E_{\rm tail}^2=\sum_{j=J}^{K}\frac{1}{j^2a_j^2}
-\left[T-\frac{2(1-e^{-a_jT})}{a_j}+\frac{1-e^{-2a_jT}}{2a_j}\right].
-\end{equation*}
-The finite-tail comparison is uniform in K>=J for sufficiently large J: the first retained term gives the lower bound, and the infinite geometric tail gives the upper bound.
-A genuine J-to-infinity statement with this finite-tail convention requires K to grow with J. The experiments use fixed K=16 only over J=5,...,9.
-Modes below J have nonzero projections but are not represented exactly by P1 functions. The resolved contribution still needs a matching upper bound to establish the same rate for the total error.
-
+On these dyadic meshes, modes from $J$ onward cancel against every finite element hat, so the infinite source has a finite assembled load. The error separates into reference truncation, the resolved contribution, and the finite unresolved tail from $J$ to $K$. The measured reference error already contains the latter two terms. The finite tail has scale $h_J^\alpha/J$, which motivates the correction on the next plot. A matching upper bound for the resolved contribution is still needed to prove that scale for the total error.
 
 ---
 
@@ -980,11 +926,7 @@ knitr::include_graphics(file.path(plot_dir,"rough-corrected.png"))
 
 
 ???
-Source: cov_in_h_rough_as_in_mat.Rmd, corrected-figure and rates;
-rough_h_as_in_mat_results.rds. Guide constants average all measured/model ratios.
-No theoretical tail sum or bound is added to the sampled norm.
-
-
+This plot shows the rough spatial errors after multiplication by $J$. The tail calculation motivates this correction because it removes the factor one over $J$ from the comparison rate. The dashed curves then have order $h_J^\alpha$. The results support the expected dependence on the fractional order over the tested meshes. This remains numerical evidence for the total error, since the tail calculation gives only its lower bound. The reference cutoff error has its own accuracy check, which I include in the appendix.
 
 ---
 
@@ -1007,6 +949,9 @@ knitr::include_graphics("data_files/thanksall3d.png")
 
 
 
+???
+The main outcome is a practical fractional diffusion solver with estimates that explain how to balance its approximation parameters. The experiments support the expected time and space behaviour and illustrate the role of data regularity. Thank you for your attention.
+
 ---
 
 class: center, middle
@@ -1019,6 +964,9 @@ class: center, middle
 
 #### THE END
 
+
+???
+That concludes the main presentation. I’m happy to discuss the analysis, the numerical method, or the experiments.
 
 ---
 
@@ -1050,8 +998,5 @@ All norms below are in $L_2(0,T;L_2(\Gamma))$. Orthogonality gives
 
 
 ???
-Source: cov_in_h_rough_as_in_mat.Rmd, Step 6, finite-reference discussion, and max_tail_squared_fraction.
-All unlabelled norms on this slide are L2(0,T;L2(Gamma)) norms.
-The bound uses (1-exp(-a_j t))^2<=1, a_j>=nu pi^alpha 2^(alpha j), and a geometric-series estimate.
-The budget applies only to the omitted reference tail j>=K+1. The unresolved modes J,...,K remain in the measured error through the finite E_tail defined on slide 24.
-The exact orthogonal identity applies to the continuum norm. E_sampled approximates the retained-reference error; reference-mesh and reference-time quadrature need separate checks.
+This slide separates the reference cutoff from the mesh cutoff. With $K=16$, the omitted reference modes begin at seventeen, beyond every tested mesh index. Bounding their coefficients and summing a geometric series gives $B_K$. We check that this bound is below zero point two percent of the measured squared error. This controls the omitted reference tail while retaining the unresolved modes inside the reference. The bound stays a diagnostic, and reference-mesh and reference-time quadrature still require separate accuracy checks.
+

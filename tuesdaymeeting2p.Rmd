@@ -133,7 +133,6 @@ htmltools::tags$iframe(
 Think of this graph as a network of thin wires heated at five locations. After the heating stops, the temperature spreads along the wires and through their junctions. This illustrates ordinary diffusion on a graph. We then extend the mathematical model to fractional diffusion, which allows nonlocal transport across the network.
 
 
-
 ---
 
 class: left, top
@@ -912,7 +911,7 @@ class: left, top
   <img src="Kaust.png">
 </div>
 
-### Experiments · Rough forcing · Unresolved modes 1/2
+### Experiments · Rough forcing · Error
 *********
 
 On the dyadic mesh $h_J=2^{-J}$, cancellation against the P1 hats makes the infinite forcing's FEM load finite:

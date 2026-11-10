@@ -109,8 +109,7 @@ class: left, top
 ### Problem setting 2/4
 *********
 
-```
-{r p5plotly, eval = TRUE, fig.height = 5, out.width = "100%"}
+```{r p5plotly, eval = TRUE, fig.height = 5, out.width = "100%"}
 load(here::here("data_files/logo_five_diffusion_animation.RData"))
 # Keep animation frames outside remark's slide source so the deck opens quickly.
 widget_file <- here::here("data_files/logo_five_diffusion_animation.html")
@@ -148,8 +147,7 @@ class: left, top
 ### Problem setting 3/4
 *********
 
-```
-{r fractional-diffusion-animation, eval = TRUE, fig.height = 5, out.width = "100%"}
+```{r fractional-diffusion-animation, eval = TRUE, fig.height = 5, out.width = "100%"}
 load(here::here("data_files/logo_five_fractional_diffusion_animation.RData"))
 # Keep animation frames outside remark's slide source so the deck opens quickly.
 fractional_widget_file <- here::here("data_files/logo_five_fractional_diffusion_animation.html")
@@ -923,14 +921,19 @@ On the dyadic mesh $h_J=2^{-J}$, cancellation against the P1 hats makes the infi
 \qquad F_i=\sum_{j=1}^{J-1}\frac{(\phi_j,\psi_i)_{L_2(\Gamma)}}{j}.
 \end{equation*}
 
-With $u_{<J}=\sum_{j=1}^{J-1}b_j\phi_j$ and the reference $u_K=\sum_{j=1}^K b_j\phi_j$, $K\ge J$, orthogonality gives the following decomposition. All norms are in $L_2(0,T;L_2(\Gamma))$.
+With $u_{<J}=\sum_{j=1}^{J-1}b_j\phi_j$ and $u_K=\sum_{j=1}^K b_j\phi_j$, we impose $K\ge J_{\max}$ for the largest tested mesh index $J_{\max}$. All norms are in $L_2(0,T;L_2(\Gamma))$.
 
 .content-box-blue[
 \begin{align*}
 E_{h_J}^2:=\|u-U_{h_J,m}^{\tau}\|^2
-&=\underbrace{\|u-u_K\|^2}_{\text{reference truncation}}
-+\underbrace{\|u_{<J}-U_{h_J,m}^{\tau}\|^2}_{\text{resolved contribution}}
+&=\|u-u_K\|^2
++\|u_{<J}-U_{h_J,m}^{\tau}\|^2
 +E_{\rm tail}^2,\\[0.6em]
+&=\|u-u_K\|^2
++\underbrace{\|u_{K}-U_{h_J,m}^{\tau}\|^2}_{\approx E^2_{\text{sampled}}}
+\end{align*}
+
+\begin{align*}
 E_{\rm tail}^2
 &:=\sum_{j=J}^{K}\int_0^T b_j(t)^2\,dt
 \asymp\sum_{j=J}^{K}\frac{2^{-2\alpha j}}{j^2}
@@ -938,12 +941,12 @@ E_{\rm tail}^2
 \end{align*}
 ]
 
-Here $K=16$ and $J=5,\ldots,9$: the finite tail retains the unresolved modes near the mesh cutoff.
 
 ???
 Source: cov_in_h_rough_as_in_mat.Rmd, Steps 2–6 and 8, with the finite-tail convention adopted for this presentation.
 The notebook's infinite unresolved tail equals the omitted reference tail plus the finite unresolved tail used here, in squared norms.
 The three contributions are mutually orthogonal; all norms on this slide are L2(0,T;L2(Gamma)).
+The imposed condition K>=J_max ensures both load preservation and a nonempty finite tail on every tested mesh; the load-only condition K>=J_max-1 is weaker.
 The finite tail starts at j=J and ends at j=K. Its exact evaluation is
 \begin{equation*}
 E_{\rm tail}^2=\sum_{j=J}^{K}\frac{1}{j^2a_j^2}
@@ -1031,7 +1034,7 @@ class: left, top
 ### Appendix · Reference truncation
 *********
 
-The reference cutoff $K=16$ exceeds every tested mesh index $J=5,\ldots,9$. The omitted reference tail starts at $j=K+1$; the finite tail $E_{\rm tail}$ on slide 24 covers $j=J,\ldots,K$.
+We impose $K\ge J_{\max}$, with $K=16$ and $J_{\max}=9$ in the experiments. The omitted reference tail starts at $j=K+1$; the finite tail $E_{\rm tail}$ on slide 24 covers $j=J,\ldots,K$.
 
 All norms below are in $L_2(0,T;L_2(\Gamma))$. Orthogonality gives
 \begin{equation*}
@@ -1046,7 +1049,6 @@ All norms below are in $L_2(0,T;L_2(\Gamma))$. Orthogonality gives
 \end{align*}
 ]
 
-$E_{\mathrm{sampled}}$ approximates $\|u_K-U_{h_J,m}^{\tau}\|$ through reference quadrature. The check limits the omitted squared tail to $0.2\%$ of the measured squared error; $B_K$ is recorded without being added to the plotted values.
 
 ???
 Source: cov_in_h_rough_as_in_mat.Rmd, Step 6, finite-reference discussion, and max_tail_squared_fraction.
